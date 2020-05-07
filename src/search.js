@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
+
+const AVAILABLE_ZIPCODES_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/available-zipcodes'
 
 class Autocomplete extends Component {
 
@@ -7,7 +10,7 @@ class Autocomplete extends Component {
         super(props);
         this.state = {
             // suggested zipcodes from API
-            suggestions: ["48104", "48105"],
+            suggestions: [],
             // The active selection's index
             activeSuggestion: 0,
             // The suggestions that match the user's input
@@ -19,7 +22,15 @@ class Autocomplete extends Component {
         };
     }
 
-    // TODO: make an API request to get the available zip codes
+    // makes an API request to get the available zip codes
+    componentDidMount() {
+        axios.get(AVAILABLE_ZIPCODES_ENDPOINT)
+            .then(res => {
+                this.setState({
+                    suggestions: res.data['zipcodes']
+                })
+            })
+    }
 
     // Event fired when the input value is changed
     onChange = e => {
