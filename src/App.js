@@ -6,8 +6,8 @@ import ZipCodeDataPanel from './zipcode-data';
 import Chart from './chart';
 import axios from "axios";
 
-const CHART_DATA_ENDPOINT = 'http://0.0.0.0:5000/chart-data'
-// const ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/state-data'
+// const CHART_DATA_ENDPOINT = 'http://0.0.0.0:5000/chart-data'
+const CHART_DATA_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/chart-data'
 
 export default class App extends Component {
 

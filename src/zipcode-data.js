@@ -4,7 +4,8 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
 
-const REPORT_DATA_ENDPOINT = 'http://0.0.0.0:5000/report-data'
+// const REPORT_DATA_ENDPOINT = 'http://0.0.0.0:5000/report-data'
+const REPORT_DATA_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/report-data'
 
 export default class ZipCodeDataPanel extends Component {
 
