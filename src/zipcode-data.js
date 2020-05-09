@@ -134,7 +134,7 @@ export default class ZipCodeDataPanel extends Component {
                     </div>) :
                     (
                         <div>
-                            <h2>Check the state data (but also plz enter a zipcode)</h2>
+                            <h2>Peep the statewide data below (but also plz enter a zipcode)</h2>
                             <p>Hint - "48104" works well :-) </p>
                             <h3>{this.state.data['total_responses']} total responses</h3>
                             <h3>{this.state.data['symptomatic_cases']} COVID-like cases</h3>
