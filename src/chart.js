@@ -8,6 +8,7 @@ export default class Chart extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            zipCode: "",
             data: [
                 {
                     "name": "Covid Positive Cases",
@@ -39,6 +40,10 @@ export default class Chart extends Component {
                 }
             ],
         }
+    }
+
+    componentDidMount() {
+
     }
 
     componentWillReceiveProps(newProps) {

@@ -2,7 +2,8 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-const AVAILABLE_ZIPCODES_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/available-zipcodes'
+const AVAILABLE_ZIPCODES_ENDPOINT = 'http://0.0.0.0:5000/available-zipcodes'
+// const AVAILABLE_ZIPCODES_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/available-zipcodes'
 
 class Autocomplete extends Component {
 
