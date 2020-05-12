@@ -3,6 +3,8 @@ import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Nav from 'react-bootstrap/Nav';
+import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
 
@@ -20,7 +22,8 @@ export default class ZipCodeDataPanel extends Component {
         this.state = {
             zipCodeDataExists: false,
             zipCode: "",
-            data: {}
+            data: {},
+            caseData: {},
         }
     }
 
@@ -34,7 +37,7 @@ export default class ZipCodeDataPanel extends Component {
             // get state level report data 
             .then(res => {
                 this.setState({
-                    data: res.data
+                    data: res.data,
                 })
                 console.log("merp", this.state)
             })
@@ -54,6 +57,7 @@ export default class ZipCodeDataPanel extends Component {
                     zipCodeDataExists: true,
                     zipCode: newZipCode,
                     data: response.data,
+                    caseData: response.data['home_data'],
                 })
             }).catch((e) => {
                 console.log("error", e);
@@ -69,11 +73,23 @@ export default class ZipCodeDataPanel extends Component {
                     zipCodeDataExists: false,
                     zipCode: "",
                     data: response.data,
+                    caseData: {},
                 })
             }).catch((e) => {
                 console.log("error", e);
             });
         }
+    }
+
+    onSelectAddress = (selectedAddress) => {
+        var caseData = this.state.data['home_data']
+        if (selectedAddress == "#work") {
+            caseData = this.state.data['work_data']
+        }
+
+        this.setState({
+            caseData: caseData,
+        })
     }
 
     render() {
@@ -82,8 +98,8 @@ export default class ZipCodeDataPanel extends Component {
             <div>
                 {this.state.zipCodeDataExists ?
                     (<div>
-                        <Card>
-                            <Card.Header bg={"Primary"}>
+                        <Card bg={'Info'}>
+                            <Card.Header >
                                 <Row>
                                     <Col>
                                         <h2>{this.state.data['zipcode']}</h2>
@@ -98,52 +114,110 @@ export default class ZipCodeDataPanel extends Component {
                             </Card.Body>
                             <Card.Footer style={{ height: "44px" }} className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
                         </Card>
-                        <Accordion>
-                            {this.state.data['case_data'].map((item, index) => (
-                                <Card>
-                                    <Card.Header>
-                                        <Accordion.Toggle as={Button} variant="link" eventKey={index}>{item['address']} -------> {item['num_reports']} reports</Accordion.Toggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey={index}>
-                                        <Card.Body>
-                                            {item['cases'].map((case_datum, ind) => (
-                                                <div>
-                                                    <div>
-                                                        <p>Name - {case_datum['name']}</p>
-                                                        <p>Gender - {case_datum['gender']}</p>
-                                                        <p>Age - {case_datum['age']}</p>
-                                                        <p>Temp - {case_datum['temperature']}</p>
-                                                        <p>Phone numba - {case_datum['phone_number']}</p>
-                                                        <p>Symptoms - {case_datum['symptoms']}</p>
-                                                        {
-                                                            case_datum['work_address'] == "" ? (
-                                                                <p>No work address reported</p>
-                                                            ) : (
-                                                                    <p>Work address - {case_datum['work_address']}</p>
-                                                                )
-                                                        }
-                                                        {
-                                                            case_datum['household_sick'] ? (
-                                                                <p>Household Sick - members in house are sick </p>
-                                                            ) :
-                                                                (<p>Household Sick - nah fam</p>)
-                                                        }
-                                                        {
-                                                            case_datum['flags']['symptomatic'] ? (
-                                                                <p>Symptomatic - yes, COVID-like illness reported</p>
-                                                            ) :
-                                                                (<p>No symptoms of a COVID-like illness</p>)
-                                                        }
-                                                        <p>Tested - {case_datum['flags']['tested']}</p>
-                                                    </div>
-                                                    <hr></hr>
-                                                </div>
-                                            ))}
-                                        </Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
-                            ))}
-                        </Accordion>
+                        <Card style={{ marginTop: "36px" }}>
+                            <Card.Header>
+                                <h4>4 Addresses</h4>
+                                <Nav variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress}>
+                                    <Nav.Item>
+                                        <Nav.Link href="#home">Home</Nav.Link>
+                                    </Nav.Item>
+                                    <Nav.Item>
+                                        <Nav.Link href="#work">Work</Nav.Link>
+                                    </Nav.Item>
+                                </Nav>
+                            </Card.Header>
+                            <Accordion>
+                                {this.state.caseData.map((item, index) => (
+                                    <Card>
+                                        <Accordion.Toggle as={Card.Header} eventKey={index}>
+                                            <Row >
+                                                <Col md="auto" >
+                                                    {item['address']}
+                                                </Col>
+                                                <Col >
+                                                    {item['num_reports']} reports
+                                                </Col>
+                                            </Row>
+                                        </Accordion.Toggle>
+                                        <Accordion.Collapse eventKey={index}>
+                                            <Card.Body>
+                                                {item['cases'].map((case_datum, ind) => (
+                                                    <Accordion>
+                                                        <Card>
+                                                            <Accordion.Toggle as={Card.Header} eventKey={ind}>
+                                                                <Row>
+                                                                    <Col md="auto">
+                                                                        > {case_datum['name']} - {case_datum['age']}, {case_datum['gender']}
+                                                                    </Col>
+                                                                    <Col >
+                                                                        {case_datum['phone_number']}
+                                                                    </Col>
+                                                                </Row>
+                                                                <Row>
+                                                                    <Col>
+                                                                        {case_datum['flags']['tested'] === 'Negative' ? (
+                                                                            <Badge pill variant="success">
+                                                                                Covid-Negative
+                                                                            </Badge>
+                                                                        ) : case_datum['flags']['tested'] === 'Awaiting Results' ? (
+                                                                            <Badge pill variant="warning">
+                                                                                Awaiting Results
+                                                                            </Badge>
+                                                                        ) : (
+                                                                                    <Badge pill variant="danger">
+                                                                                        Covid-Positive
+                                                                                    </Badge>
+                                                                                )}
+                                                                        {
+                                                                            case_datum['flags']['symptomatic'] ? (
+                                                                                <Badge style={{ marginLeft: "4px" }} pill variant="warning">
+                                                                                    Symptomatic
+                                                                                </Badge>
+                                                                            ) :
+                                                                                (<></>)
+                                                                        }
+                                                                    </Col>
+                                                                </Row>
+                                                            </Accordion.Toggle>
+                                                            <Accordion.Collapse eventKey={ind}>
+                                                                <Card.Body>
+                                                                    <ul>
+                                                                        <li><b>Temperature</b> - {case_datum['temperature']}</li>
+                                                                        <li><b>Symptoms</b> - {case_datum['symptoms']}</li>
+                                                                        {
+                                                                            case_datum['work_address'] == "" ? (
+                                                                                // <p>No work address reported</p>
+                                                                                <></>
+                                                                            ) : (
+                                                                                    <li><b>Work address</b> - {case_datum['work_address']}</li>
+                                                                                )
+                                                                        }
+                                                                        {
+                                                                            case_datum['household_sick'] ? (
+                                                                                <li><b>Household Sick</b> - members in house are feeling unwell</li>
+                                                                            ) :
+                                                                                (<li><b>Household Sick</b> - member in house feel fine</li>)
+                                                                        }
+                                                                        {
+                                                                            case_datum['flags']['symptomatic'] ? (
+                                                                                <li><b>Symptomatic</b> - yes, COVID-like illness reported</li>
+                                                                            ) :
+                                                                                (<li><b>Symptomatic</b> - no symptoms of a COVID-like illness reported</li>)
+                                                                        }
+                                                                        <li><b>Tested</b> - {case_datum['flags']['tested']}</li>
+                                                                    </ul>
+                                                                </Card.Body>
+                                                            </Accordion.Collapse>
+                                                        </Card>
+                                                    </Accordion>
+                                                ))}
+                                            </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                ))}
+                            </Accordion>
+                        </Card>
+
                     </div>) :
                     (
                         <div>
