@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
 
@@ -80,11 +82,22 @@ export default class ZipCodeDataPanel extends Component {
             <div>
                 {this.state.zipCodeDataExists ?
                     (<div>
-                        <h2>Yeah, we've got data for {this.state.data['zipcode']}</h2>
-                        <h3>{this.state.data['total_responses']} total reports</h3>
-                        <h3>{this.state.data['symptomatic_cases']} COVID-like cases</h3>
-                        <h6>{this.state.data['confirmed_cases']} COVID-positive cases</h6>
-                        <h6>Last updated - {this.state.data['last_updated']} </h6>
+                        <Card>
+                            <Card.Header bg={"Primary"}>
+                                <Row>
+                                    <Col>
+                                        <h2>{this.state.data['zipcode']}</h2>
+                                        <h6>{this.state.data['total_responses']} MiSymptoms Users | Mar 6 - May 9</h6>
+                                    </Col>
+                                </Row>
+                            </Card.Header>
+                            <Card.Body style={{ paddingBottom: "-8px", }}>
+                                <Card.Text>
+                                    {this.state.data['symptomatic_cases']} COVID-like reports  <b style={{ opacity: "0.25" }}>|</b>  {this.state.data['confirmed_cases']} COVID-positive reports
+                                    </Card.Text>
+                            </Card.Body>
+                            <Card.Footer style={{ height: "44px" }} className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
+                        </Card>
                         <Accordion>
                             {this.state.data['case_data'].map((item, index) => (
                                 <Card>
@@ -134,12 +147,22 @@ export default class ZipCodeDataPanel extends Component {
                     </div>) :
                     (
                         <div>
-                            <h2>Peep the statewide data below (but also plz enter a zipcode)</h2>
-                            <p>Hint - "48104" works well :-) </p>
-                            <h3>{this.state.data['total_responses']} total responses</h3>
-                            <h3>{this.state.data['symptomatic_cases']} COVID-like cases</h3>
-                            <h6>{this.state.data['confirmed_cases']} COVID-positive cases</h6>
-                            <h6>Last updated - {this.state.data['last_updated']} </h6>
+                            <Card>
+                                <Card.Header bg={"Primary"}>
+                                    <Row>
+                                        <Col>
+                                            <h2>Statewide</h2>
+                                            <h6>{this.state.data['total_responses']} MiSymptoms Users | Mar 6 - May 9</h6>
+                                        </Col>
+                                    </Row>
+                                </Card.Header>
+                                <Card.Body style={{ paddingBottom: "-8px", }}>
+                                    <Card.Text>
+                                        {this.state.data['symptomatic_cases']} COVID-like reports  <b style={{ opacity: "0.25" }}>|</b>  {this.state.data['confirmed_cases']} COVID-positive reports
+                                    </Card.Text>
+                                </Card.Body>
+                                <Card.Footer style={{ height: "44px" }} className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
+                            </Card>
                         </div>
                     )}
             </div>

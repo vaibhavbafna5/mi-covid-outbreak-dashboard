@@ -19,7 +19,7 @@ export default class MichiganMap extends Component {
         this.state = {
             lng: -84.597,
             lat: 44.48,
-            zoom: 5.68,
+            zoom: 4.98,
         }
     }
 

@@ -6,6 +6,13 @@ import ZipCodeDataPanel from './zipcode-data';
 import Chart from './chart';
 import axios from "axios";
 
+// bootstrap components
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Navbar from 'react-bootstrap/Navbar'
+
 // const CHART_DATA_ENDPOINT = 'http://0.0.0.0:5000/chart-data'
 const CHART_DATA_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/chart-data'
 
@@ -21,6 +28,7 @@ export default class App extends Component {
             // resultData is core data panel (line chart + addresses + top line metrics)
             cumulativeData: [],
             weeklyData: [],
+            showWeeklyData: true,
         }
     }
 
@@ -64,15 +72,73 @@ export default class App extends Component {
         // pass zipcode to zipcodedatapanel to thing to render
     }
 
+    setData(event) {
+        var showWeeklyData = true
+        if (event.target.value == 'weekly') {
+            showWeeklyData = true;
+        } else {
+            showWeeklyData = false;
+        }
+        this.setState({
+            showWeeklyData: showWeeklyData,
+        })
+    }
+
     render() {
         return (
-            <div>
-                <h2>Covid Outbreak Dashboard</h2>
-                <Autocomplete onZipCodeChange={this.onZipCodeChange} />
-                <MichiganMap />
+            <>
+                <Navbar bg="primary" variant="dark" expand="lg" >
+                    <Navbar.Brand>Covid-19 Outbreak Tracker</Navbar.Brand>
+                    <Navbar.Text>
+                        Collecting and surfacing responses from MiSymptoms
+                    </Navbar.Text>
+                </Navbar>
+                <Container style={{ marginTop: "24px", }}>
+                    <Row>
+                        <Col>
+                            <Row style={{ marginBottom: "24px" }}>
+                                <Col>
+                                    <Autocomplete onZipCodeChange={this.onZipCodeChange} />
+                                </Col>
+                                <Col>
+                                    <Form onChange={this.setData.bind(this)}>
+                                        <Row>
+                                            <Col>
+                                                <Form.Check
+                                                    type="radio"
+                                                    value="cumulative"
+                                                    name="gender"
+                                                    label="Cumulative">
+                                                </Form.Check>
+                                            </Col>
+                                            <Col>
+                                                <Form.Check
+                                                    type="radio"
+                                                    value="weekly"
+                                                    name="gender"
+                                                    label="Past 7 Days"
+                                                    defaultChecked >
+                                                </Form.Check>
+                                            </Col>
+                                        </Row>
+                                    </Form>
+                                </Col>
+                            </Row>
+                            <Chart showWeeklyData={this.state.showWeeklyData} weeklyData={this.state.weeklyData} cumulativeData={this.state.cumulativeData} />
+                            <div style={{ marginTop: "24px", }}>
+                                <MichiganMap />
+                            </div>
+                        </Col>
+                        <Col>
+                            <ZipCodeDataPanel zipCode={this.state.zipCode} />
+                        </Col>
+                    </Row>
+                </Container>
+                {/* <Autocomplete onZipCodeChange={this.onZipCodeChange} />
                 <Chart weeklyData={this.state.weeklyData} cumulativeData={this.state.cumulativeData} />
-                <ZipCodeDataPanel zipCode={this.state.zipCode} />
-            </div>
+                <MichiganMap />
+                <ZipCodeDataPanel zipCode={this.state.zipCode} /> */}
+            </>
         )
     }
 }

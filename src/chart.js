@@ -1,6 +1,11 @@
 import { LineChart, PieChart } from 'react-chartkick'
 import 'chart.js'
 import React, { Component } from 'react';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import './index.css';
 
 export default class Chart extends Component {
 
@@ -39,6 +44,7 @@ export default class Chart extends Component {
                     "data": props.cumulativeData["symptomatic_responses"],
                 }
             ],
+            showWeeklyData: true,
         }
     }
 
@@ -48,16 +54,6 @@ export default class Chart extends Component {
 
     componentWillReceiveProps(newProps) {
         this.setState({
-            data: [
-                {
-                    "name": "Covid Positive Cases",
-                    "data": newProps.weeklyData["covid_positive_cases"],
-                },
-                {
-                    "name": "Symptomatic Responses",
-                    "data": newProps.weeklyData["symptomatic_responses"],
-                }
-            ],
             weeklyData: [
                 {
                     "name": "Covid Positive Cases",
@@ -78,30 +74,20 @@ export default class Chart extends Component {
                     "data": newProps.cumulativeData["symptomatic_responses"],
                 }
             ],
+            showWeeklyData: newProps.showWeeklyData,
         })
-    }
-
-    setData(event) {
-        var newData = []
-        if (event.target.value == 'weekly') {
-            newData = this.state.weeklyData
-        } else {
-            newData = this.state.cumulativeData;
-        }
-        this.setState({
-            data: newData,
-        })
-        console.log("plz", this.state.data)
     }
 
     render() {
         return (
-            <div>
-                <div onChange={this.setData.bind(this)}>
-                    <input type="radio" value="cumulative" name="gender" /> Show cumulative cases
-                    <input type="radio" value="weekly" name="gender" defaultChecked /> Show weekly cases
-                </div>
-                <LineChart data={this.state.data} />
+            <div >
+                {this.state.showWeeklyData ?
+                    (
+                        <LineChart legend={"bottom"} height="150px" data={this.state.weeklyData} />
+                    ) : (
+                        <LineChart legend={"bottom"} height="150px" data={this.state.cumulativeData} />
+                    )
+                }
             </div>
         )
     }

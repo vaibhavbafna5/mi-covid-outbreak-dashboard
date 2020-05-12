@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+import Form from 'react-bootstrap/Form';
+import ListGroup from 'react-bootstrap/ListGroup'
 
 // const AVAILABLE_ZIPCODES_ENDPOINT = 'http://0.0.0.0:5000/available-zipcodes'
 const AVAILABLE_ZIPCODES_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/available-zipcodes'
@@ -118,7 +120,7 @@ class Autocomplete extends Component {
         if (showSuggestions && userInput) {
             if (filteredSuggestions.length) {
                 suggestionsListComponent = (
-                    <ul class="suggestions">
+                    <ListGroup style={{ position: "absolute", }}>
                         {filteredSuggestions.map((suggestion, index) => {
                             let className;
 
@@ -128,34 +130,31 @@ class Autocomplete extends Component {
                             }
 
                             return (
-                                <li
-                                    className={className}
+                                // absolute position style thing is being used 
+                                // to make sure content doesn't get pushed down
+                                <ListGroup.Item
                                     key={suggestion}
-                                    onClick={onClick}
-                                >
+                                    action onClick={onClick}>
                                     {suggestion}
-                                </li>
+                                </ListGroup.Item>
                             );
                         })}
-                    </ul>
+                    </ListGroup>
                 );
             } else {
                 suggestionsListComponent = (
-                    <div class="no-suggestions">
+                    <ListGroup.Item>
                         <em>No zipcodes found</em>
-                    </div>
+                    </ListGroup.Item>
                 );
             }
         }
 
         return (
             <Fragment>
-                <input
-                    type="text"
-                    onChange={onChange}
-                    onKeyDown={onKeyDown}
-                    value={userInput}
-                />
+                <Form >
+                    <Form.Control type="text" value={userInput} onChange={onChange} placeholder="Search for a zipcode" />
+                </Form>
                 {suggestionsListComponent}
             </Fragment>
         );
