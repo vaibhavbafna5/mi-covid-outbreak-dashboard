@@ -116,13 +116,13 @@ export default class ZipCodeDataPanel extends Component {
                         </Card>
                         <Card style={{ marginTop: "36px" }}>
                             <Card.Header>
-                                <h4>4 Addresses</h4>
+                                <h4>{this.state.data['home_data'].length + this.state.data['work_data'].length} Addresses</h4>
                                 <Nav variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress}>
                                     <Nav.Item>
-                                        <Nav.Link href="#home">Home</Nav.Link>
+                                        <Nav.Link href="#home">Home ({this.state.data['home_data'].length})</Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item>
-                                        <Nav.Link href="#work">Work</Nav.Link>
+                                        <Nav.Link href="#work">Work ({this.state.data['work_data'].length})</Nav.Link>
                                     </Nav.Item>
                                 </Nav>
                             </Card.Header>
@@ -147,7 +147,7 @@ export default class ZipCodeDataPanel extends Component {
                                                             <Accordion.Toggle as={Card.Header} eventKey={ind}>
                                                                 <Row>
                                                                     <Col md="auto">
-                                                                        > {case_datum['name']} - {case_datum['age']}, {case_datum['gender']}
+                                                                        {case_datum['name']} - {case_datum['age']}, {case_datum['gender']}
                                                                     </Col>
                                                                     <Col >
                                                                         {case_datum['phone_number']}
