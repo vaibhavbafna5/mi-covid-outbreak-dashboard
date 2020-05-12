@@ -12,6 +12,11 @@ code {
     monospace;
 } */
 
+#bootstrap-overrides h2 {
+  color: #008EC6;
+}
+
 #chart-1 {
     height: 50px;
 }
+

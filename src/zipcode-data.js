@@ -7,6 +7,7 @@ import Nav from 'react-bootstrap/Nav';
 import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
+import './index.css';
 
 // const REPORT_DATA_ENDPOINT = 'http://0.0.0.0:5000/report-data'
 const REPORT_DATA_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/report-data'
@@ -102,7 +103,7 @@ export default class ZipCodeDataPanel extends Component {
                             <Card.Header >
                                 <Row>
                                     <Col>
-                                        <h2>{this.state.data['zipcode']}</h2>
+                                        <h2 className="dottedBox" id="bigHeader">{this.state.data['zipcode']}</h2>
                                         <h6>{this.state.data['total_responses']} MiSymptoms Users | Mar 6 - May 9</h6>
                                     </Col>
                                 </Row>
