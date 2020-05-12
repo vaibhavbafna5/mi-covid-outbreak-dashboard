@@ -83,9 +83,9 @@ export default class Chart extends Component {
             <div >
                 {this.state.showWeeklyData ?
                     (
-                        <LineChart legend={"bottom"} height="150px" data={this.state.weeklyData} />
+                        <LineChart legend={"bottom"} width="420px" height="150px" data={this.state.weeklyData} />
                     ) : (
-                        <LineChart legend={"bottom"} height="150px" data={this.state.cumulativeData} />
+                        <LineChart legend={"bottom"} width="420px" height="150px" data={this.state.cumulativeData} />
                     )
                 }
             </div>

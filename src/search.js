@@ -143,7 +143,7 @@ class Autocomplete extends Component {
                 );
             } else {
                 suggestionsListComponent = (
-                    <ListGroup.Item>
+                    <ListGroup.Item style={{ position: "absolute", }}>
                         <em>No zipcodes found</em>
                     </ListGroup.Item>
                 );

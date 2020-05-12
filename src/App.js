@@ -95,7 +95,7 @@ export default class App extends Component {
                 </Navbar>
                 <Container style={{ marginTop: "24px", }}>
                     <Row>
-                        <Col>
+                        <Col style={{ marginLeft: "-48x", width: "400px" }}>
                             <Row style={{ marginBottom: "24px" }}>
                                 <Col>
                                     <Autocomplete onZipCodeChange={this.onZipCodeChange} />
