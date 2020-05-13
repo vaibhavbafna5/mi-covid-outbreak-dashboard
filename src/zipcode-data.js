@@ -8,6 +8,7 @@ import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import './index.css';
+import './zipcode-data.css'
 
 // const REPORT_DATA_ENDPOINT = 'http://0.0.0.0:5000/report-data'
 const REPORT_DATA_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/report-data'
@@ -99,25 +100,25 @@ export default class ZipCodeDataPanel extends Component {
             <div>
                 {this.state.zipCodeDataExists ?
                     (<div>
-                        <Card bg={'Info'}>
-                            <Card.Header >
+                        <Card >
+                            <Card.Header id="overview-container-header">
                                 <Row>
                                     <Col>
-                                        <h2 className="dottedBox" id="bigHeader">{this.state.data['zipcode']}</h2>
-                                        <h6>{this.state.data['total_responses']} MiSymptoms Users | {this.state.data['date_range']}</h6>
+                                        <h2 >{this.state.data['zipcode']}</h2>
+                                        <h6 >{this.state.data['total_responses']} MiSymptoms Users | {this.state.data['date_range']}</h6>
                                     </Col>
                                 </Row>
                             </Card.Header>
-                            <Card.Body style={{ paddingBottom: "-8px", }}>
+                            <Card.Body id="overview-container-body">
                                 <Card.Text>
                                     {this.state.data['symptomatic_cases']} COVID-like reports  <b style={{ opacity: "0.25" }}>|</b>  {this.state.data['confirmed_cases']} COVID-positive reports
                                     </Card.Text>
                             </Card.Body>
-                            <Card.Footer style={{ height: "44px" }} className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
+                            <Card.Footer id="overview-container-footer" className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
                         </Card>
                         <Card style={{ marginTop: "36px" }}>
-                            <Card.Header>
-                                <h4>{this.state.data['home_data'].length + this.state.data['work_data'].length} Addresses</h4>
+                            <Card.Header id="address-container-header">
+                                <h3 id="address-container-header-text">{this.state.data['home_data'].length + this.state.data['work_data'].length} Addresses</h3>
                                 <Nav variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress}>
                                     <Nav.Item>
                                         <Nav.Link href="#home">Home ({this.state.data['home_data'].length})</Nav.Link>
@@ -132,8 +133,10 @@ export default class ZipCodeDataPanel extends Component {
                                     <Card>
                                         <Accordion.Toggle as={Card.Header} eventKey={index}>
                                             <Row >
-                                                <Col md="auto" >
-                                                    {item['address']}
+                                                <Col>
+                                                    <div style={{ width: "350px", }}>
+                                                        {item['address'].slice(0, item['address'].lastIndexOf(","))}
+                                                    </div>
                                                 </Col>
                                                 <Col >
                                                     {item['num_reports']} reports
@@ -223,24 +226,22 @@ export default class ZipCodeDataPanel extends Component {
 
                     </div>) :
                     (
-                        <div>
-                            <Card>
-                                <Card.Header bg={"Primary"}>
-                                    <Row>
-                                        <Col>
-                                            <h2>Statewide</h2>
-                                            <h6>{this.state.data['total_responses']} MiSymptoms Users | {this.state.data['date_range']}</h6>
-                                        </Col>
-                                    </Row>
-                                </Card.Header>
-                                <Card.Body style={{ paddingBottom: "-8px", }}>
-                                    <Card.Text>
-                                        {this.state.data['symptomatic_cases']} COVID-like reports  <b style={{ opacity: "0.25" }}>|</b>  {this.state.data['confirmed_cases']} COVID-positive reports
+                        <Card>
+                            <Card.Header id="overview-container-header">
+                                <Row>
+                                    <Col>
+                                        <h2>Statewide</h2>
+                                        <h6>{this.state.data['total_responses']} MiSymptoms Users | {this.state.data['date_range']}</h6>
+                                    </Col>
+                                </Row>
+                            </Card.Header>
+                            <Card.Body id="overview-container-body">
+                                <Card.Text>
+                                    {this.state.data['symptomatic_cases']} COVID-like reports  <b style={{ opacity: "0.25" }}>|</b>  {this.state.data['confirmed_cases']} COVID-positive reports
                                     </Card.Text>
-                                </Card.Body>
-                                <Card.Footer style={{ height: "44px" }} className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
-                            </Card>
-                        </div>
+                            </Card.Body>
+                            <Card.Footer id="overview-container-footer" className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
+                        </Card>
                     )}
             </div>
         )

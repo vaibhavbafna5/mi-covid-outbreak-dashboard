@@ -1,0 +1,20 @@
+#overview-container-header {
+    border-bottom: none;
+    background-color: var(--secondary);
+    color: var(--white);
+}
+
+#overview-container-body {
+    padding-bottom: 0px;
+}
+
+#overview-container-footer {
+    background: none;
+    border-top: none;
+    height: 44px;
+}
+
+#address-container-header {
+    background-color: var(--secondary);
+    color: var(--white);
+}
