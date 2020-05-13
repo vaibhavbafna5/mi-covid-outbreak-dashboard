@@ -104,7 +104,7 @@ export default class ZipCodeDataPanel extends Component {
                                 <Row>
                                     <Col>
                                         <h2 className="dottedBox" id="bigHeader">{this.state.data['zipcode']}</h2>
-                                        <h6>{this.state.data['total_responses']} MiSymptoms Users | Mar 6 - May 9</h6>
+                                        <h6>{this.state.data['total_responses']} MiSymptoms Users | {this.state.data['date_range']}</h6>
                                     </Col>
                                 </Row>
                             </Card.Header>
@@ -183,6 +183,7 @@ export default class ZipCodeDataPanel extends Component {
                                                             <Accordion.Collapse eventKey={ind}>
                                                                 <Card.Body>
                                                                     <ul>
+                                                                        <li><b>Reported</b> - {case_datum['reported']}</li>
                                                                         <li><b>Temperature</b> - {case_datum['temperature']}</li>
                                                                         <li><b>Symptoms</b> - {case_datum['symptoms']}</li>
                                                                         <li><b>Covid+ Contact</b> - {case_datum['covid_contacted']}</li>
@@ -228,7 +229,7 @@ export default class ZipCodeDataPanel extends Component {
                                     <Row>
                                         <Col>
                                             <h2>Statewide</h2>
-                                            <h6>{this.state.data['total_responses']} MiSymptoms Users | Mar 6 - May 9</h6>
+                                            <h6>{this.state.data['total_responses']} MiSymptoms Users | {this.state.data['date_range']}</h6>
                                         </Col>
                                     </Row>
                                 </Card.Header>
