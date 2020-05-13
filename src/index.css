@@ -1,20 +1,105 @@
-/* body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body {
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased !important;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
+:root {
+  --secondary: #0077A7;
+  --light-blue: #008EC6;
+  --light-blue-ten-percent: #E5F4F9;
+  --light-blue-five-percent: #F2F9FC;
+  --black: #000000;
+  --white: #FFFFFF;
+  --eighty-percent-gray: #323E43;
+  --seventy-percent-gray: #51646D;
+  --sixty-percent-gray: #728A92;
+  --forty-percent-gray: #C4CED1;
+  --thirty-percent-gray: #E3E3E3;
 
+  /* tags */
+  --danger: #B80000;
+  --danger-ten-percent: #F8E5E5;
+  --warning: #C75300;
+  --warning-ten-percent: #F9EEE5;
+  --success: #158655;
+  --success-ten-percent: #E8F3EE;
+  --brown: #8A6300;
+  --light-brown: #FFF7E3;
+}
+
+/* statewide & zipcode header */
+#bootstrap-overrides h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+/* dashboard title */
 #bootstrap-overrides h2 {
-  color: #008EC6;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--white);
 }
+
+/* address name */
+#bootstrap-overrides h3 {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+/* name,age,sex */
+#bootstrap-overrides h4 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+/* bulleted list lablels  */
+#bootstrap-overrides h5 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black);
+}
+
+#bootstrap-overrides h6 {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+#bootstrap-overrides h7 {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--black);
+}
+
+/* tags - gonna have to add color separately */
+#bootstrap-overrides h8 {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* update h5 for text that follows bulleted list label & h7 for selected radio button label */
+.medium {
+  font-weight: 500;
+}
+
+/* update h3 for covid-like reports & covid-positive reports  */
+.semi-bold {
+  font-weight: 600;
+}
+
+/* update h5 for top banner subheader */
+.white {
+  color: var(--white);
+}
+
+/* update h4 for phone number & update h5 for text that follows bulleted list label 
+& update for h7 unselected radio button label & update for time stamp in overview container */
+.seventy-percent-gray {
+  color: var(--seventy-percent-gray)
+}
+
 
 #chart-1 {
     height: 50px;
