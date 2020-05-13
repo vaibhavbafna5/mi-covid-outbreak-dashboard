@@ -185,6 +185,7 @@ export default class ZipCodeDataPanel extends Component {
                                                                     <ul>
                                                                         <li><b>Temperature</b> - {case_datum['temperature']}</li>
                                                                         <li><b>Symptoms</b> - {case_datum['symptoms']}</li>
+                                                                        <li><b>Covid+ Contact</b> - {case_datum['covid_contacted']}</li>
                                                                         {
                                                                             case_datum['work_address'] == "" ? (
                                                                                 // <p>No work address reported</p>
