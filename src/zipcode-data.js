@@ -97,7 +97,7 @@ export default class ZipCodeDataPanel extends Component {
     render() {
 
         return (
-            <div>
+            <div style={{ width: "600px" }}>
                 {this.state.zipCodeDataExists ?
                     (<div>
                         <Card >
@@ -118,20 +118,20 @@ export default class ZipCodeDataPanel extends Component {
                         </Card>
                         <Card style={{ marginTop: "36px" }}>
                             <Card.Header id="address-container-header">
-                                <h3 id="address-container-header-text">{this.state.data['home_data'].length + this.state.data['work_data'].length} Addresses</h3>
-                                <Nav variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress}>
-                                    <Nav.Item>
-                                        <Nav.Link href="#home">Home ({this.state.data['home_data'].length})</Nav.Link>
+                                <h3 style={{ color: "white", }} id="address-container-header-text">{this.state.data['home_data'].length + this.state.data['work_data'].length} Addresses</h3>
+                                <Nav id="nav-container" variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress}>
+                                    <Nav.Item id="nav-item">
+                                        <Nav.Link href="#home"><b>Home ({this.state.data['home_data'].length})</b></Nav.Link>
                                     </Nav.Item>
-                                    <Nav.Item>
-                                        <Nav.Link href="#work">Work ({this.state.data['work_data'].length})</Nav.Link>
+                                    <Nav.Item id="nav-item">
+                                        <Nav.Link href="#work"><b>Work ({this.state.data['work_data'].length})</b></Nav.Link>
                                     </Nav.Item>
                                 </Nav>
                             </Card.Header>
                             <Accordion>
                                 {this.state.caseData.map((item, index) => (
                                     <Card>
-                                        <Accordion.Toggle as={Card.Header} eventKey={index}>
+                                        <Accordion.Toggle tabIndex={index} id="address-accordion-toggle" as={Card.Header} eventKey={index}>
                                             <Row >
                                                 <Col>
                                                     <div style={{ width: "350px", }}>
@@ -141,9 +141,14 @@ export default class ZipCodeDataPanel extends Component {
                                                 <Col >
                                                     {item['num_reports']} reports
                                                 </Col>
+                                                <Col>
+                                                    <div>
+                                                        <img className="address-expand-icon" src={require('./icons/arrow/big/condensed/unselected.svg')}></img>
+                                                    </div>
+                                                </Col>
                                             </Row>
                                         </Accordion.Toggle>
-                                        <Accordion.Collapse eventKey={index}>
+                                        <Accordion.Collapse id="address-accordion-collapser" eventKey={index}>
                                             <Card.Body>
                                                 {item['cases'].map((case_datum, ind) => (
                                                     <Accordion>

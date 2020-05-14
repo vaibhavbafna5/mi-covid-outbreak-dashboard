@@ -1,6 +1,6 @@
 #overview-container-header {
     border-bottom: none;
-    background-color: var(--secondary);
+    background-color: var(--light-blue);
     color: var(--white);
 }
 
@@ -15,6 +15,61 @@
 }
 
 #address-container-header {
-    background-color: var(--secondary);
+    background-color: var(--light-blue);
     color: var(--white);
+}
+
+#address-container-header-text {
+    color: var(--white);
+}
+
+#nav-container {
+    background-color: var(--light-blue);
+}
+
+#nav-item {
+    background-color: var(--light-blue);
+    border: none;
+    height: 36px;
+}
+
+#bootstrap-overrides a:hover {
+    /* text-decoration: underline; */
+    border-bottom: 4px solid white;
+    border: none;
+}
+
+#bootstrap-overrides a {
+    color: #99D2E8;
+    border: none;
+    height: 36px;
+}
+
+#bootstrap-overrides .nav-link.active {
+    /* text-decoration: underline; */
+    background-color: var(--light-blue);
+    border: none;
+    border-bottom: 4px solid white;
+    color: var(--white);
+}
+
+#address-accordion-toggle {
+    background-color: var(--white);
+}
+
+#address-accordion-toggle:hover {
+    background-color: #E5F4F9;
+}
+
+#address-accordion-toggle.collapse {
+    background-color: var(--white);
+}
+
+#address-accordion-toggle:focus {
+    background: pink;
+    outline: none;
+}
+
+#address-accordion-toggle.card-header:hover .address-expand-icon {
+    content: url("./icons/condensed/hovered.svg");
 }
