@@ -100,7 +100,7 @@ body {
   color: var(--seventy-percent-gray)
 }
 
-.nav {
+#top-level-nav {
   height: 86px;
   background: linear-gradient(271.49deg, #008EC6 0.1%, #0077A7 99.9%);
   color: var(--white);
@@ -143,18 +143,18 @@ h5.subheader {
   left: 0;
   height: 14px;
   width: 14px;
-  background-color: #eee;
-  border-radius: 50%;
+  background-color: var(--white);
+  border-radius: 1px;
 }
 
 /* On mouse-over, add a grey background color */
 .container:hover input ~ .checkmark {
-  background-color: #ccc;
+  border-color: var(--forty-percent-gray);
 }
 
 /* When the radio button is checked, add a blue background */
 .container input:checked ~ .checkmark {
-  background-color:green;
+  background-color: var(--light-blue);
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */

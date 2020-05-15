@@ -6,7 +6,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 // import classes from "./chart.module.css";
 
-import './index.css';
+// import './index.css';
+
+// const symptomaticColor = ""
 
 export default class Chart extends Component {
 
@@ -84,9 +86,9 @@ export default class Chart extends Component {
             <div>
                 {this.state.showWeeklyData ?
                     (
-                        <LineChart width="430px" height="119px" legend={"bottom"} data={this.state.weeklyData} />
+                        <LineChart colors={["#B80000", "#C75300"]} width="430px" height="250px" legend={"bottom"} data={this.state.weeklyData} />
                     ) : (
-                        <LineChart width="430px" height="119px" legend={"bottom"} data={this.state.cumulativeData} />
+                        <LineChart colors={["#B80000", "#C75300"]} width="430px" height="250px" legend={"bottom"} data={this.state.cumulativeData} />
                     )
                 }
             </div>

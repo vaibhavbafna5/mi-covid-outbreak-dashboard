@@ -93,7 +93,7 @@ export default class App extends Component {
                         Collecting and surfacing responses from MiSymptoms
                     </Navbar.Text>
                 </Navbar> */}
-                <Navbar className="nav">
+                <Navbar id="top-level-nav">
                     <h2 className="header">Covid-19 Outbreak Tracker</h2>
                     <h5 className="subheader">Collecting and surfacing responses from MiSymptoms</h5>
                 </Navbar>
@@ -132,9 +132,9 @@ export default class App extends Component {
                                 </Col>
                             </Row>
                             <Chart showWeeklyData={this.state.showWeeklyData} weeklyData={this.state.weeklyData} cumulativeData={this.state.cumulativeData} />
-                            <div style={{ marginTop: "24px", }}>
+                            {/* <div style={{ marginTop: "24px", }}>
                                 <MichiganMap />
-                            </div>
+                            </div> */}
                         </Col>
                         <Col>
                             <ZipCodeDataPanel zipCode={this.state.zipCode} />
