@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -9,6 +10,8 @@ import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import './index.css';
 import './zipcode-data.css'
+import UnselectedArrow from "./icons/arrow/big/condensed/unselected.svg"
+import SelectedArrow from "./icons/arrow/big/expanded/address/selected.svg"
 
 // const REPORT_DATA_ENDPOINT = 'http://0.0.0.0:5000/report-data'
 const REPORT_DATA_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/report-data'
@@ -18,6 +21,7 @@ export default class ZipCodeDataPanel extends Component {
     constructor(props) {
         super(props);
         console.log("zipcode-data props", this.props)
+        this.wrapper = React.createRef();
 
 
 
@@ -26,6 +30,11 @@ export default class ZipCodeDataPanel extends Component {
             zipCode: "",
             data: {},
             caseData: {},
+            addressRow: {
+                expanded: false,
+                backgroundColor: "#FFFFFF",
+                imgSrc: UnselectedArrow,
+            },
         }
     }
 
@@ -94,6 +103,29 @@ export default class ZipCodeDataPanel extends Component {
         })
     }
 
+    toggle(position) {
+        console.log("accordion clicked - ", position);
+        if (this.state.active === position) {
+            this.setState({ active: null })
+        } else {
+            this.setState({ active: position })
+        }
+    }
+
+    setBackgroundColor(position) {
+        if (this.state.active == position) {
+            return "#E5F4F9";
+        }
+        return "#FFFFFF";
+    }
+
+    setExpandIcon(position) {
+        if (this.state.active == position) {
+            return SelectedArrow;
+        }
+        return UnselectedArrow;
+    }
+
     render() {
 
         return (
@@ -128,10 +160,11 @@ export default class ZipCodeDataPanel extends Component {
                                     </Nav.Item>
                                 </Nav>
                             </Card.Header>
-                            <Accordion>
+                            <Accordion id="address-accordion" >
                                 {this.state.caseData.map((item, index) => (
-                                    <Card>
-                                        <Accordion.Toggle tabIndex={index} id="address-accordion-toggle" as={Card.Header} eventKey={index}>
+                                    <Card id="address-card" variant="flush">
+                                        {/* style={{ backgroundColor: this.state.addressRow.backgroundColor }}  */}
+                                        <Accordion.Toggle style={{ backgroundColor: this.setBackgroundColor(index) }} onClick={() => { this.toggle(index) }} id="address-accordion-toggle" as={Card.Header} eventKey={index}>
                                             <Row >
                                                 <Col>
                                                     <div style={{ width: "350px", }}>
@@ -143,17 +176,17 @@ export default class ZipCodeDataPanel extends Component {
                                                 </Col>
                                                 <Col>
                                                     <div>
-                                                        <img className="address-expand-icon" src={require('./icons/arrow/big/condensed/unselected.svg')}></img>
+                                                        <img className="address-expand-icon" src={this.setExpandIcon(index)}></img>
                                                     </div>
                                                 </Col>
                                             </Row>
                                         </Accordion.Toggle>
                                         <Accordion.Collapse id="address-accordion-collapser" eventKey={index}>
-                                            <Card.Body>
+                                            <Card.Body id="address-card-body">
                                                 {item['cases'].map((case_datum, ind) => (
                                                     <Accordion>
-                                                        <Card>
-                                                            <Accordion.Toggle as={Card.Header} eventKey={ind}>
+                                                        <Card id="report-card">
+                                                            <Accordion.Toggle id="report-accordion-toggle" as={Card.Header} eventKey={ind}>
                                                                 <Row>
                                                                     <Col md="auto">
                                                                         {case_datum['name']} - {case_datum['age']}, {case_datum['gender']}
@@ -189,7 +222,8 @@ export default class ZipCodeDataPanel extends Component {
                                                                 </Row>
                                                             </Accordion.Toggle>
                                                             <Accordion.Collapse eventKey={ind}>
-                                                                <Card.Body>
+                                                                <Card.Body id="report-card-body">
+                                                                    <hr></hr>
                                                                     <ul>
                                                                         <li><b>Reported</b> - {case_datum['reported']}</li>
                                                                         <li><b>Temperature</b> - {case_datum['temperature']}</li>

@@ -45,6 +45,10 @@
     height: 36px;
 }
 
+#bootstrap-overrides .card-header {
+    border-bottom: 0px;
+}
+
 #bootstrap-overrides .nav-link.active {
     /* text-decoration: underline; */
     background-color: var(--light-blue);
@@ -58,18 +62,36 @@
 }
 
 #address-accordion-toggle:hover {
-    background-color: #E5F4F9;
+    background-color: #F2F9FC;
 }
 
 #address-accordion-toggle.collapse {
     background-color: var(--white);
 }
 
-#address-accordion-toggle:focus {
-    background: pink;
-    outline: none;
+#address-accordion {
+    border: none;
 }
 
-#address-accordion-toggle.card-header:hover .address-expand-icon {
-    content: url("./icons/condensed/hovered.svg");
+#address-card {
+    border: none;
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+
+#address-card-body {
+    padding: 0;
+}
+
+#report-card {
+    background-color: var(--white);
+    border: none;
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+
+#report-card-body {
+    padding-top: 0px;
+}
+
+#report-accordion-toggle {
+    background-color: var(--white);
 }
