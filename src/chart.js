@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+// import classes from "./chart.module.css";
 
 import './index.css';
 
@@ -80,12 +81,12 @@ export default class Chart extends Component {
 
     render() {
         return (
-            <div >
+            <div>
                 {this.state.showWeeklyData ?
                     (
-                        <LineChart legend={"bottom"} width="420px" height="150px" data={this.state.weeklyData} />
+                        <LineChart width="430px" height="119px" legend={"bottom"} data={this.state.weeklyData} />
                     ) : (
-                        <LineChart legend={"bottom"} width="420px" height="150px" data={this.state.cumulativeData} />
+                        <LineChart width="430px" height="119px" legend={"bottom"} data={this.state.cumulativeData} />
                     )
                 }
             </div>

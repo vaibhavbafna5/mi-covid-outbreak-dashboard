@@ -87,11 +87,15 @@ export default class App extends Component {
     render() {
         return (
             <>
-                <Navbar bg="primary" variant="dark" expand="lg" >
+                {/* <Navbar bg="primary" variant="dark" expand="lg" >
                     <Navbar.Brand>Covid-19 Outbreak Tracker</Navbar.Brand>
                     <Navbar.Text>
                         Collecting and surfacing responses from MiSymptoms
                     </Navbar.Text>
+                </Navbar> */}
+                <Navbar className="nav">
+                    <h2 className="header">Covid-19 Outbreak Tracker</h2>
+                    <h5 className="subheader">Collecting and surfacing responses from MiSymptoms</h5>
                 </Navbar>
                 <Container style={{ marginTop: "24px", }}>
                     <Row>
@@ -103,22 +107,25 @@ export default class App extends Component {
                                 <Col>
                                     <Form onChange={this.setData.bind(this)}>
                                         <Row>
-                                            <Col>
-                                                <Form.Check
-                                                    type="radio"
-                                                    value="cumulative"
-                                                    name="gender"
-                                                    label="Cumulative">
-                                                </Form.Check>
+                                            {/* <Col>
+                                                <input className="date-range-selector" id="cumulative" type="radio" value="cumulative" label="Cumulative" checked={!this.state.showWeeklyData}></input>
+                                                <label for="cumulative">Cumulative</label>
                                             </Col>
                                             <Col>
-                                                <Form.Check
-                                                    type="radio"
-                                                    value="weekly"
-                                                    name="gender"
-                                                    label="Past 7 Days"
-                                                    defaultChecked >
-                                                </Form.Check>
+                                                <input className="date-range-selector" id="weekly" type="radio" value="weekly" label="Past 7 Days" checked={this.state.showWeeklyData}></input>
+                                                <label for="weekly">Past 7 Days</label>
+                                            </Col> */}
+                                             <Col>
+                                             <label className="date-range-selector">Cumulative
+                                                <input id="cumulative" type="radio" value="cumulative" label="Cumulative" checked={!this.state.showWeeklyData}></input>
+                                                <span class="checkmark"></span>
+                                                </label>
+                                            </Col>
+                                            <Col>
+                                            <label className="date-range-selector">Past 7 Days
+                                                <input id="weekly" type="radio" value="weekly" label="Past 7 Days" checked={this.state.showWeeklyData}></input>
+                                                <span class="checkmark"></span>
+                                                </label>
                                             </Col>
                                         </Row>
                                     </Form>

@@ -142,8 +142,12 @@ class Autocomplete extends Component {
                     </ListGroup>
                 );
             } else {
+                // suggestionsListComponent = (
+                //     <ListGroup.Item style={{ position: "absolute", }}>
+                //         <em>No zipcodes found</em>
+                //     </ListGroup.Item>
                 suggestionsListComponent = (
-                    <ListGroup.Item style={{ position: "absolute", }}>
+                    <ListGroup.Item className="search">
                         <em>No zipcodes found</em>
                     </ListGroup.Item>
                 );
@@ -152,7 +156,7 @@ class Autocomplete extends Component {
 
         return (
             <Fragment>
-                <Form >
+                <Form className="search-bar">
                     <Form.Control type="text" value={userInput} onChange={onChange} placeholder="Search for a zipcode" />
                 </Form>
                 {suggestionsListComponent}
