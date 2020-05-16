@@ -116,11 +116,11 @@ class Autocomplete extends Component {
         } = this;
 
         let suggestionsListComponent;
-
+        
         if (showSuggestions && userInput) {
             if (filteredSuggestions.length) {
                 suggestionsListComponent = (
-                    <ListGroup style={{ position: "absolute", width: "202px", fontSize:"14px", borderBottomLeftRadius: "0px", borderBottomRightRadius: "0px" }}>
+                    <ListGroup style={{ position: "absolute", width: "202px", fontSize:"14px"}}>
                         {filteredSuggestions.map((suggestion, index) => {
                             let className;
 
@@ -129,13 +129,32 @@ class Autocomplete extends Component {
                                 className = "suggestion-active";
                             }
 
+                            // my poor attempt at bolding part of each result that matches with user input 
+                            
+                            // var i = 0; 
+                            // while (i < String(userInput).length) {
+                            //     var k= 0; 
+                            //     while (k < filteredSuggestions.length) { 
+                            //         var item1 = filteredSuggestions[k];
+                            //         var newString = item1.replace(item1[i], item1[i].bold());
+                            //         filteredSuggestions[k] = newString;
+                            //         console.log(k)
+                            //         console.log(filteredSuggestions[k])
+                                 
+                            //         k += 1;
+                            //     }
+                            //     i += 1;
+                            // }
+
                             return (
                                 // absolute position style thing is being used 
                                 // to make sure content doesn't get pushed down
-                                <ListGroup.Item
+                                <ListGroup.Item style={{ borderTopLeftRadius: "0px", borderTopRightRadius: "0px", color: "black"}}
                                     key={suggestion}
                                     action onClick={onClick}>
+                                    <div style={{color: "Red", backgroundColor: "Yellow"}}>
                                     {suggestion}
+                                    </div>
                                 </ListGroup.Item>
                             );
                         })}
@@ -147,8 +166,8 @@ class Autocomplete extends Component {
                 //         <em>No zipcodes found</em>
                 //     </ListGroup.Item>
                 suggestionsListComponent = (
-                    <ListGroup.Item style={{ width: "202px", fontSize:"14px" }}>
-                        <em>No zipcode found</em>
+                    <ListGroup.Item style={{ width: "202px", fontSize:"14px", fontStyle:"italic", textAlign: "center" }}>
+                        <div style={{display:"inline-block", textStyle:"italic"}}>No zipcode found</div>
                         {/* <em>Please enter a 5 digit zipcode</em> */}
                     </ListGroup.Item>
                 );
@@ -158,6 +177,7 @@ class Autocomplete extends Component {
         return (
             <Fragment>
                 <Form style={{ width: "202px"}}>
+                <img src ="./icons/searchIcon.svg"></img>
                     <Form.Control type="text" value={userInput} onChange={onChange} placeholder="Search for a zipcode" />
                 </Form>
                 {suggestionsListComponent}
