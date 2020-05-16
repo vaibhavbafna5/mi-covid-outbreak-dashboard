@@ -97,34 +97,28 @@ export default class App extends Component {
                     <h2 className="header">Covid-19 Outbreak Tracker</h2>
                     <h5 className="subheader">Collecting and surfacing responses from MiSymptoms</h5>
                 </Navbar>
-                <Container style={{ marginTop: "24px", }}>
+                <Container style={{ marginTop: "30px"}}>
                     <Row>
-                        <Col style={{ marginLeft: "-48x", width: "400px" }}>
-                            <Row style={{ marginBottom: "24px" }}>
-                                <Col>
-                                    <Autocomplete onZipCodeChange={this.onZipCodeChange} />
+                        <Col>
+                            <Row style={{maxHeight:"40px"}}>
+                                <Col className="no-gutters" style={{maxHeight:"40px"}}>
+                                    <Autocomplete onZipCodeChange={this.onZipCodeChange}/>
                                 </Col>
-                                <Col>
-                                    <Form onChange={this.setData.bind(this)}>
-                                        <Row>
-                                            {/* <Col>
-                                                <input className="date-range-selector" id="cumulative" type="radio" value="cumulative" label="Cumulative" checked={!this.state.showWeeklyData}></input>
-                                                <label for="cumulative">Cumulative</label>
-                                            </Col>
-                                            <Col>
-                                                <input className="date-range-selector" id="weekly" type="radio" value="weekly" label="Past 7 Days" checked={this.state.showWeeklyData}></input>
-                                                <label for="weekly">Past 7 Days</label>
-                                            </Col> */}
+                                <Col className="no-gutters" style={{maxHeight:"40px"}}>
+                                    <Form onChange={this.setData.bind(this)} className="no-gutters" style={{maxHeight:"40px"}}>
+                                        <Row className="no-gutters" style={{maxHeight:"40px"}}>
                                              <Col>
-                                             <label className="date-range-selector">Cumulative
-                                                <input id="cumulative" type="radio" value="cumulative" label="Cumulative" checked={!this.state.showWeeklyData}></input>
-                                                <span class="checkmark"></span>
+                                                <label className="date-range-selector" style={{maxHeight:"40px"}}>
+                                                    <input id="cumulative" type="radio" value="cumulative" label="Cumulative" checked={!this.state.showWeeklyData}></input>
+                                                    <span className="checkmark"></span>
+                                                    <span className="radio-button-label">Cumulative</span>
                                                 </label>
                                             </Col>
-                                            <Col>
-                                            <label className="date-range-selector">Past 7 Days
-                                                <input id="weekly" type="radio" value="weekly" label="Past 7 Days" checked={this.state.showWeeklyData}></input>
-                                                <span class="checkmark"></span>
+                                            <Col style={{maxHeight:"40px"}}>
+                                                <label className="date-range-selector" style={{maxHeight:"40px"}}>
+                                                    <input id="weekly" type="radio" value="weekly" label="Past 7 Days" checked={this.state.showWeeklyData}></input>
+                                                    <span className="checkmark"></span>
+                                                    <span className="radio-button-label">Past 7 Days</span>
                                                 </label>
                                             </Col>
                                         </Row>

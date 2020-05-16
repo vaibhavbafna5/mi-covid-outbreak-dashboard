@@ -120,7 +120,7 @@ class Autocomplete extends Component {
         if (showSuggestions && userInput) {
             if (filteredSuggestions.length) {
                 suggestionsListComponent = (
-                    <ListGroup style={{ position: "absolute", }}>
+                    <ListGroup style={{ position: "absolute", width: "202px", fontSize:"14px", borderBottomLeftRadius: "0px", borderBottomRightRadius: "0px" }}>
                         {filteredSuggestions.map((suggestion, index) => {
                             let className;
 
@@ -147,8 +147,9 @@ class Autocomplete extends Component {
                 //         <em>No zipcodes found</em>
                 //     </ListGroup.Item>
                 suggestionsListComponent = (
-                    <ListGroup.Item className="search">
-                        <em>No zipcodes found</em>
+                    <ListGroup.Item style={{ width: "202px", fontSize:"14px" }}>
+                        <em>No zipcode found</em>
+                        {/* <em>Please enter a 5 digit zipcode</em> */}
                     </ListGroup.Item>
                 );
             }
@@ -156,7 +157,7 @@ class Autocomplete extends Component {
 
         return (
             <Fragment>
-                <Form className="search-bar">
+                <Form style={{ width: "202px"}}>
                     <Form.Control type="text" value={userInput} onChange={onChange} placeholder="Search for a zipcode" />
                 </Form>
                 {suggestionsListComponent}

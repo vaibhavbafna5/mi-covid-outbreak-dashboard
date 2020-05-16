@@ -83,7 +83,7 @@ export default class Chart extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{ marginTop: "45px"}}>
                 {this.state.showWeeklyData ?
                     (
                         <LineChart colors={["#B80000", "#C75300"]} width="430px" height="250px" legend={"bottom"} data={this.state.weeklyData} />

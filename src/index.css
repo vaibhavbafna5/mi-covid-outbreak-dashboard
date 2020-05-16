@@ -3,6 +3,11 @@ body {
   -webkit-font-smoothing: antialiased !important;
 }
 
+.no-gutters {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
 :root {
   --secondary: #0077A7;
   --light-blue: #008EC6;
@@ -116,45 +121,64 @@ h2.header {
 h5.subheader {
   margin-top: -4px;
 }
-/* 
-.container {
-  display: block;
+
+/* radio button */
+
+
+.date-range-selector {
   position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 26px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 14px;
+  color: var(--seventy-percent-gray);
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-} */
+}
 
+/* Remove browser default */
 .date-range-selector input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
 }
 
-/* Create a custom radio button */
+/* Create radio button */
 .checkmark {
   position: absolute;
-  top: 0;
   left: 0;
-  height: 14px;
-  width: 14px;
+  height: 20px;
+  width: 20px;
   background-color: var(--white);
-  border-radius: 1px;
-}
-
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 1px;
   border-color: var(--forty-percent-gray);
 }
 
+/* On mouse-over, add a grey border */
+.date-range-selector:hover input ~ .checkmark {
+  border-color: var(--sixty-percent-gray);
+}
+
+/* On mouse-over, make label a darker grey */
+.date-range-selector:hover input ~ .radio-button-label {
+  color: var(--eighty-percent-gray);
+}
+
 /* When the radio button is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.date-range-selector input:checked ~ .checkmark {
   background-color: var(--light-blue);
+  box-shadow: 0px 1px 6px rgba(1, 122, 170, 0.25);
+  border-style: none;
+}
+
+.date-range-selector input:checked ~ .radio-button-label {
+  font-weight: 500;
+  color: var(--black);
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -165,14 +189,14 @@ h5.subheader {
 }
 
 /* Show the indicator (dot/circle) when checked */
-.container input:checked ~ .checkmark:after {
+input:checked ~ .checkmark:after {
   display: block;
 }
 
 /* Style the indicator (dot/circle) */
-.container .checkmark:after {
- 	top: 9px;
-	left: 9px;
+.checkmark:after {
+ 	top: 6px;
+	left: 6px;
 	width: 8px;
 	height: 8px;
 	border-radius: 50%;
@@ -180,26 +204,32 @@ h5.subheader {
 }
 
 
-/* #bootstrap-overrides .input[type='radio']:after {
-  background-color: #d1d3d1;
+
+/* search */
+
+.form-control {
+  height: 40px;
+  width: 202px;
+  font-size: 14px;
+  border-color: var(--forty-percent-gray);
+  border-radius: 5px;
 }
 
-#bootstrap-overrides .input[type='radio']:checked:after {
-  background-color: green;
-} */
-
-
-
-/* .navItems {
-  position: inline-block;
-} */
-
-.chart {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
+.form-control::placeholder {
+  color: var(--seventy-percent-gray)
 }
 
-#chart-1 {
-    height: 50px;
+.form-control:hover {
+  border-color: var(--sixty-percent-gray);
 }
 
+.form-control:focus {
+  border-color: var(--eighty-percent-gray);
+  color: var(--black);
+  box-shadow: none;
+  /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6); */
+}
+
+.form-control::selection {
+  border-bottom-left-radius: 0px;
+}
