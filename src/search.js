@@ -7,6 +7,8 @@ import ListGroup from 'react-bootstrap/ListGroup'
 // const AVAILABLE_ZIPCODES_ENDPOINT = 'http://0.0.0.0:5000/available-zipcodes'
 const AVAILABLE_ZIPCODES_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/available-zipcodes'
 
+var t = "";
+
 class Autocomplete extends Component {
 
     constructor(props) {
@@ -129,32 +131,25 @@ class Autocomplete extends Component {
                                 className = "suggestion-active";
                             }
 
-                            // my poor attempt at bolding part of each result that matches with user input 
-                            
-                            // var i = 0; 
-                            // while (i < String(userInput).length) {
-                            //     var k= 0; 
-                            //     while (k < filteredSuggestions.length) { 
-                            //         var item1 = filteredSuggestions[k];
-                            //         var newString = item1.replace(item1[i], item1[i].bold());
-                            //         filteredSuggestions[k] = newString;
-                            //         console.log(k)
-                            //         console.log(filteredSuggestions[k])
-                                 
-                            //         k += 1;
-                            //     }
-                            //     i += 1;
-                            // }
+                            var t = '';
+                            var m = '';
+
+                            for (var i = 0; i <= userInput.length - 1; i++) {
+                                t = t + suggestion.charAt(i);
+                            };
+
+                            for (var k = userInput.length; k < suggestion.length + 1; k++) {
+                                m = m + suggestion.charAt(k);
+                            }
 
                             return (
                                 // absolute position style thing is being used 
                                 // to make sure content doesn't get pushed down
+
                                 <ListGroup.Item style={{ borderTopLeftRadius: "0px", borderTopRightRadius: "0px", color: "black"}}
                                     key={suggestion}
                                     action onClick={onClick}>
-                                    <div style={{color: "Red", backgroundColor: "Yellow"}}>
-                                    {suggestion}
-                                    </div>
+                                    <b>{t}</b>{m}
                                 </ListGroup.Item>
                             );
                         })}
@@ -173,6 +168,8 @@ class Autocomplete extends Component {
                 );
             }
         }
+
+        // i = 0;
 
         return (
             <Fragment>
