@@ -150,17 +150,13 @@ class Autocomplete extends Component {
                                 <ListGroup.Item className="zipcode" style={{ borderTopLeftRadius: "0px", borderTopRightRadius: "0px", color: "black"}}
                                     key={suggestion}
                                     action onClick={onClick}>
-                                    <div style={{marginLeft:"-8px"}}><b>{t}</b>{m}</div>
+                                    <div style={{marginLeft:"19px"}}><b>{t}</b>{m}</div>
                                 </ListGroup.Item>
                             );
                         })}
                     </ListGroup>
                 );
             } else {
-                // suggestionsListComponent = (
-                //     <ListGroup.Item style={{ position: "absolute", }}>
-                //         <em>No zipcodes found</em>
-                //     </ListGroup.Item>
                 suggestionsListComponent = (
                     <ListGroup.Item className="no-zipcode" style={{ width: "202px", fontSize:"14px", fontStyle:"italic", textAlign: "center"}}>
                         <div style={{display:"inline-block", textStyle:"italic"}}>No zipcode found</div>
@@ -174,14 +170,14 @@ class Autocomplete extends Component {
         return (
             <Fragment>
                 {/* <Form style={{ width: "202px", borderWidth: "1px"}} inline="true"> */}
-                <Form style={{ width: "202px", borderWidth: "1px"}}>
-                    {/* <InputGroup> */}
-                        {/* <InputGroup.Prepend>
-                            <InputGroup.Text> <img src ={SearchIcon} alt="Search Icon"/></InputGroup.Text>
-                        </InputGroup.Prepend> */}
+                <Form style={{ width: "202px", borderWidth: "1px", borderTopLeftRadius: "5px"}}>
+                    <InputGroup>
+                        <InputGroup.Prepend>
+                            <InputGroup.Text style={{backgroundColor:"white", border: "0", width: "41px"}}> <img src ={SearchIcon} alt="Search Icon"/></InputGroup.Text>
+                        </InputGroup.Prepend>
                 
                         <Form.Control type="text" value={userInput} onChange={onChange} placeholder="Search zipcode"></Form.Control>
-                    {/* </InputGroup> */}
+                    </InputGroup>
                 </Form>
                 {suggestionsListComponent}
             </Fragment>

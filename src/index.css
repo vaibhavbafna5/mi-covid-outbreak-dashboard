@@ -214,7 +214,10 @@ input:checked ~ .checkmark:after {
   font-size: 14px;
   border-color: var(--forty-percent-gray);
   border-radius: 5px;
-  /* border-width: 0px; */
+  border-top-left-radius: 5px !important;
+  border-bottom-left-radius: 5px !important;
+  margin-left: -40px;
+  background: none;
 }
 
 .form-control::placeholder {
@@ -222,12 +225,13 @@ input:checked ~ .checkmark:after {
 }
 
 input:not(:placeholder-shown) {
-  border-bottom-left-radius: 0;
+  border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0;
 }
 
 .form-control:hover {
   border-color: var(--sixty-percent-gray);
+  background: none;
 }
 
 .zipcode:hover {
@@ -253,6 +257,12 @@ input:not(:placeholder-shown) {
 .form-control:focus {
   border-color: var(--eighty-percent-gray);
   color: var(--black);
+  background: none;
   box-shadow: none;
+  padding-left: 40px;
   /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6); */
+}
+
+.form-control:not(:active){
+  padding-left: 40px;
 }
