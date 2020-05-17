@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import Form from 'react-bootstrap/Form';
-// import InputGroup from 'react-boostrap/lib/InputGroup';
+import InputGroup from 'react-bootstrap/InputGroup';
 import ListGroup from 'react-bootstrap/ListGroup';
 import SearchIcon from "./icons/searchIcon.svg";
 
@@ -180,7 +180,7 @@ class Autocomplete extends Component {
                             <InputGroup.Text> <img src ={SearchIcon} alt="Search Icon"/></InputGroup.Text>
                         </InputGroup.Prepend> */}
                 
-                        <Form.Control type="text" value={userInput} onChange={onChange} placeholder="Search zipcode"/>
+                        <Form.Control type="text" value={userInput} onChange={onChange} placeholder="Search zipcode"></Form.Control>
                     {/* </InputGroup> */}
                 </Form>
                 {suggestionsListComponent}
