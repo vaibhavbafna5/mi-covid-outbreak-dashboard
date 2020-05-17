@@ -120,11 +120,11 @@ class Autocomplete extends Component {
         } = this;
 
         let suggestionsListComponent;
-        
+
         if (showSuggestions && userInput) {
             if (filteredSuggestions.length) {
                 suggestionsListComponent = (
-                    <ListGroup style={{ position: "absolute", width: "202px", fontSize:"14px"}}>
+                    <ListGroup style={{ position: "absolute", width: "202px", fontSize: "14px" }}>
                         {filteredSuggestions.map((suggestion, index) => {
                             let className;
 
@@ -147,7 +147,7 @@ class Autocomplete extends Component {
                             return (
                                 // absolute position style thing is being used 
                                 // to make sure content doesn't get pushed down
-                                <ListGroup.Item className="zipcode" style={{ borderTopLeftRadius: "0px", borderTopRightRadius: "0px", color: "black"}}
+                                <ListGroup.Item className="zipcode" style={{ borderTopLeftRadius: "0px", borderTopRightRadius: "0px", color: "black" }}
                                     key={suggestion}
                                     action onClick={onClick}>
                                     <div style={{marginLeft:"19px"}}><b>{t}</b>{m}</div>
@@ -158,8 +158,8 @@ class Autocomplete extends Component {
                 );
             } else {
                 suggestionsListComponent = (
-                    <ListGroup.Item className="no-zipcode" style={{ width: "202px", fontSize:"14px", fontStyle:"italic", textAlign: "center"}}>
-                        <div style={{display:"inline-block", textStyle:"italic"}}>No zipcode found</div>
+                    <ListGroup.Item className="no-zipcode" style={{ width: "202px", fontSize: "14px", fontStyle: "italic", textAlign: "center" }}>
+                        <div style={{ display: "inline-block", textStyle: "italic" }}>No zipcode found</div>
                     </ListGroup.Item>
                 );
             }
