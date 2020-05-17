@@ -174,7 +174,7 @@ class Autocomplete extends Component {
         return (
             <Fragment>
                 <Form style={{ width: "202px"}}>
-                <img src ="./icons/searchIcon.svg"></img>
+                {/* <img src ="./icons/searchIcon.svg"></img> */}
                     <Form.Control type="text" value={userInput} onChange={onChange} placeholder="Search for a zipcode" />
                 </Form>
                 {suggestionsListComponent}
