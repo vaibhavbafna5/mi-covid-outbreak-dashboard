@@ -120,11 +120,11 @@ class Autocomplete extends Component {
         } = this;
 
         let suggestionsListComponent;
-        
+
         if (showSuggestions && userInput) {
             if (filteredSuggestions.length) {
                 suggestionsListComponent = (
-                    <ListGroup style={{ position: "absolute", width: "202px", fontSize:"14px"}}>
+                    <ListGroup style={{ position: "absolute", width: "202px", fontSize: "14px" }}>
                         {filteredSuggestions.map((suggestion, index) => {
                             let className;
 
@@ -147,10 +147,10 @@ class Autocomplete extends Component {
                             return (
                                 // absolute position style thing is being used 
                                 // to make sure content doesn't get pushed down
-                                <ListGroup.Item className="zipcode" style={{ borderTopLeftRadius: "0px", borderTopRightRadius: "0px", color: "black"}}
+                                <ListGroup.Item className="zipcode" style={{ borderTopLeftRadius: "0px", borderTopRightRadius: "0px", color: "black" }}
                                     key={suggestion}
                                     action onClick={onClick}>
-                                    <div style={{marginLeft:"-8px"}}><b>{t}</b>{m}</div>
+                                    <div style={{ marginLeft: "-8px" }}><b>{t}</b>{m}</div>
                                 </ListGroup.Item>
                             );
                         })}
@@ -162,8 +162,8 @@ class Autocomplete extends Component {
                 //         <em>No zipcodes found</em>
                 //     </ListGroup.Item>
                 suggestionsListComponent = (
-                    <ListGroup.Item className="no-zipcode" style={{ width: "202px", fontSize:"14px", fontStyle:"italic", textAlign: "center"}}>
-                        <div style={{display:"inline-block", textStyle:"italic"}}>No zipcode found</div>
+                    <ListGroup.Item className="no-zipcode" style={{ width: "202px", fontSize: "14px", fontStyle: "italic", textAlign: "center" }}>
+                        <div style={{ display: "inline-block", textStyle: "italic" }}>No zipcode found</div>
                     </ListGroup.Item>
                 );
             }
@@ -174,14 +174,14 @@ class Autocomplete extends Component {
         return (
             <Fragment>
                 {/* <Form style={{ width: "202px", borderWidth: "1px"}} inline="true"> */}
-                <Form style={{ width: "202px", borderWidth: "1px"}}>
-                    {/* <InputGroup> */}
-                        {/* <InputGroup.Prepend>
-                            <InputGroup.Text> <img src ={SearchIcon} alt="Search Icon"/></InputGroup.Text>
-                        </InputGroup.Prepend> */}
-                
-                        <Form.Control type="text" value={userInput} onChange={onChange} placeholder="Search zipcode"></Form.Control>
-                    {/* </InputGroup> */}
+                <Form style={{ width: "202px", borderWidth: "1px" }}>
+                    <InputGroup>
+                        <InputGroup.Prepend>
+                            <InputGroup.Text> <img src={SearchIcon} alt="Search Icon" /></InputGroup.Text>
+                        </InputGroup.Prepend>
+
+                        <Form.Control type="text" value={userInput} onChange={onChange} placeholder="Search zipcode" />
+                    </InputGroup>
                 </Form>
                 {suggestionsListComponent}
             </Fragment>
