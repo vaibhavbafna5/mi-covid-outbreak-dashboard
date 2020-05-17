@@ -207,16 +207,18 @@ input:checked ~ .checkmark:after {
 
 /* search */
 
+
 .form-control {
   height: 40px;
   width: 202px;
   font-size: 14px;
   border-color: var(--forty-percent-gray);
   border-radius: 5px;
+  /* border-width: 0px; */
 }
 
 .form-control::placeholder {
-  color: var(--seventy-percent-gray)
+  color: var(--seventy-percent-gray);
 }
 
 input:not(:placeholder-shown) {
@@ -226,6 +228,22 @@ input:not(:placeholder-shown) {
 
 .form-control:hover {
   border-color: var(--sixty-percent-gray);
+}
+
+.zipcode:hover {
+  background-color: var(--light-blue-five-percent);
+}
+
+.no-zipcode:hover {
+  background-color: none;
+}
+
+.list-group-item:first-child {
+  border-top: 0; 
+}
+
+.list-group-item:active {
+  box-shadow: none;
 }
 
 .form-control:focus {

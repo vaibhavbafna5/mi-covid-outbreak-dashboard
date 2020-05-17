@@ -2,7 +2,9 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import Form from 'react-bootstrap/Form';
-import ListGroup from 'react-bootstrap/ListGroup'
+// import InputGroup from 'react-boostrap/lib/InputGroup';
+import ListGroup from 'react-bootstrap/ListGroup';
+import SearchIcon from "./icons/searchIcon.svg";
 
 // const AVAILABLE_ZIPCODES_ENDPOINT = 'http://0.0.0.0:5000/available-zipcodes'
 const AVAILABLE_ZIPCODES_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/available-zipcodes'
@@ -23,7 +25,7 @@ class Autocomplete extends Component {
             // Whether or not the suggestion list is shown
             showSuggestions: false,
             // What the user has entered
-            userInput: ""
+            userInput: "",
         };
     }
 
@@ -145,11 +147,10 @@ class Autocomplete extends Component {
                             return (
                                 // absolute position style thing is being used 
                                 // to make sure content doesn't get pushed down
-
-                                <ListGroup.Item style={{ borderTopLeftRadius: "0px", borderTopRightRadius: "0px", color: "black"}}
+                                <ListGroup.Item className="zipcode" style={{ borderTopLeftRadius: "0px", borderTopRightRadius: "0px", color: "black"}}
                                     key={suggestion}
                                     action onClick={onClick}>
-                                    <b>{t}</b>{m}
+                                    <div style={{marginLeft:"-8px"}}><b>{t}</b>{m}</div>
                                 </ListGroup.Item>
                             );
                         })}
@@ -161,9 +162,8 @@ class Autocomplete extends Component {
                 //         <em>No zipcodes found</em>
                 //     </ListGroup.Item>
                 suggestionsListComponent = (
-                    <ListGroup.Item style={{ width: "202px", fontSize:"14px", fontStyle:"italic", textAlign: "center" }}>
+                    <ListGroup.Item className="no-zipcode" style={{ width: "202px", fontSize:"14px", fontStyle:"italic", textAlign: "center"}}>
                         <div style={{display:"inline-block", textStyle:"italic"}}>No zipcode found</div>
-                        {/* <em>Please enter a 5 digit zipcode</em> */}
                     </ListGroup.Item>
                 );
             }
@@ -173,9 +173,15 @@ class Autocomplete extends Component {
 
         return (
             <Fragment>
-                <Form style={{ width: "202px"}}>
-                {/* <img src ="./icons/searchIcon.svg"></img> */}
-                    <Form.Control type="text" value={userInput} onChange={onChange} placeholder="Search for a zipcode" />
+                {/* <Form style={{ width: "202px", borderWidth: "1px"}} inline="true"> */}
+                <Form style={{ width: "202px", borderWidth: "1px"}}>
+                    {/* <InputGroup> */}
+                        {/* <InputGroup.Prepend>
+                            <InputGroup.Text> <img src ={SearchIcon} alt="Search Icon"/></InputGroup.Text>
+                        </InputGroup.Prepend> */}
+                
+                        <Form.Control type="text" value={userInput} onChange={onChange} placeholder="Search zipcode"/>
+                    {/* </InputGroup> */}
                 </Form>
                 {suggestionsListComponent}
             </Fragment>
