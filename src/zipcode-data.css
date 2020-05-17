@@ -62,7 +62,7 @@
 }
 
 #address-accordion-toggle:hover {
-    background-color: #F2F9FC;
+    background-color: #F2F9FC !important;
 }
 
 #address-accordion-toggle.collapse {

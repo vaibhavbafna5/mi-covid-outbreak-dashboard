@@ -13,6 +13,14 @@ import './zipcode-data.css'
 import UnselectedArrow from "./icons/arrow/big/condensed/unselected.svg"
 import SelectedArrow from "./icons/arrow/big/expanded/address/selected.svg"
 
+import ItemNotSelectedArrow from "./icons/arrow/big/condensed/unselected.svg"
+import ItemNotSelectedButHoveredArrow from "./icons/arrow/big/condensed/hovered.svg"
+
+import AddressSelectedArrow from "./icons/arrow/big/expanded/address/selected.svg"
+import RowSelectedArrow from "./icons/arrow/big/expanded/report/selected.svg"
+
+import ItemSelectedAndHoveredArrow from "./icons/arrow/big/expanded/hovered.svg"
+
 // const REPORT_DATA_ENDPOINT = 'http://0.0.0.0:5000/report-data'
 const REPORT_DATA_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/report-data'
 
@@ -35,6 +43,8 @@ export default class ZipCodeDataPanel extends Component {
                 backgroundColor: "#FFFFFF",
                 imgSrc: UnselectedArrow,
             },
+            addressHover: false,
+            addressHoverPosition: null,
         }
     }
 
@@ -103,13 +113,44 @@ export default class ZipCodeDataPanel extends Component {
         })
     }
 
-    toggle(position) {
+    onAddressToggle(position) {
         console.log("accordion clicked - ", position);
         if (this.state.active === position) {
             this.setState({ active: null })
         } else {
             this.setState({ active: position })
         }
+    }
+
+    onAddressHover(position) {
+        this.setState({
+            addressHoverPosition: position,
+        })
+    }
+
+    onAddressUnhover(position) {
+        this.setState({
+            addressHoverPosition: null,
+        })
+    }
+
+    onReportToggle(position) {
+        console.log("report clicked - ", position)
+        if (this.state.reportActive == position) {
+            this.setState({
+                reportActive: null,
+            })
+        } else {
+            this.setState({ reportActive: position })
+        }
+    }
+
+    setReportExpandIcon(position) {
+
+        if (this.state.reportActive == position) {
+            return SelectedArrow;
+        }
+        return UnselectedArrow;
     }
 
     setBackgroundColor(position) {
@@ -120,13 +161,27 @@ export default class ZipCodeDataPanel extends Component {
     }
 
     setExpandIcon(position) {
-        if (this.state.active == position) {
-            return SelectedArrow;
+
+        // item is not selected
+        if (this.state.active == null && this.state.addressHoverPosition == null) {
+            return ItemNotSelectedArrow
+            // item is not selected but hovered
+        } else if (this.state.active == null && this.state.addressHoverPosition == position) {
+            return ItemNotSelectedButHoveredArrow
+            // item is selected but not hovered
+        } else if (this.state.active == position && this.state.addressHoverPosition == null) {
+            return AddressSelectedArrow
+            // item is selected and hovered
+        } else if (this.state.active == position && this.state.addressHoverPosition == position) {
+            return ItemSelectedAndHoveredArrow
+        } else {
+            return ItemNotSelectedArrow
         }
-        return UnselectedArrow;
     }
 
     render() {
+
+        var addressStyle;
 
         return (
             <div style={{ width: "600px" }}>
@@ -164,15 +219,17 @@ export default class ZipCodeDataPanel extends Component {
                                 {this.state.caseData.map((item, index) => (
                                     <Card id="address-card" variant="flush">
                                         {/* style={{ backgroundColor: this.state.addressRow.backgroundColor }}  */}
-                                        <Accordion.Toggle style={{ backgroundColor: this.setBackgroundColor(index) }} onClick={() => { this.toggle(index) }} id="address-accordion-toggle" as={Card.Header} eventKey={index}>
+                                        <Accordion.Toggle onMouseLeave={() => { this.onAddressUnhover(index) }} onMouseEnter={() => { this.onAddressHover(index) }} style={{ backgroundColor: this.setBackgroundColor(index) }} onClick={() => { this.onAddressToggle(index) }} id="address-accordion-toggle" as={Card.Header} eventKey={index}>
                                             <Row >
                                                 <Col>
-                                                    <div style={{ width: "350px", }}>
+                                                    <div style={{ width: "325px", }}>
                                                         {item['address'].slice(0, item['address'].lastIndexOf(","))}
                                                     </div>
                                                 </Col>
                                                 <Col >
-                                                    {item['num_reports']} reports
+                                                    <div style={{ width: "125px", }}>
+                                                        {item['num_reports']} reports
+                                                    </div>
                                                 </Col>
                                                 <Col>
                                                     <div>
@@ -186,13 +243,22 @@ export default class ZipCodeDataPanel extends Component {
                                                 {item['cases'].map((case_datum, ind) => (
                                                     <Accordion>
                                                         <Card id="report-card">
-                                                            <Accordion.Toggle id="report-accordion-toggle" as={Card.Header} eventKey={ind}>
+                                                            <Accordion.Toggle id="report-accordion-toggle" as={Card.Header} eventKey={ind} onClick={() => { this.onReportToggle(ind) }}>
                                                                 <Row>
-                                                                    <Col md="auto">
-                                                                        {case_datum['name']} - {case_datum['age']}, {case_datum['gender']}
+                                                                    <Col>
+                                                                        <div style={{ width: "325px" }}>
+                                                                            {case_datum['name']} - {case_datum['age']}, {case_datum['gender']}
+                                                                        </div>
                                                                     </Col>
                                                                     <Col >
-                                                                        {case_datum['phone_number']}
+                                                                        <div style={{ width: "125px" }}>
+                                                                            {case_datum['phone_number']}
+                                                                        </div>
+                                                                    </Col>
+                                                                    <Col>
+                                                                        <div>
+                                                                            <img className="address-expand-icon" src={this.setReportExpandIcon(ind)}></img>
+                                                                        </div>
                                                                     </Col>
                                                                 </Row>
                                                                 <Row>
