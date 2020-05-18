@@ -27,6 +27,7 @@ import ReportSelectedArrow from "./icons/arrow/big/expanded/report/selected.svg"
 import ItemSelectedAndHoveredArrow from "./icons/arrow/big/expanded/hovered.svg"
 
 import FilterIcon from "./icons/filterIcon.svg";
+import SortIcon from "./icons/sortIcon.svg";
 
 // const REPORT_DATA_ENDPOINT = 'http://0.0.0.0:5000/report-data'
 const REPORT_DATA_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/report-data'
@@ -267,7 +268,7 @@ export default class ZipCodeDataPanel extends Component {
                                 <h3 style={{ color: "white", }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Addresses</b></h3>
                                 <Row style={{ height: "24px" }}>
                                     <Col style={{ width: "400px" }}>
-                                        <Nav id="nav-container" variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress}>
+                                        <Nav id="nav-container" variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress} style={{ width: "350px" }}>
                                             <Nav.Item id="nav-item">
                                                 <Nav.Link href="#home"><b>Home ({this.state.data['home_data'].length})</b></Nav.Link>
                                             </Nav.Item>
@@ -280,11 +281,23 @@ export default class ZipCodeDataPanel extends Component {
                                         <Dropdown id="filter-dropdown">
                                             <Dropdown.Toggle style={{ color: "#99D2E8", border: "#008EC6", backgroundColor: "#008EC6" }}>
                                                 <img style={{ paddingBottom: "2px" }} src={FilterIcon}></img>All
-                                            </Dropdown.Toggle>
+                                                </Dropdown.Toggle>
                                             <Dropdown.Menu>
-                                                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                                                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                                                <Dropdown.Item href="/filter-all">All</Dropdown.Item>
+                                                <Dropdown.Item href="/filter-covid-like">COVID-Like</Dropdown.Item>
+                                                <Dropdown.Item href="/filter-covid-positive">COVID-Positive</Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                    </Col>
+                                    <Col>
+                                        <Dropdown id="sort-dropdown">
+                                            <Dropdown.Toggle style={{ color: "#99D2E8", border: "#008EC6", backgroundColor: "#008EC6" }}>
+                                                <img style={{ paddingBottom: "2px" }} src={SortIcon}></img>A-Z
+                                                </Dropdown.Toggle>
+                                            <Dropdown.Menu>
+                                                <Dropdown.Item href="/sort-alphabetically">A-Z</Dropdown.Item>
+                                                <Dropdown.Item href="/sort-least-greatest">Greatest to Least</Dropdown.Item>
+                                                <Dropdown.Item href="/sort-greatest-least">Least to Greatest</Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </Col>
@@ -348,7 +361,9 @@ export default class ZipCodeDataPanel extends Component {
                                                                                 )}
                                                                         {
                                                                             case_datum['flags']['symptomatic'] ? (
-                                                                                <CovidLikeBadge />
+                                                                                <span style={{ marginLeft: "4px" }}>
+                                                                                    <CovidLikeBadge />
+                                                                                </span>
                                                                             ) :
                                                                                 (<></>)
                                                                         }
