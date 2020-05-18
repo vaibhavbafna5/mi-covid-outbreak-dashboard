@@ -91,11 +91,11 @@ body {
 
 #bootstrap-overrides li {
   line-height: 25px;
+  font-size: 14px;
 }
 
 .body {
-  font-size: 14px;
-
+  font-size: 12px !important;
 }
 
 .regular {

@@ -22,16 +22,17 @@ import questionMarkIcon from './icons/questionMarkIcon.svg';
 const CHART_DATA_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/chart-data'
 
 const popover = (
-    <Popover style={{minWidth: "400px", backgroundColor:"white", border: "none", boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.25)", marginTop: "12px"}}>
+    <Popover style={{minWidth: "450px", backgroundColor:"white", border: "none", boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.25)", marginTop: "12px", paddingRight:"4px", fontFamily: "Montserrat"}}>
         <Popover.Content>
             <h3 class="semi-bold" style={{textAlign:"center", marginTop: "8px"}}>Quick Tips</h3>
-            <ul style={{marginTop:"12px", paddingLeft: "24px", paddingRight: "4px"}}>
+            <h5 class="regular" style={{marginLeft:"12px", lineHeight: "24px"}}>Disclaimer - the data surfaced on the dashboard is collected from self-reports made by MiSymptoms users. This is not information reported directly from medical officials.</h5>
+            <ul style={{marginTop:"12px", paddingLeft: "12px", listStyle:"none"}}>
                 <li><CovidLikeBadge></CovidLikeBadge>   - user has been flagged by our system as symptomatic for COVID-19 based on their <span style={{marginTop:"16px"}}>self-reported symptoms</span></li>
                 <li><CovidPositiveBadge></CovidPositiveBadge>    - user self-reported they tested positive for COVID-19</li>
                 <li><CovidNegativeBadge></CovidNegativeBadge>    - user self-reported they tested negative for COVID-19 </li>
                 <li><AwaitingResultsBadge></AwaitingResultsBadge>    - user self-reported they’re awaiting results from a COVID-19 test</li>
             </ul>
-            <h5 class="regular" style={{marginLeft:"8px"}}>If you have any questions or feedback please contact <span style={{color: "#0077A7", lineHeight: "24px",}}>jzelner@umich.edu</span></h5>
+            <h5 class="regular" style={{marginLeft:"12px", lineHeight: "24px", marginTop:"-8px"}}>If you have any questions or feedback please contact <span style={{color: "#0077A7"}}>jzelner@umich.edu</span></h5>
       </Popover.Content>
     </Popover>
 );
@@ -131,7 +132,7 @@ export default class App extends Component {
                     <Popup/>
                     <div style={{ textAlign: "center", marginTop: "-61px" }}>
                         <h2 className="header">COVID-19 Outbreak Tracker</h2>
-                        <h5 className="subheader">Surfacing MiSymptom users’ most recent self-reports</h5>
+                        <h5 className="subheader">Surfacing the most recent self-reports of MiSymptom users</h5>
                     </div>
                 </Navbar>
                 <Container style={{ marginTop: "30px" }}>
