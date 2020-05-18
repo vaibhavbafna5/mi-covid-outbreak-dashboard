@@ -4,7 +4,7 @@ import Badge from 'react-bootstrap/Badge';
 class CovidNegativeBadge extends Component {
     render() {
         return (
-            <Badge style={{ backgroundColor: "#E8F3EE", color: "#158655", height:"23px", width:"111px", textAlign:"center" }}>
+            <Badge style={{ backgroundColor: "#E8F3EE", color: "#158655", height:"23px", width:"112px", textAlign:"center" }}>
                 <div style={{marginTop:"4px"}}><h8>COVID-Negative</h8></div>
             </Badge>
         );
@@ -34,7 +34,7 @@ class CovidPositiveBadge extends Component {
 class CovidLikeBadge extends Component {
     render() {
         return (
-            <Badge style={{ backgroundColor: "#F3F1F8", color: "#8573BC", height:"23px", width:"79px", textAlign:"center"}}>
+            <Badge style={{ backgroundColor: "#F3F1F8", color: "#8573BC", height:"23px", width:"82px", textAlign:"center"}}>
                 <div style={{marginTop:"4px"}}><h8>COVID-Like</h8></div>
             </Badge>
         )
