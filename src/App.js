@@ -11,10 +11,32 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Navbar from 'react-bootstrap/Navbar'
+import Navbar from 'react-bootstrap/Navbar';
+import Popover from 'react-bootstrap/Popover';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+
+import questionMarkIcon from './icons/questionMarkIcon.svg';
 
 // const CHART_DATA_ENDPOINT = 'http://0.0.0.0:5000/chart-data'
 const CHART_DATA_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/chart-data'
+
+const popover = (
+    <Popover id="popover-basic">
+        <Popover.Title as="h3">Merp merp</Popover.Title>
+        <Popover.Content>
+            FAQ - Definitions, explanation, lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+            consectetur adipiscing elit cola furesd
+      </Popover.Content>
+    </Popover>
+);
+
+const Popup = () => (
+    <div style={{ textAlign: "left", marginLeft: "8px", width: "50px", paddingTop: "24px" }}>
+        <OverlayTrigger style={{ marginLeft: "8px", paddingTop: "20px", }} placement="bottom" overlay={popover}>
+            <img src={questionMarkIcon}></img>
+        </OverlayTrigger>
+    </div>
+);
 
 export default class App extends Component {
 
@@ -106,8 +128,11 @@ export default class App extends Component {
                     </Navbar.Text>
                 </Navbar> */}
                 <Navbar id="top-level-nav">
-                    <h2 className="header">Covid-19 Outbreak Tracker</h2>
-                    <h5 className="subheader">Collecting and surfacing responses from MiSymptoms</h5>
+                    <Popup />
+                    <div style={{ textAlign: "center", marginTop: "-52px" }}>
+                        <h2 className="header">Covid-19 Outbreak Tracker</h2>
+                        <h5 className="subheader">Collecting and surfacing responses from MiSymptoms</h5>
+                    </div>
                 </Navbar>
                 <Container style={{ marginTop: "30px" }}>
                     <Row>
