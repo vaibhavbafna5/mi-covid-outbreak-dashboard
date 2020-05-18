@@ -26,6 +26,8 @@ import ReportSelectedArrow from "./icons/arrow/big/expanded/report/selected.svg"
 
 import ItemSelectedAndHoveredArrow from "./icons/arrow/big/expanded/hovered.svg"
 
+import FilterIcon from "./icons/filterIcon.svg";
+
 // const REPORT_DATA_ENDPOINT = 'http://0.0.0.0:5000/report-data'
 const REPORT_DATA_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/report-data'
 
@@ -264,7 +266,7 @@ export default class ZipCodeDataPanel extends Component {
                             <Card.Header id="address-container-header">
                                 <h3 style={{ color: "white", }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Addresses</b></h3>
                                 <Row style={{ height: "24px" }}>
-                                    <Col style={{ width: "350px" }}>
+                                    <Col style={{ width: "400px" }}>
                                         <Nav id="nav-container" variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress}>
                                             <Nav.Item id="nav-item">
                                                 <Nav.Link href="#home"><b>Home ({this.state.data['home_data'].length})</b></Nav.Link>
@@ -276,8 +278,8 @@ export default class ZipCodeDataPanel extends Component {
                                     </Col>
                                     <Col>
                                         <Dropdown id="filter-dropdown">
-                                            <Dropdown.Toggle style={{ border: "#008EC6", backgroundColor: "#008EC6" }}>
-                                                Dropdown Button
+                                            <Dropdown.Toggle style={{ color: "#99D2E8", border: "#008EC6", backgroundColor: "#008EC6" }}>
+                                                <img style={{ paddingBottom: "2px" }} src={FilterIcon}></img>All
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
                                                 <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
