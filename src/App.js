@@ -11,10 +11,30 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Navbar from 'react-bootstrap/Navbar'
+import Navbar from 'react-bootstrap/Navbar';
+import Popover from 'react-bootstrap/Popover';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+
+import questionMarkIcon from './icons/questionMarkIcon.svg';
 
 // const CHART_DATA_ENDPOINT = 'http://0.0.0.0:5000/chart-data'
 const CHART_DATA_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/chart-data'
+
+const popover = (
+    <Popover id="popover-basic">
+        <Popover.Title as="h3">Popover right</Popover.Title>
+        <Popover.Content>
+            And here's some <strong>amazing</strong> content. It's very engaging.
+        right?
+      </Popover.Content>
+    </Popover>
+);
+
+const Popup = () => (
+    <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
+        <img src={questionMarkIcon}></img>
+    </OverlayTrigger>
+);
 
 export default class App extends Component {
 
@@ -106,6 +126,7 @@ export default class App extends Component {
                     </Navbar.Text>
                 </Navbar> */}
                 <Navbar id="top-level-nav">
+                    <Popup />
                     <h2 className="header">Covid-19 Outbreak Tracker</h2>
                     <h5 className="subheader">Collecting and surfacing responses from MiSymptoms</h5>
                 </Navbar>
