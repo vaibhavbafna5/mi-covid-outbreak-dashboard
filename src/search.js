@@ -61,7 +61,7 @@ class Autocomplete extends Component {
     };
 
     // Event fired when the user clicks on a suggestion
-    onClick = e => {
+    onMouseDown = e => {
         // Update the user input and reset the rest of the state
         this.setState({
             activeSuggestion: 0,
@@ -73,6 +73,21 @@ class Autocomplete extends Component {
         this.props.onZipCodeChange(this.state.userInput)
 
     };
+
+    // Remove suggestions when user clicks off search field
+    onBlur = e => {
+        console.log("hi")
+        this.setState({
+            showSuggestions: false,
+        });
+    };
+
+    // Show suggestions when user clicks on search field (accounting for when user has typed, clicked out and then clicked back in search field)
+    onFocus = e => {
+        this.setState({
+            showSuggestions: true,
+        });
+    }
 
     // Event fired when the user presses a key down
     onKeyDown = e => {
@@ -109,8 +124,10 @@ class Autocomplete extends Component {
     render() {
         const {
             onChange,
-            onClick,
+            onMouseDown,
             onKeyDown,
+            onBlur,
+            onFocus,
             state: {
                 activeSuggestion,
                 filteredSuggestions,
@@ -149,7 +166,7 @@ class Autocomplete extends Component {
                                 // to make sure content doesn't get pushed down
                                 <ListGroup.Item className="zipcode" style={{ borderTopLeftRadius: "0px", borderTopRightRadius: "0px", color: "black" }}
                                     key={suggestion}
-                                    action onClick={onClick}>
+                                    action onMouseDown={onMouseDown}>
                                     <div style={{marginLeft:"19px"}}><b>{t}</b>{m}</div>
                                 </ListGroup.Item>
                             );
@@ -159,7 +176,7 @@ class Autocomplete extends Component {
             } else {
                 suggestionsListComponent = (
                     <ListGroup.Item className="no-zipcode" style={{ width: "202px", fontSize: "14px", fontStyle: "italic", textAlign: "center" }}>
-                        <div style={{ display: "inline-block", textStyle: "italic" }}>No zipcode found</div>
+                        <div style={{ display: "inline-block", textStyle: "italic" }}>No zipcodes found</div>
                     </ListGroup.Item>
                 );
             }
@@ -176,7 +193,7 @@ class Autocomplete extends Component {
                             <InputGroup.Text style={{backgroundColor:"white", border: "0", width: "41px"}}> <img src ={SearchIcon} alt="Search Icon"/></InputGroup.Text>
                         </InputGroup.Prepend>
                 
-                        <Form.Control type="text" value={userInput} onChange={onChange} placeholder="Search zipcode"></Form.Control>
+                        <Form.Control type="text" value={userInput} onChange={onChange} onBlur={onBlur} onFocus={onFocus} placeholder="Search zipcode"></Form.Control>
                     </InputGroup>
                 </Form>
                 {suggestionsListComponent}
