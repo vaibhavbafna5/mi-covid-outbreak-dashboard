@@ -63,14 +63,16 @@ class Autocomplete extends Component {
     // Event fired when the user clicks on a suggestion
     onMouseDown = e => {
         // Update the user input and reset the rest of the state
+        console.log("before this shit", this.state)
+
         this.setState({
             activeSuggestion: 0,
             filteredSuggestions: [],
             showSuggestions: false,
-            userInput: e.currentTarget.innerText
+            userInput: e.target.outerText,
         });
 
-        this.props.onZipCodeChange(this.state.userInput)
+        this.props.onZipCodeChange(e.target.outerText)
 
     };
 
@@ -167,7 +169,7 @@ class Autocomplete extends Component {
                                 <ListGroup.Item className="zipcode" style={{ borderTopLeftRadius: "0px", borderTopRightRadius: "0px", color: "black" }}
                                     key={suggestion}
                                     action onMouseDown={onMouseDown}>
-                                    <div style={{marginLeft:"19px"}}><b>{t}</b>{m}</div>
+                                    <div style={{ marginLeft: "19px" }}><b>{t}</b>{m}</div>
                                 </ListGroup.Item>
                             );
                         })}
@@ -187,12 +189,12 @@ class Autocomplete extends Component {
         return (
             <Fragment>
                 {/* <Form style={{ width: "202px", borderWidth: "1px"}} inline="true"> */}
-                <Form style={{ width: "202px", borderWidth: "1px", borderTopLeftRadius: "5px"}}>
+                <Form style={{ width: "202px", borderWidth: "1px", borderTopLeftRadius: "5px" }}>
                     <InputGroup>
                         <InputGroup.Prepend>
-                            <InputGroup.Text style={{backgroundColor:"white", border: "0", width: "41px"}}> <img src ={SearchIcon} alt="Search Icon"/></InputGroup.Text>
+                            <InputGroup.Text style={{ backgroundColor: "white", border: "0", width: "41px" }}> <img src={SearchIcon} alt="Search Icon" /></InputGroup.Text>
                         </InputGroup.Prepend>
-                
+
                         <Form.Control type="text" value={userInput} onChange={onChange} onBlur={onBlur} onFocus={onFocus} placeholder="Search zipcode"></Form.Control>
                     </InputGroup>
                 </Form>
