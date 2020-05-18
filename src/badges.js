@@ -4,8 +4,8 @@ import Badge from 'react-bootstrap/Badge';
 class CovidNegativeBadge extends Component {
     render() {
         return (
-            <Badge style={{ backgroundColor: "#E8F3EE", color: "#158655", }} >
-                Covid-Negative
+            <Badge style={{ backgroundColor: "#E8F3EE", color: "#158655", height:"23px", width:"111px", textAlign:"center" }}>
+                <div style={{marginTop:"4px"}}><h8>COVID-negative</h8></div>
             </Badge>
         );
     };
@@ -14,8 +14,8 @@ class CovidNegativeBadge extends Component {
 class AwaitingResultsBadge extends Component {
     render() {
         return (
-            <Badge style={{ backgroundColor: "#FFF7E3", color: "#8A6300", }} >
-                Awaiting Results
+            <Badge style={{ backgroundColor: "#FFF7E3", color: "#8A6300", height:"23px", width:"115px", textAlign:"center"}}>
+                <div style={{marginTop:"4px"}}><h8>Awaiting Results</h8></div>
             </Badge>
         );
     };
@@ -24,22 +24,22 @@ class AwaitingResultsBadge extends Component {
 class CovidPositiveBadge extends Component {
     render() {
         return (
-            <Badge style={{ backgroundColor: "#F8E5E5", color: "#8A6300" }} >
-                Covid-Positive
+            <Badge style={{ backgroundColor: "#F8E5E5", color: "#B80000", height:"23px", width:"105px", textAlign:"center"}}>
+                <div style={{marginTop:"4px"}}><h8>COVID-positive</h8></div>
             </Badge>
         );
     };
 }
 
-class SymptomaticBadge extends Component {
+class CovidLikeBadge extends Component {
     render() {
         return (
-            <Badge style={{ marginLeft: "4px", backgroundColor: "#F3F1F8", color: "#8573BC" }}>
-                Symptomatic
+            <Badge style={{ backgroundColor: "#F3F1F8", color: "#8573BC", height:"23px", width:"79px", textAlign:"center"}}>
+                <div style={{marginTop:"4px"}}><h8>COVID-like</h8></div>
             </Badge>
         )
     }
 }
 
 
-export { CovidNegativeBadge, CovidPositiveBadge, AwaitingResultsBadge, SymptomaticBadge };
+export { CovidNegativeBadge, CovidPositiveBadge, AwaitingResultsBadge, CovidLikeBadge };

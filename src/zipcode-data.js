@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
-import { CovidNegativeBadge, CovidPositiveBadge, AwaitingResultsBadge, SymptomaticBadge } from './badges'
+import { CovidNegativeBadge, CovidPositiveBadge, AwaitingResultsBadge, CovidLikeBadge } from './badges'
 
 import axios from "axios";
 import './index.css';
@@ -346,7 +346,7 @@ export default class ZipCodeDataPanel extends Component {
                                                                                 )}
                                                                         {
                                                                             case_datum['flags']['symptomatic'] ? (
-                                                                                <SymptomaticBadge />
+                                                                                <CovidLikeBadge />
                                                                             ) :
                                                                                 (<></>)
                                                                         }

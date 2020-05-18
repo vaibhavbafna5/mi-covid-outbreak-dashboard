@@ -81,17 +81,35 @@ body {
 /* tags - gonna have to add color separately */
 #bootstrap-overrides h8 {
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 500;
+}
+
+#bootstrap-overrides li:not(:first-child) {
+  margin-top: 8px;
+
+}
+
+#bootstrap-overrides li {
+  line-height: 25px;
+}
+
+.body {
+  font-size: 14px;
+
+}
+
+.regular {
+  font-weight: 400 !important;
 }
 
 /* update h5 for text that follows bulleted list label & h7 for selected radio button label */
 .medium {
-  font-weight: 500;
+  font-weight: 500 !important;
 }
 
 /* update h3 for covid-like reports & covid-positive reports  */
 .semi-bold {
-  font-weight: 600;
+  font-weight: 600 !important;
 }
 
 /* update h5 for top banner subheader */
@@ -106,7 +124,8 @@ body {
 }
 
 #top-level-nav {
-  height: 86px;
+  margin: 0px;
+  min-height: 86px;
   background: linear-gradient(271.49deg, #008EC6 0.1%, #0077A7 99.9%);
   color: var(--white);
   display: block;
