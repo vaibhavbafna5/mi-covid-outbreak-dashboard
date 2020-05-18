@@ -30,22 +30,34 @@ export default class App extends Component {
             weeklyData: [],
             showWeeklyData: true,
         }
-    }
 
-    componentDidMount() {
         axios.get(CHART_DATA_ENDPOINT, {
             params: {
                 'area': 'statewide',
             }
-        })
-            // get state level cumulative/weekly data 
-            .then(res => {
-                this.setState({
-                    cumulativeData: res.data['chart_data']['cumulative_data'],
-                    weeklyData: res.data['chart_data']['weekly_data']
-                })
-                console.log("yo,", this.state)
+        }).then((res) => {
+            this.setState({
+                cumulativeData: res.data['chart_data']['cumulative_data'],
+                weeklyData: res.data['chart_data']['weekly_data']
             })
+        }).catch((e) => {
+            console.log("error", e);
+        })
+    }
+
+    componentWillMount() {
+        axios.get(CHART_DATA_ENDPOINT, {
+            params: {
+                'area': 'statewide',
+            }
+        }).then((res) => {
+            this.setState({
+                cumulativeData: res.data['chart_data']['cumulative_data'],
+                weeklyData: res.data['chart_data']['weekly_data']
+            })
+        }).catch((e) => {
+            console.log("error", e);
+        })
     }
 
     onZipCodeChange = (newZipCode) => {
@@ -97,25 +109,25 @@ export default class App extends Component {
                     <h2 className="header">Covid-19 Outbreak Tracker</h2>
                     <h5 className="subheader">Collecting and surfacing responses from MiSymptoms</h5>
                 </Navbar>
-                <Container style={{ marginTop: "30px"}}>
+                <Container style={{ marginTop: "30px" }}>
                     <Row>
                         <Col>
-                            <Row style={{maxHeight:"40px"}}>
-                                <Col className="no-gutters" style={{maxHeight:"40px"}}>
-                                    <Autocomplete onZipCodeChange={this.onZipCodeChange}/>
+                            <Row style={{ maxHeight: "40px" }}>
+                                <Col className="no-gutters" style={{ maxHeight: "40px" }}>
+                                    <Autocomplete onZipCodeChange={this.onZipCodeChange} />
                                 </Col>
-                                <Col className="no-gutters" style={{maxHeight:"40px"}}>
-                                    <Form onChange={this.setData.bind(this)} className="no-gutters" style={{maxHeight:"40px"}}>
-                                        <Row className="no-gutters" style={{maxHeight:"40px"}}>
-                                             <Col>
-                                                <label className="date-range-selector" style={{maxHeight:"40px"}}>
+                                <Col className="no-gutters" style={{ maxHeight: "40px" }}>
+                                    <Form onChange={this.setData.bind(this)} className="no-gutters" style={{ maxHeight: "40px" }}>
+                                        <Row className="no-gutters" style={{ maxHeight: "40px" }}>
+                                            <Col>
+                                                <label className="date-range-selector" style={{ maxHeight: "40px" }}>
                                                     <input id="cumulative" type="radio" value="cumulative" label="Cumulative" checked={!this.state.showWeeklyData}></input>
                                                     <span className="checkmark"></span>
                                                     <span className="radio-button-label">Cumulative</span>
                                                 </label>
                                             </Col>
-                                            <Col style={{maxHeight:"40px"}}>
-                                                <label className="date-range-selector" style={{maxHeight:"40px"}}>
+                                            <Col style={{ maxHeight: "40px" }}>
+                                                <label className="date-range-selector" style={{ maxHeight: "40px" }}>
                                                     <input id="weekly" type="radio" value="weekly" label="Past 7 Days" checked={this.state.showWeeklyData}></input>
                                                     <span className="checkmark"></span>
                                                     <span className="radio-button-label">Past 7 Days</span>

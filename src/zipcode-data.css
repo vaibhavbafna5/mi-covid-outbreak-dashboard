@@ -95,3 +95,11 @@
 #report-accordion-toggle {
     background-color: var(--white);
 }
+
+#report-accordion-toggle:hover {
+    background-color: #F2F9FC !important;
+}
+
+#report-accordion-toggle:focus {
+    background-color: pink !important; 
+}

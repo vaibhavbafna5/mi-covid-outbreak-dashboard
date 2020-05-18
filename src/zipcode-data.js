@@ -17,7 +17,7 @@ import ItemNotSelectedArrow from "./icons/arrow/big/condensed/unselected.svg"
 import ItemNotSelectedButHoveredArrow from "./icons/arrow/big/condensed/hovered.svg"
 
 import AddressSelectedArrow from "./icons/arrow/big/expanded/address/selected.svg"
-import RowSelectedArrow from "./icons/arrow/big/expanded/report/selected.svg"
+import ReportSelectedArrow from "./icons/arrow/big/expanded/report/selected.svg"
 
 import ItemSelectedAndHoveredArrow from "./icons/arrow/big/expanded/hovered.svg"
 
@@ -43,8 +43,11 @@ export default class ZipCodeDataPanel extends Component {
                 backgroundColor: "#FFFFFF",
                 imgSrc: UnselectedArrow,
             },
-            addressHover: false,
+            active: null,
+            reportActive: null,
             addressHoverPosition: null,
+            reportHoverPosition: null,
+            activeReports: {},
         }
     }
 
@@ -135,22 +138,71 @@ export default class ZipCodeDataPanel extends Component {
     }
 
     onReportToggle(position) {
-        console.log("report clicked - ", position)
-        if (this.state.reportActive == position) {
-            this.setState({
-                reportActive: null,
-            })
+        if (this.state.activeReports[position] == false) {
+            this.state.activeReports[position] = true
         } else {
-            this.setState({ reportActive: position })
+            this.state.activeReports[position] = false
         }
+
+        console.log("ryan lieu is a fag", this.state.activeReports)
+
+        // console.log("report clicked - ", position)
+        // if (this.state.reportActive == position) {
+        //     this.setState({
+        //         reportActive: null,
+        //     })
+        // } else {
+        //     this.setState({ reportActive: position })
+        // }
     }
 
-    setReportExpandIcon(position) {
+    onReportHover(position) {
+        this.setState({
+            reportHoverPosition: position,
+        })
+    }
 
-        if (this.state.reportActive == position) {
-            return SelectedArrow;
+    onReportUnhover(position) {
+        this.setState({
+            reportHoverPosition: null,
+        })
+    }
+
+    setReportArrow(position) {
+
+        // if (this.state.reportActive == position) {
+        //     return SelectedArrow;
+        // }
+        // return UnselectedArrow;
+
+        /* 
+    if this.state.activeReports[pos] == false && this.state.reportHoverPosition == null
+    --> ItemNotSelectedArrow
+
+    if this.state.activeReports[pos] == false && this.state.reportHoverPosition == pos
+    --> ItemNotSelectedButHovered
+
+    if this.state.activeReports[pos] == true && this.state.reportHoverPosition == null
+    --> ReportSelectedArrow
+
+    if this.state.activeReports[pos] == true && this.state.reportHoverPosition == pos
+    --> ItemSelectedAndHovered
+*/
+
+        if (this.state.activeReports[position] == false && this.state.reportHoverPosition == null) {
+            return ItemNotSelectedArrow
+        } else if (this.state.activeReports[position] == false && this.state.reportHoverPosition == position) {
+            return ItemNotSelectedButHoveredArrow
+        } else if (this.state.activeReports[position] == true && this.state.reportHoverPosition == null) {
+            return ReportSelectedArrow
+        } else if (this.state.activeReports[position] == true && this.state.reportHoverPosition == position) {
+            return ItemSelectedAndHoveredArrow
+        } else {
+            return ItemNotSelectedArrow
         }
-        return UnselectedArrow;
+        // } else {
+        //     return ItemNotSelectedArrow
+        // }
     }
 
     setBackgroundColor(position) {
@@ -160,7 +212,7 @@ export default class ZipCodeDataPanel extends Component {
         return "#FFFFFF";
     }
 
-    setExpandIcon(position) {
+    setAddressArrow(position) {
 
         // item is not selected
         if (this.state.active == null && this.state.addressHoverPosition == null) {
@@ -233,7 +285,7 @@ export default class ZipCodeDataPanel extends Component {
                                                 </Col>
                                                 <Col>
                                                     <div>
-                                                        <img className="address-expand-icon" src={this.setExpandIcon(index)}></img>
+                                                        <img className="address-expand-icon" src={this.setAddressArrow(index)}></img>
                                                     </div>
                                                 </Col>
                                             </Row>
@@ -243,7 +295,8 @@ export default class ZipCodeDataPanel extends Component {
                                                 {item['cases'].map((case_datum, ind) => (
                                                     <Accordion>
                                                         <Card id="report-card">
-                                                            <Accordion.Toggle id="report-accordion-toggle" as={Card.Header} eventKey={ind} onClick={() => { this.onReportToggle(ind) }}>
+                                                            {this.state.activeReports[ind] = false}
+                                                            <Accordion.Toggle id="report-accordion-toggle" onMouseLeave={() => { this.onReportUnhover(ind) }} onMouseEnter={() => { this.onReportHover(ind) }} as={Card.Header} eventKey={ind} onClick={() => { this.onReportToggle(ind) }}>
                                                                 <Row>
                                                                     <Col>
                                                                         <div style={{ width: "325px" }}>
@@ -257,28 +310,28 @@ export default class ZipCodeDataPanel extends Component {
                                                                     </Col>
                                                                     <Col>
                                                                         <div>
-                                                                            <img className="address-expand-icon" src={this.setReportExpandIcon(ind)}></img>
+                                                                            <img className="address-expand-icon" src={this.setReportArrow(ind)}></img>
                                                                         </div>
                                                                     </Col>
                                                                 </Row>
                                                                 <Row>
                                                                     <Col>
                                                                         {case_datum['flags']['tested'] === 'Negative' ? (
-                                                                            <Badge pill variant="success">
+                                                                            <Badge variant="success">
                                                                                 Covid-Negative
                                                                             </Badge>
                                                                         ) : case_datum['flags']['tested'] === 'Awaiting Results' ? (
-                                                                            <Badge pill variant="warning">
+                                                                            <Badge variant="warning">
                                                                                 Awaiting Results
                                                                             </Badge>
                                                                         ) : (
-                                                                                    <Badge pill variant="danger">
+                                                                                    <Badge variant="danger">
                                                                                         Covid-Positive
                                                                                     </Badge>
                                                                                 )}
                                                                         {
                                                                             case_datum['flags']['symptomatic'] ? (
-                                                                                <Badge style={{ marginLeft: "4px" }} pill variant="warning">
+                                                                                <Badge style={{ marginLeft: "4px" }} variant="warning">
                                                                                     Symptomatic
                                                                                 </Badge>
                                                                             ) :
