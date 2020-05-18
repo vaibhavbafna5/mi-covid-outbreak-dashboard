@@ -317,21 +317,21 @@ export default class ZipCodeDataPanel extends Component {
                                                                 <Row>
                                                                     <Col>
                                                                         {case_datum['flags']['tested'] === 'Negative' ? (
-                                                                            <Badge variant="success">
+                                                                            <Badge style={{ backgroundColor: "#E8F3EE", color: "#158655", }} variant="success">
                                                                                 Covid-Negative
                                                                             </Badge>
                                                                         ) : case_datum['flags']['tested'] === 'Awaiting Results' ? (
-                                                                            <Badge variant="warning">
+                                                                            <Badge style={{ backgroundColor: "#FFF7E3", color: "#8A6300" }} variant="warning">
                                                                                 Awaiting Results
                                                                             </Badge>
                                                                         ) : (
-                                                                                    <Badge variant="danger">
+                                                                                    <Badge style={{ backgroundColor: "#F8E5E5", color: "#8A6300" }} variant="danger">
                                                                                         Covid-Positive
                                                                                     </Badge>
                                                                                 )}
                                                                         {
                                                                             case_datum['flags']['symptomatic'] ? (
-                                                                                <Badge style={{ marginLeft: "4px" }} variant="warning">
+                                                                                <Badge style={{ marginLeft: "4px", backgroundColor: "#F3F1F8", color: "#8573BC" }} variant="warning">
                                                                                     Symptomatic
                                                                                 </Badge>
                                                                             ) :

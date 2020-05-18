@@ -83,12 +83,12 @@ export default class Chart extends Component {
 
     render() {
         return (
-            <div style={{ marginTop: "45px"}}>
+            <div style={{ marginTop: "45px" }}>
                 {this.state.showWeeklyData ?
                     (
-                        <LineChart colors={["#B80000", "#8573BC"]} width="430px" height="200px" legend={"bottom"} data={this.state.weeklyData} />
+                        <LineChart colors={["#B80000", "#8573BC"]} width="430px" height="400px" legend={"bottom"} data={this.state.weeklyData} />
                     ) : (
-                        <LineChart colors={["#B80000", "#8573BC"]} width="430px" height="200px" legend={"bottom"} data={this.state.cumulativeData} />
+                        <LineChart colors={["#B80000", "#8573BC"]} width="430px" height="400px" legend={"bottom"} data={this.state.cumulativeData} />
                     )
                 }
             </div>
