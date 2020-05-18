@@ -14,6 +14,7 @@ import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
 import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import { CovidNegativeBadge, CovidPositiveBadge, AwaitingResultsBadge, CovidLikeBadge } from './badges'
 
 import questionMarkIcon from './icons/questionMarkIcon.svg';
 
@@ -21,18 +22,23 @@ import questionMarkIcon from './icons/questionMarkIcon.svg';
 const CHART_DATA_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/chart-data'
 
 const popover = (
-    <Popover id="popover-basic">
-        <Popover.Title as="h3">Merp merp</Popover.Title>
+    <Popover style={{minWidth: "400px", backgroundColor:"white", border: "none", boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.25)", marginTop: "12px"}}>
         <Popover.Content>
-            FAQ - Definitions, explanation, lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-            consectetur adipiscing elit cola furesd
+            <h3 class="semi-bold" style={{textAlign:"center", marginTop: "8px"}}>Quick Tips</h3>
+            <ul style={{marginTop:"12px", paddingLeft: "24px", paddingRight: "4px"}}>
+                <li><CovidLikeBadge></CovidLikeBadge>   - user has been flagged by our system as symptomatic for COVID-19 based on their <span style={{marginTop:"16px"}}>self-reported symptoms</span></li>
+                <li><CovidPositiveBadge></CovidPositiveBadge>    - user self-reported they tested positive for COVID-19</li>
+                <li><CovidNegativeBadge></CovidNegativeBadge>    - user self-reported they tested negative for COVID-19 </li>
+                <li><AwaitingResultsBadge></AwaitingResultsBadge>    - user self-reported they’re awaiting results from a COVID-19 test</li>
+            </ul>
+            <h5 class="regular" style={{marginLeft:"8px"}}>If you have any questions or feedback please contact <span style={{color: "#0077A7", lineHeight: "24px",}}>jzelner@umich.edu</span></h5>
       </Popover.Content>
     </Popover>
 );
 
 const Popup = () => (
-    <div style={{ textAlign: "left", marginLeft: "8px", width: "50px", paddingTop: "24px" }}>
-        <OverlayTrigger style={{ marginLeft: "8px", paddingTop: "20px", }} placement="bottom" overlay={popover}>
+    <div style={{ textAlign: "left", marginLeft: "70px", paddingTop: "27px"}}>
+        <OverlayTrigger placement="bottom" overlay={popover}>
             <img src={questionMarkIcon}></img>
         </OverlayTrigger>
     </div>
@@ -121,17 +127,11 @@ export default class App extends Component {
     render() {
         return (
             <>
-                {/* <Navbar bg="primary" variant="dark" expand="lg" >
-                    <Navbar.Brand>Covid-19 Outbreak Tracker</Navbar.Brand>
-                    <Navbar.Text>
-                        Collecting and surfacing responses from MiSymptoms
-                    </Navbar.Text>
-                </Navbar> */}
                 <Navbar id="top-level-nav">
-                    <Popup />
-                    <div style={{ textAlign: "center", marginTop: "-52px" }}>
-                        <h2 className="header">Covid-19 Outbreak Tracker</h2>
-                        <h5 className="subheader">Collecting and surfacing responses from MiSymptoms</h5>
+                    <Popup/>
+                    <div style={{ textAlign: "center", marginTop: "-61px" }}>
+                        <h2 className="header">COVID-19 Outbreak Tracker</h2>
+                        <h5 className="subheader">Surfacing MiSymptom users’ most recent self-reports</h5>
                     </div>
                 </Navbar>
                 <Container style={{ marginTop: "30px" }}>
