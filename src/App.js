@@ -31,8 +31,8 @@ const popover = (
 );
 
 const Popup = () => (
-    <div style={{ textAlign: "left", marginLeft: "8px", width: "50px", paddingTop: "20px" }}>
-        <OverlayTrigger style={{ marginLeft: "8px", paddingTop: "16px", }} placement="bottom" overlay={popover}>
+    <div style={{ textAlign: "left", marginLeft: "8px", width: "50px", paddingTop: "24px" }}>
+        <OverlayTrigger style={{ marginLeft: "8px", paddingTop: "20px", }} placement="bottom" overlay={popover}>
             <img src={questionMarkIcon}></img>
         </OverlayTrigger>
     </div>
@@ -129,7 +129,7 @@ export default class App extends Component {
                 </Navbar> */}
                 <Navbar id="top-level-nav">
                     <Popup />
-                    <div style={{ textAlign: "center", marginTop: "-48px" }}>
+                    <div style={{ textAlign: "center", marginTop: "-52px" }}>
                         <h2 className="header">Covid-19 Outbreak Tracker</h2>
                         <h5 className="subheader">Collecting and surfacing responses from MiSymptoms</h5>
                     </div>
