@@ -65,7 +65,6 @@ export default class App extends Component {
             newZipCode = 'statewide'
         }
 
-        this.setState({ zipCode: newZipCode })
         axios.get(CHART_DATA_ENDPOINT, {
             params: {
                 'area': newZipCode,
@@ -74,10 +73,11 @@ export default class App extends Component {
             // get state level cumulative/weekly data 
             .then(res => {
                 this.setState({
+                    zipCode: newZipCode,
                     cumulativeData: res.data['chart_data']['cumulative_data'],
                     weeklyData: res.data['chart_data']['weekly_data']
                 })
-                console.log("merp", this.state)
+                console.log("merp this fuckin error", this.state)
             })
         // make an api request to get zipcode level data
         // reset cumulative/weekly data
