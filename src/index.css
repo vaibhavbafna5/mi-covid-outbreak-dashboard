@@ -110,7 +110,7 @@ body {
   background: linear-gradient(271.49deg, #008EC6 0.1%, #0077A7 99.9%);
   color: var(--white);
   display: block;
-  text-align: center;
+  /* text-align: center; */
   padding: 0px;
 }
 

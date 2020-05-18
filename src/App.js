@@ -22,18 +22,20 @@ const CHART_DATA_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/chart-data
 
 const popover = (
     <Popover id="popover-basic">
-        <Popover.Title as="h3">Popover right</Popover.Title>
+        <Popover.Title as="h3">Merp merp</Popover.Title>
         <Popover.Content>
-            And here's some <strong>amazing</strong> content. It's very engaging.
-        right?
+            FAQ - Definitions, explanation, lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+            consectetur adipiscing elit cola furesd
       </Popover.Content>
     </Popover>
 );
 
 const Popup = () => (
-    <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
-        <img src={questionMarkIcon}></img>
-    </OverlayTrigger>
+    <div style={{ textAlign: "left", marginLeft: "8px", width: "50px", paddingTop: "20px" }}>
+        <OverlayTrigger style={{ marginLeft: "8px", paddingTop: "16px", }} placement="bottom" overlay={popover}>
+            <img src={questionMarkIcon}></img>
+        </OverlayTrigger>
+    </div>
 );
 
 export default class App extends Component {
@@ -127,8 +129,10 @@ export default class App extends Component {
                 </Navbar> */}
                 <Navbar id="top-level-nav">
                     <Popup />
-                    <h2 className="header">Covid-19 Outbreak Tracker</h2>
-                    <h5 className="subheader">Collecting and surfacing responses from MiSymptoms</h5>
+                    <div style={{ textAlign: "center", marginTop: "-48px" }}>
+                        <h2 className="header">Covid-19 Outbreak Tracker</h2>
+                        <h5 className="subheader">Collecting and surfacing responses from MiSymptoms</h5>
+                    </div>
                 </Navbar>
                 <Container style={{ marginTop: "30px" }}>
                     <Row>
