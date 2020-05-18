@@ -57,6 +57,14 @@
     color: var(--white);
 }
 
+#bootstrap-overrides ul {
+    list-style-type: circle;
+}
+
+#bootstrap-overrides .li {
+    color: red;
+}
+
 #address-accordion-toggle {
     background-color: var(--white);
 }

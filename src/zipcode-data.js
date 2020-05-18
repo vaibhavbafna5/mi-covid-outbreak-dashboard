@@ -237,27 +237,27 @@ export default class ZipCodeDataPanel extends Component {
 
         return (
             <div style={{ width: "600px" }}>
+                <Card>
+                    <Card.Header id="overview-container-header">
+                        <Row>
+                            <Col>
+                                <h2>Statewide</h2>
+                                <h4 style={{ color: "white", }}><b>{this.state.data['total_responses']} MiSymptoms Users | {this.state.data['date_range']}</b></h4>
+                            </Col>
+                        </Row>
+                    </Card.Header>
+                    <Card.Body id="overview-container-body">
+                        <Card.Text>
+                            <h3>{this.state.data['symptomatic_cases']} COVID-like reports  <b style={{ opacity: "0.25" }}>|</b>  {this.state.data['confirmed_cases']} COVID-positive reports</h3>
+                        </Card.Text>
+                    </Card.Body>
+                    <Card.Footer id="overview-container-footer" className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
+                </Card>
                 {this.state.zipCodeDataExists ?
                     (<div>
-                        <Card >
-                            <Card.Header id="overview-container-header">
-                                <Row>
-                                    <Col>
-                                        <h2 >{this.state.data['zipcode']}</h2>
-                                        <h6 >{this.state.data['total_responses']} MiSymptoms Users | {this.state.data['date_range']}</h6>
-                                    </Col>
-                                </Row>
-                            </Card.Header>
-                            <Card.Body id="overview-container-body">
-                                <Card.Text>
-                                    {this.state.data['symptomatic_cases']} COVID-like reports  <b style={{ opacity: "0.25" }}>|</b>  {this.state.data['confirmed_cases']} COVID-positive reports
-                                    </Card.Text>
-                            </Card.Body>
-                            <Card.Footer id="overview-container-footer" className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
-                        </Card>
                         <Card style={{ marginTop: "36px" }}>
                             <Card.Header id="address-container-header">
-                                <h3 style={{ color: "white", }} id="address-container-header-text">{this.state.data['home_data'].length + this.state.data['work_data'].length} Addresses</h3>
+                                <h3 style={{ color: "white", }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Addresses</b></h3>
                                 <Nav id="nav-container" variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress}>
                                     <Nav.Item id="nav-item">
                                         <Nav.Link href="#home"><b>Home ({this.state.data['home_data'].length})</b></Nav.Link>
@@ -384,22 +384,7 @@ export default class ZipCodeDataPanel extends Component {
 
                     </div>) :
                     (
-                        <Card>
-                            <Card.Header id="overview-container-header">
-                                <Row>
-                                    <Col>
-                                        <h2>Statewide</h2>
-                                        <h6>{this.state.data['total_responses']} MiSymptoms Users | {this.state.data['date_range']}</h6>
-                                    </Col>
-                                </Row>
-                            </Card.Header>
-                            <Card.Body id="overview-container-body">
-                                <Card.Text>
-                                    {this.state.data['symptomatic_cases']} COVID-like reports  <b style={{ opacity: "0.25" }}>|</b>  {this.state.data['confirmed_cases']} COVID-positive reports
-                                    </Card.Text>
-                            </Card.Body>
-                            <Card.Footer id="overview-container-footer" className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
-                        </Card>
+                        <></>
                     )}
             </div>
         )
