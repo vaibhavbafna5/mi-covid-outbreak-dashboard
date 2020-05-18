@@ -317,11 +317,11 @@ export default class ZipCodeDataPanel extends Component {
                                                                 <Row>
                                                                     <Col>
                                                                         {case_datum['flags']['tested'] === 'Negative' ? (
-                                                                            <Badge style={{ backgroundColor: "#E8F3EE", color: "#158655", }} variant="success">
+                                                                            <Badge style={{ backgroundColor: "#E8F3EE", color: "#158655", }} >
                                                                                 Covid-Negative
                                                                             </Badge>
                                                                         ) : case_datum['flags']['tested'] === 'Awaiting Results' ? (
-                                                                            <Badge style={{ backgroundColor: "#FFF7E3", color: "#8A6300" }} variant="warning">
+                                                                            <Badge style={{ backgroundColor: "#FFF7E3", color: "#8A6300" }} >
                                                                                 Awaiting Results
                                                                             </Badge>
                                                                         ) : (
