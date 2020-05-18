@@ -25,7 +25,7 @@ const popover = (
     <Popover style={{minWidth: "450px", backgroundColor:"white", border: "none", boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.25)", marginTop: "12px", paddingRight:"4px", fontFamily: "Montserrat"}}>
         <Popover.Content>
             <h3 class="semi-bold" style={{textAlign:"center", marginTop: "8px"}}>Quick Tips</h3>
-            <h5 class="regular" style={{marginLeft:"12px", lineHeight: "24px"}}>Disclaimer - the data surfaced on the dashboard is collected from self-reports made by MiSymptoms users. This is not information reported directly from medical officials.</h5>
+            <h5 class="regular" style={{marginLeft:"12px", lineHeight: "24px", marginTop:"16px"}}><span style={{fontWeight:"500"}}>Disclaimer</span> <span style={{fontStyle:"italic"}}>- the data surfaced on the dashboard is collected from self-reports made by MiSymptoms users. This is not information reported directly from medical officials.</span></h5>
             <ul style={{marginTop:"12px", paddingLeft: "12px", listStyle:"none"}}>
                 <li><CovidLikeBadge></CovidLikeBadge>   - user has been flagged by our system as symptomatic for COVID-19 based on their <span style={{marginTop:"16px"}}>self-reported symptoms</span></li>
                 <li><CovidPositiveBadge></CovidPositiveBadge>    - user self-reported they tested positive for COVID-19</li>

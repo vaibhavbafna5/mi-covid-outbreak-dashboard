@@ -99,6 +99,8 @@ body {
 }
 
 .regular {
+  /* font-size: 13px !important; */
+  line-height: 10px;
   font-weight: 400 !important;
 }
 
