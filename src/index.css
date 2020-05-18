@@ -1,268 +1,270 @@
 body {
-    font-family: 'Montserrat', sans-serif;
-    -webkit-font-smoothing: antialiased !important;
-  }
-  
-  .no-gutters {
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  
-  :root {
-    --secondary: #0077A7;
-    --light-blue: #008EC6;
-    --light-blue-ten-percent: #E5F4F9;
-    --light-blue-five-percent: #F2F9FC;
-    --black: #000000;
-    --white: #FFFFFF;
-    --eighty-percent-gray: #323E43;
-    --seventy-percent-gray: #51646D;
-    --sixty-percent-gray: #728A92;
-    --forty-percent-gray: #C4CED1;
-    --thirty-percent-gray: #E3E3E3;
-  
-    /* tags */
-    --danger: #B80000;
-    --danger-ten-percent: #F8E5E5;
-    --warning: #C75300;
-    --warning-ten-percent: #F9EEE5;
-    --success: #158655;
-    --success-ten-percent: #E8F3EE;
-    --brown: #8A6300;
-    --light-brown: #FFF7E3;
-  }
-  
-  /* statewide & zipcode header */
-  #bootstrap-overrides h1 {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--black);
-  }
-  
-  /* dashboard title */
-  #bootstrap-overrides h2 {
-    font-size: 24px;
-    font-weight: 800;
-    color: var(--white);
-  }
-  
-  /* address name */
-  #bootstrap-overrides h3 {
-    font-size: 17px;
-    font-weight: 500;
-    color: var(--black);
-  }
-  
-  /* name,age,sex */
-  #bootstrap-overrides h4 {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--black);
-  }
-  
-  /* bulleted list lablels  */
-  #bootstrap-overrides h5 {
-    font-size: 14px;
-    font-weight: 600;
-    /* color: var(--black); */
-  }
-  
-  #bootstrap-overrides h6 {
-    font-size: 13px;
-    font-weight: 400;
-  }
-  
-  #bootstrap-overrides h7 {
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--black);
-  }
-  
-  /* tags - gonna have to add color separately */
-  #bootstrap-overrides h8 {
-    font-size: 12px;
-    font-weight: 400;
-  }
-  
-  /* update h5 for text that follows bulleted list label & h7 for selected radio button label */
-  .medium {
-    font-weight: 500;
-  }
-  
-  /* update h3 for covid-like reports & covid-positive reports  */
-  .semi-bold {
-    font-weight: 600;
-  }
-  
-  /* update h5 for top banner subheader */
-  .white {
-    color: var(--white);
-  }
-  
-  /* update h4 for phone number & update h5 for text that follows bulleted list label 
-  & update for h7 unselected radio button label & update for time stamp in overview container */
-  .seventy-percent-gray {
-    color: var(--seventy-percent-gray)
-  }
-  
-  #top-level-nav {
-    height: 86px;
-    background: linear-gradient(271.49deg, #008EC6 0.1%, #0077A7 99.9%);
-    color: var(--white);
-    display: block;
-    /* text-align: center; */
-    padding: 0px;
-  }
-  
-  h2.header {
-    padding-top: 18px;
-  }
-  
-  h5.subheader {
-    margin-top: -4px;
-  }
-  
-  /* radio button */
-  
-  
-  .date-range-selector {
-    position: relative;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 26px;
-    cursor: pointer;
-    font-size: 14px;
-    color: var(--seventy-percent-gray);
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  
-  /* Remove browser default */
-  .date-range-selector input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-  }
-  
-  /* Create radio button */
-  .checkmark {
-    position: absolute;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    background-color: var(--white);
-    border-radius: 50%;
-    border-style: solid;
-    border-width: 1px;
-    border-color: var(--forty-percent-gray);
-  }
-  
-  /* On mouse-over, add a grey border */
-  .date-range-selector:hover input ~ .checkmark {
-    border-color: var(--sixty-percent-gray);
-  }
-  
-  /* On mouse-over, make label a darker grey */
-  .date-range-selector:hover input ~ .radio-button-label {
-    color: var(--eighty-percent-gray);
-  }
-  
-  /* When the radio button is checked, add a blue background */
-  .date-range-selector input:checked ~ .checkmark {
-    background-color: var(--light-blue);
-    box-shadow: 0px 1px 6px rgba(1, 122, 170, 0.25);
-    border-style: none;
-  }
-  
-  .date-range-selector input:checked ~ .radio-button-label {
-    font-weight: 500;
-    color: var(--black);
-  }
-  
-  /* Create the indicator (the dot/circle - hidden when not checked) */
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-  
-  /* Show the indicator (dot/circle) when checked */
-  input:checked ~ .checkmark:after {
-    display: block;
-  }
-  
-  /* Style the indicator (dot/circle) */
-  .checkmark:after {
-       top: 6px;
-      left: 6px;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: white;
-  }
-  
-  
-  
-  /* search */
-  
-  
-  .form-control {
-    height: 40px;
-    width: 202px;
-    font-size: 14px;
-    border-color: var(--forty-percent-gray);
-    border-radius: 5px;
-    border-top-left-radius: 5px !important;
-    border-bottom-left-radius: 5px !important;
-    margin-left: -40px;
-    background: none;
-  }
-  
-  .form-control::placeholder {
-    color: var(--seventy-percent-gray);
-  }
-  
-  input:not(:placeholder-shown) {
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0;
-  }
-  
-  .form-control:hover {
-    border-color: var(--sixty-percent-gray);
-    background: none;
-  }
-  
-  .zipcode:hover {
-    background-color: var(--light-blue-five-percent);
-  }
-  
-  .no-zipcode:hover {
-    background-color: none;
-  }
-  
-  .list-group-item:first-child {
-    border-top: 0; 
-  }
-  
-  .list-group-item:last-child {
-    border-top: 0; 
-  }
-  
-  .list-group-item:active {
-    box-shadow: none;
-  }
-  
-  .form-control:focus {
-    border-color: var(--eighty-percent-gray);
-    color: var(--black);
-    background: none;
-    box-shadow: none;
-    padding-left: 40px;
-    /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6); */
-  }
-  
-  .form-control:not(:active){
-    padding-left: 40px;
-  }
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+.no-gutters {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+:root {
+  --secondary: #0077A7;
+  --light-blue: #008EC6;
+  --light-blue-ten-percent: #E5F4F9;
+  --light-blue-five-percent: #F2F9FC;
+  --black: #000000;
+  --white: #FFFFFF;
+  --eighty-percent-gray: #323E43;
+  --seventy-percent-gray: #51646D;
+  --sixty-percent-gray: #728A92;
+  --forty-percent-gray: #C4CED1;
+  --thirty-percent-gray: #E3E3E3;
+
+  /* tags */
+  --danger: #B80000;
+  --danger-ten-percent: #F8E5E5;
+  --warning: #C75300;
+  --warning-ten-percent: #F9EEE5;
+  --success: #158655;
+  --success-ten-percent: #E8F3EE;
+  --brown: #8A6300;
+  --light-brown: #FFF7E3;
+}
+
+/* statewide & zipcode header */
+#bootstrap-overrides h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+/* dashboard title */
+#bootstrap-overrides h2 {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--white);
+}
+
+/* address name */
+#bootstrap-overrides h3 {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+/* name,age,sex */
+#bootstrap-overrides h4 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+/* bulleted list lablels  */
+#bootstrap-overrides h5 {
+  font-size: 14px;
+  font-weight: 600;
+  /* color: var(--black); */
+}
+
+#bootstrap-overrides h6 {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+#bootstrap-overrides h7 {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--black);
+}
+
+/* tags - gonna have to add color separately */
+#bootstrap-overrides h8 {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* update h5 for text that follows bulleted list label & h7 for selected radio button label */
+.medium {
+  font-weight: 500;
+}
+
+/* update h3 for covid-like reports & covid-positive reports  */
+.semi-bold {
+  font-weight: 600;
+}
+
+/* update h5 for top banner subheader */
+.white {
+  color: var(--white);
+}
+
+/* update h4 for phone number & update h5 for text that follows bulleted list label 
+& update for h7 unselected radio button label & update for time stamp in overview container */
+.seventy-percent-gray {
+  color: var(--seventy-percent-gray)
+}
+
+#top-level-nav {
+  height: 86px;
+  background: linear-gradient(271.49deg, #008EC6 0.1%, #0077A7 99.9%);
+  color: var(--white);
+  display: block;
+  text-align: center;
+  padding: 0px;
+}
+
+h2.header {
+  padding-top: 18px;
+}
+
+h5.subheader {
+  margin-top: -4px;
+}
+
+/* radio button */
+
+
+.date-range-selector {
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 26px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--seventy-percent-gray);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Remove browser default */
+.date-range-selector input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create radio button */
+.checkmark {
+  position: absolute;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: var(--white);
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--forty-percent-gray);
+}
+
+/* On mouse-over, add a grey border */
+.date-range-selector:hover input ~ .checkmark {
+  border-color: var(--sixty-percent-gray);
+}
+
+/* On mouse-over, make label a darker grey */
+.date-range-selector:hover input ~ .radio-button-label {
+  color: var(--eighty-percent-gray);
+}
+
+/* When the radio button is checked, add a blue background */
+.date-range-selector input:checked ~ .checkmark {
+  background-color: var(--light-blue);
+  box-shadow: 0px 1px 6px rgba(1, 122, 170, 0.25);
+  border-style: none;
+}
+
+.date-range-selector input:checked ~ .radio-button-label {
+  font-weight: 500;
+  color: var(--black);
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.checkmark:after {
+ 	top: 6px;
+	left: 6px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+
+
+/* search */
+
+
+.form-control { 
+  height: 40px; 
+  width: 202px; 
+  font-size: 14px; 
+  border-color: var(--forty-percent-gray); 
+  border-radius: 5px; 
+  border-top-left-radius: 5px !important; 
+  border-bottom-left-radius: 5px !important; 
+  margin-left: -40px; background: none;
+}
+.form-control::placeholder { 
+  color: var(--seventy-percent-gray);
+}
+input:not(:placeholder-shown):not(:focus) { 
+  border-bottom-left-radius: 5 !important; 
+  border-bottom-right-radius: 5;
+}
+
+input:focus:not(:placeholder-shown) { 
+  border-bottom-left-radius: 0 !important; 
+  border-bottom-right-radius: 0;
+}
+/* input:not(:focus) { border-bottom-left-radius: 5 !important; border-bottom-right-radius: 5 !important;} */
+
+.form-control:hover { 
+  border-color: var(--sixty-percent-gray); 
+  background: none;
+}
+
+.zipcode:hover { 
+  background-color: var(--light-blue-five-percent);
+}
+
+.no-zipcode:hover { 
+  background-color: none;
+}
+
+.list-group-item:first-child { 
+  border-top: 0; 
+}
+
+.list-group-item:last-child { 
+  border-top: 0; 
+}
+
+.list-group-item:active { 
+  box-shadow: none;
+}
+
+.form-control:focus { 
+  border-color: var(--eighty-percent-gray); 
+  color: var(--black); 
+  background: none; 
+  box-shadow: none; 
+  padding-left: 40px; /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6); */
+}
+
+.form-control:not(:active) { 
+  padding-left: 40px;
+}
