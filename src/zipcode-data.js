@@ -346,7 +346,9 @@ export default class ZipCodeDataPanel extends Component {
                                                                                 )}
                                                                         {
                                                                             case_datum['flags']['symptomatic'] ? (
-                                                                                <SymptomaticBadge />
+                                                                                <span style={{ paddingLeft: "4px" }}>
+                                                                                    <SymptomaticBadge />
+                                                                                </span>
                                                                             ) :
                                                                                 (<></>)
                                                                         }

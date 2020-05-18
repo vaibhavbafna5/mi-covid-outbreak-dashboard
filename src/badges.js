@@ -34,7 +34,7 @@ class CovidPositiveBadge extends Component {
 class SymptomaticBadge extends Component {
     render() {
         return (
-            <Badge style={{ marginLeft: "4px", backgroundColor: "#F3F1F8", color: "#8573BC" }}>
+            <Badge style={{ backgroundColor: "#F3F1F8", color: "#8573BC" }}>
                 Symptomatic
             </Badge>
         )
