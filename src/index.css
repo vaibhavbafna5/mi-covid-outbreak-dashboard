@@ -208,61 +208,63 @@ input:checked ~ .checkmark:after {
 /* search */
 
 
-.form-control {
-  height: 40px;
-  width: 202px;
-  font-size: 14px;
-  border-color: var(--forty-percent-gray);
-  border-radius: 5px;
-  border-top-left-radius: 5px !important;
-  border-bottom-left-radius: 5px !important;
-  margin-left: -40px;
-  background: none;
+.form-control { 
+  height: 40px; 
+  width: 202px; 
+  font-size: 14px; 
+  border-color: var(--forty-percent-gray); 
+  border-radius: 5px; 
+  border-top-left-radius: 5px !important; 
+  border-bottom-left-radius: 5px !important; 
+  margin-left: -40px; background: none;
 }
-
-.form-control::placeholder {
+.form-control::placeholder { 
   color: var(--seventy-percent-gray);
 }
-
-input:not(:placeholder-shown) {
-  border-bottom-left-radius: 0 !important;
-  border-bottom-right-radius: 0;
+input:not(:placeholder-shown):not(:focus) { 
+  border-bottom-left-radius: 5 !important; 
+  border-bottom-right-radius: 5;
 }
 
-.form-control:hover {
-  border-color: var(--sixty-percent-gray);
+input:focus:not(:placeholder-shown) { 
+  border-bottom-left-radius: 0 !important; 
+  border-bottom-right-radius: 0;
+}
+/* input:not(:focus) { border-bottom-left-radius: 5 !important; border-bottom-right-radius: 5 !important;} */
+
+.form-control:hover { 
+  border-color: var(--sixty-percent-gray); 
   background: none;
 }
 
-.zipcode:hover {
+.zipcode:hover { 
   background-color: var(--light-blue-five-percent);
 }
 
-.no-zipcode:hover {
+.no-zipcode:hover { 
   background-color: none;
 }
 
-.list-group-item:first-child {
+.list-group-item:first-child { 
   border-top: 0; 
 }
 
-.list-group-item:last-child {
+.list-group-item:last-child { 
   border-top: 0; 
 }
 
-.list-group-item:active {
+.list-group-item:active { 
   box-shadow: none;
 }
 
-.form-control:focus {
-  border-color: var(--eighty-percent-gray);
-  color: var(--black);
-  background: none;
-  box-shadow: none;
-  padding-left: 40px;
-  /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6); */
+.form-control:focus { 
+  border-color: var(--eighty-percent-gray); 
+  color: var(--black); 
+  background: none; 
+  box-shadow: none; 
+  padding-left: 40px; /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6); */
 }
 
-.form-control:not(:active){
+.form-control:not(:active) { 
   padding-left: 40px;
 }
