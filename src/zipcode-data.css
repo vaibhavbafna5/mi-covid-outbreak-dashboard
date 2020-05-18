@@ -57,6 +57,10 @@
     color: var(--white);
 }
 
+#bootstrap-overrides .btn-primary.dropdown-toggle:focus {
+    box-shadow: none;
+}
+
 #bootstrap-overrides ul {
     list-style-type: circle;
 }

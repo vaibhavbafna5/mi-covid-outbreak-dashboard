@@ -7,6 +7,11 @@ import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+
+import { CovidNegativeBadge, CovidPositiveBadge, AwaitingResultsBadge, SymptomaticBadge } from './badges'
+
 import axios from "axios";
 import './index.css';
 import './zipcode-data.css'
@@ -258,14 +263,30 @@ export default class ZipCodeDataPanel extends Component {
                         <Card style={{ marginTop: "36px" }}>
                             <Card.Header id="address-container-header">
                                 <h3 style={{ color: "white", }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Addresses</b></h3>
-                                <Nav id="nav-container" variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress}>
-                                    <Nav.Item id="nav-item">
-                                        <Nav.Link href="#home"><b>Home ({this.state.data['home_data'].length})</b></Nav.Link>
-                                    </Nav.Item>
-                                    <Nav.Item id="nav-item">
-                                        <Nav.Link href="#work"><b>Work ({this.state.data['work_data'].length})</b></Nav.Link>
-                                    </Nav.Item>
-                                </Nav>
+                                <Row style={{ height: "24px" }}>
+                                    <Col style={{ width: "350px" }}>
+                                        <Nav id="nav-container" variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress}>
+                                            <Nav.Item id="nav-item">
+                                                <Nav.Link href="#home"><b>Home ({this.state.data['home_data'].length})</b></Nav.Link>
+                                            </Nav.Item>
+                                            <Nav.Item id="nav-item">
+                                                <Nav.Link href="#work"><b>Work ({this.state.data['work_data'].length})</b></Nav.Link>
+                                            </Nav.Item>
+                                        </Nav>
+                                    </Col>
+                                    <Col>
+                                        <Dropdown id="filter-dropdown">
+                                            <Dropdown.Toggle style={{ border: "#008EC6", backgroundColor: "#008EC6" }}>
+                                                Dropdown Button
+                                            </Dropdown.Toggle>
+                                            <Dropdown.Menu>
+                                                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                                                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                                                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                    </Col>
+                                </Row>
                             </Card.Header>
                             <Accordion id="address-accordion" >
                                 {this.state.caseData.map((item, index) => (
@@ -317,23 +338,15 @@ export default class ZipCodeDataPanel extends Component {
                                                                 <Row>
                                                                     <Col>
                                                                         {case_datum['flags']['tested'] === 'Negative' ? (
-                                                                            <Badge style={{ backgroundColor: "#E8F3EE", color: "#158655", }} >
-                                                                                Covid-Negative
-                                                                            </Badge>
+                                                                            <CovidNegativeBadge />
                                                                         ) : case_datum['flags']['tested'] === 'Awaiting Results' ? (
-                                                                            <Badge style={{ backgroundColor: "#FFF7E3", color: "#8A6300" }} >
-                                                                                Awaiting Results
-                                                                            </Badge>
+                                                                            <AwaitingResultsBadge />
                                                                         ) : (
-                                                                                    <Badge style={{ backgroundColor: "#F8E5E5", color: "#8A6300" }} variant="danger">
-                                                                                        Covid-Positive
-                                                                                    </Badge>
+                                                                                    <CovidPositiveBadge />
                                                                                 )}
                                                                         {
                                                                             case_datum['flags']['symptomatic'] ? (
-                                                                                <Badge style={{ marginLeft: "4px", backgroundColor: "#F3F1F8", color: "#8573BC" }} variant="warning">
-                                                                                    Symptomatic
-                                                                                </Badge>
+                                                                                <SymptomaticBadge />
                                                                             ) :
                                                                                 (<></>)
                                                                         }
@@ -360,7 +373,7 @@ export default class ZipCodeDataPanel extends Component {
                                                                             case_datum['household_sick'] ? (
                                                                                 <li><b>Household Sick</b> - members in house are feeling unwell</li>
                                                                             ) :
-                                                                                (<li><b>Household Sick</b> - member in house feel fine</li>)
+                                                                                (<li><b>Household Sick</b> - members in house feel fine</li>)
                                                                         }
                                                                         {
                                                                             case_datum['flags']['symptomatic'] ? (
