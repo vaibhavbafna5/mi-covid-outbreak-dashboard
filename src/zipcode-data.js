@@ -292,9 +292,9 @@ export default class ZipCodeDataPanel extends Component {
                                                 <img style={{ paddingBottom: "2px" }} src={FilterIcon}></img>All
                                                 </Dropdown.Toggle>
                                             <Dropdown.Menu>
-                                                <Dropdown.Item href="/filter-all">All</Dropdown.Item>
-                                                <Dropdown.Item href="/filter-covid-like">COVID-Like</Dropdown.Item>
-                                                <Dropdown.Item href="/filter-covid-positive">COVID-Positive</Dropdown.Item>
+                                                <Dropdown.Item >All</Dropdown.Item>
+                                                <Dropdown.Item >COVID-Like</Dropdown.Item>
+                                                <Dropdown.Item >COVID-Positive</Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </Col>
@@ -304,9 +304,9 @@ export default class ZipCodeDataPanel extends Component {
                                                 <img style={{ paddingBottom: "2px" }} src={SortIcon}></img>A-Z
                                                 </Dropdown.Toggle>
                                             <Dropdown.Menu>
-                                                <Dropdown.Item href="/sort-alphabetically">A-Z</Dropdown.Item>
-                                                <Dropdown.Item href="/sort-least-greatest">Greatest to Least</Dropdown.Item>
-                                                <Dropdown.Item href="/sort-greatest-least">Least to Greatest</Dropdown.Item>
+                                                <Dropdown.Item >A-Z</Dropdown.Item>
+                                                <Dropdown.Item >Greatest to Least</Dropdown.Item>
+                                                <Dropdown.Item >Least to Greatest</Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </Col>
