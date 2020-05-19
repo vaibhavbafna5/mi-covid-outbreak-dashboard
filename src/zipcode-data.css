@@ -65,8 +65,16 @@
     list-style-type: circle;
 }
 
-#bootstrap-overrides .li {
-    color: red;
+/* #bootstrap-overrides .dropdown-item:active {
+    background-color: pink !important;
+} */
+
+#bootstrap-overrides .dropdown-item:hover {
+    background-color: var(--light-blue-ten-percent);
+}
+
+#bootstrap-overrides .dropdown-item {
+    color: var(--black);
 }
 
 #address-accordion-toggle {
