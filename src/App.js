@@ -140,7 +140,7 @@ export default class App extends Component {
                         <Col>
                             <Row style={{ maxHeight: "40px" }}>
                                 <Col className="no-gutters" style={{ maxHeight: "40px" }}>
-                                    <Autocomplete onZipCodeChange={this.onZipCodeChange} />
+                                    <Autocomplete onZipCodeChange={this.onZipCodeChange} zipCode={this.state.zipCode} />
                                 </Col>
                                 <Col className="no-gutters" style={{ maxHeight: "40px" }}>
                                     <Form onChange={this.setData.bind(this)} className="no-gutters" style={{ maxHeight: "40px" }}>
