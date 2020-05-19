@@ -94,6 +94,8 @@ export default class App extends Component {
             newZipCode = 'statewide'
         }
 
+        console.log(newZipCode);
+
         axios.get(CHART_DATA_ENDPOINT, {
             params: {
                 'area': newZipCode,

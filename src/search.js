@@ -81,7 +81,7 @@ class Autocomplete extends Component {
                 activeSuggestion: 0,
                 filteredSuggestions: [],
                 showSuggestions: false,
-                userInput: "Oh.. Hi Mark",
+                userInput: "",
             });
 
             this.props.onZipCodeChange("")
