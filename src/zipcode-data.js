@@ -266,8 +266,9 @@ export default class ZipCodeDataPanel extends Component {
     setFilterIcon() {
         if (this.state.filterHover == true) {
             return FilterIconHovered
+        } else {
+            return FilterIconUnhovered
         }
-        return FilterIconUnhovered
     }
 
     render() {
