@@ -167,7 +167,7 @@ export default class App extends Component {
                                     </Form>
                                 </Col>
                             </Row>
-                            <ZipCodeOverviewContainer zipCode={this.state.zipCode} />
+                            {/* <ZipCodeOverviewContainer zipCode={this.state.zipCode} /> */}
                             <Chart showWeeklyData={this.state.showWeeklyData} weeklyData={this.state.weeklyData} cumulativeData={this.state.cumulativeData} />
                             {/* <div style={{ marginTop: "24px", }}>
                                 <MichiganMap />

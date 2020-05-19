@@ -26,8 +26,8 @@ import ReportSelectedArrow from "./icons/arrow/big/expanded/report/selected.svg"
 
 import ItemSelectedAndHoveredArrow from "./icons/arrow/big/expanded/hovered.svg"
 
-import FilterIcon from "./icons/filterIcon.svg";
-import SortIcon from "./icons/sortIcon.svg";
+import FilterIconUnhovered from "./icons/filterIconUnhovered.svg";
+import FilterIconHovered from "./icons/filterIconHovered.svg";
 
 // const REPORT_DATA_ENDPOINT = 'http://0.0.0.0:5000/report-data'
 const REPORT_DATA_ENDPOINT = 'https://still-cliffs-94162.herokuapp.com/report-data'
@@ -55,6 +55,8 @@ export default class ZipCodeDataPanel extends Component {
             addressHoverPosition: null,
             reportHoverPosition: null,
             activeReports: {},
+            filter: "Filter",
+            filterHover: false,
         }
     }
 
@@ -236,11 +238,43 @@ export default class ZipCodeDataPanel extends Component {
         }
     }
 
+    onFilterSelect(eventKey) {
+        this.setState({
+            filter: eventKey,
+        })
+    }
+
+    onFilterHover() {
+        this.setState({
+            filterHover: true,
+        })
+    }
+
+    onFilterUnhover() {
+        this.setState({
+            filterHover: false,
+        })
+    }
+
+    setFilterColor() {
+        if (this.state.filterHover == true) {
+            return "#CCE4ED"
+        }
+        return "#99D2E8"
+    }
+
+    setFilterIcon() {
+        if (this.state.filterHover == true) {
+            return FilterIconHovered
+        }
+        return FilterIconUnhovered
+    }
+
     render() {
 
         return (
             <div style={{ width: "600px" }}>
-                {/* <Card>
+                <Card>
                     <Card.Header id="overview-container-header">
                         <Row>
                             <Col>
@@ -255,15 +289,15 @@ export default class ZipCodeDataPanel extends Component {
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer id="overview-container-footer" className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
-                </Card> */}
+                </Card>
                 {this.state.zipCodeDataExists ?
                     (<div>
                         <Card style={{ marginTop: "36px" }}>
                             <Card.Header id="address-container-header">
                                 <h3 style={{ color: "white", }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Addresses</b></h3>
                                 <Row style={{ height: "24px" }}>
-                                    <Col style={{ width: "350px" }}>
-                                        <Nav id="nav-container" variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress} style={{ width: "325px" }}>
+                                    <Col >
+                                        <Nav id="nav-container" variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress}>
                                             <Nav.Item id="nav-item">
                                                 <Nav.Link href="#home"><b>Home ({this.state.data['home_data'].length})</b></Nav.Link>
                                             </Nav.Item>
@@ -273,28 +307,18 @@ export default class ZipCodeDataPanel extends Component {
                                         </Nav>
                                     </Col>
                                     <Col>
-                                        <Dropdown id="filter-dropdown">
-                                            <Dropdown.Toggle style={{ color: "#99D2E8", border: "#008EC6", backgroundColor: "#008EC6" }}>
-                                                <img style={{ paddingBottom: "2px" }} src={FilterIcon}></img>Filter
+                                        <div style={{ float: "right", marginRight: "18px" }}>
+                                            <Dropdown alignRight id="filter-dropdown" onSelect={this.onFilterSelect.bind(this)}>
+                                                <Dropdown.Toggle onMouseLeave={() => this.onFilterUnhover()} onMouseEnter={() => this.onFilterHover()} style={{ color: this.setFilterColor(), border: "#008EC6", backgroundColor: "#008EC6", }}>
+                                                    <img style={{ paddingBottom: "2px" }} src={this.setFilterIcon()}></img>{this.state.filter}
                                                 </Dropdown.Toggle>
-                                            <Dropdown.Menu>
-                                                <Dropdown.Item href="#all">All</Dropdown.Item>
-                                                <Dropdown.Item href="#covid-like">COVID-Like</Dropdown.Item>
-                                                <Dropdown.Item href="#covid-pos">COVID-Positive</Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown>
-                                    </Col>
-                                    <Col>
-                                        <Dropdown id="sort-dropdown">
-                                            <Dropdown.Toggle style={{ color: "#99D2E8", border: "#008EC6", backgroundColor: "#008EC6" }}>
-                                                <img style={{ paddingBottom: "2px", paddingRight: "4px" }} src={SortIcon}></img>Sort
-                                                </Dropdown.Toggle>
-                                            <Dropdown.Menu>
-                                                <Dropdown.Item >A-Z</Dropdown.Item>
-                                                <Dropdown.Item >Greatest to Least</Dropdown.Item>
-                                                <Dropdown.Item >Least to Greatest</Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown>
+                                                <Dropdown.Menu>
+                                                    <Dropdown.Item eventKey="All" >{this.state.filter == "All" || this.state.filter == "Filter" ? (<b>All</b>) : "All"}</Dropdown.Item>
+                                                    <Dropdown.Item eventKey="COVID-Like" >{this.state.filter == "COVID-Like" ? (<b>COVID-Like</b>) : ("COVID-Like")}</Dropdown.Item>
+                                                    <Dropdown.Item eventKey="COVID-Positive" >{this.state.filter == "COVID-Positive" ? (<b>COVID-Positive</b>) : ("COVID-Positive")}</Dropdown.Item>
+                                                </Dropdown.Menu>
+                                            </Dropdown>
+                                        </div>
                                     </Col>
                                 </Row>
                             </Card.Header>
