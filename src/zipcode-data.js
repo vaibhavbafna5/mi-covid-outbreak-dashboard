@@ -37,7 +37,6 @@ export default class ZipCodeDataPanel extends Component {
     constructor(props) {
         super(props);
         console.log("zipcode-data props", this.props)
-        this.wrapper = React.createRef();
 
 
 
@@ -152,8 +151,6 @@ export default class ZipCodeDataPanel extends Component {
             this.state.activeReports[position] = false
         }
 
-        console.log("ryan lieu is a fag", this.state.activeReports)
-
         // console.log("report clicked - ", position)
         // if (this.state.reportActive == position) {
         //     this.setState({
@@ -243,7 +240,7 @@ export default class ZipCodeDataPanel extends Component {
 
         return (
             <div style={{ width: "600px" }}>
-                <Card>
+                {/* <Card>
                     <Card.Header id="overview-container-header">
                         <Row>
                             <Col>
@@ -258,15 +255,15 @@ export default class ZipCodeDataPanel extends Component {
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer id="overview-container-footer" className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
-                </Card>
+                </Card> */}
                 {this.state.zipCodeDataExists ?
                     (<div>
                         <Card style={{ marginTop: "36px" }}>
                             <Card.Header id="address-container-header">
                                 <h3 style={{ color: "white", }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Addresses</b></h3>
                                 <Row style={{ height: "24px" }}>
-                                    <Col style={{ width: "400px" }}>
-                                        <Nav id="nav-container" variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress} style={{ width: "350px" }}>
+                                    <Col style={{ width: "350px" }}>
+                                        <Nav id="nav-container" variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress} style={{ width: "325px" }}>
                                             <Nav.Item id="nav-item">
                                                 <Nav.Link href="#home"><b>Home ({this.state.data['home_data'].length})</b></Nav.Link>
                                             </Nav.Item>
@@ -278,19 +275,19 @@ export default class ZipCodeDataPanel extends Component {
                                     <Col>
                                         <Dropdown id="filter-dropdown">
                                             <Dropdown.Toggle style={{ color: "#99D2E8", border: "#008EC6", backgroundColor: "#008EC6" }}>
-                                                <img style={{ paddingBottom: "2px" }} src={FilterIcon}></img>All
+                                                <img style={{ paddingBottom: "2px" }} src={FilterIcon}></img>Filter
                                                 </Dropdown.Toggle>
                                             <Dropdown.Menu>
-                                                <Dropdown.Item >All</Dropdown.Item>
-                                                <Dropdown.Item >COVID-Like</Dropdown.Item>
-                                                <Dropdown.Item >COVID-Positive</Dropdown.Item>
+                                                <Dropdown.Item href="#all">All</Dropdown.Item>
+                                                <Dropdown.Item href="#covid-like">COVID-Like</Dropdown.Item>
+                                                <Dropdown.Item href="#covid-pos">COVID-Positive</Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </Col>
                                     <Col>
                                         <Dropdown id="sort-dropdown">
                                             <Dropdown.Toggle style={{ color: "#99D2E8", border: "#008EC6", backgroundColor: "#008EC6" }}>
-                                                <img style={{ paddingBottom: "2px" }} src={SortIcon}></img>A-Z
+                                                <img style={{ paddingBottom: "2px", paddingRight: "4px" }} src={SortIcon}></img>Sort
                                                 </Dropdown.Toggle>
                                             <Dropdown.Menu>
                                                 <Dropdown.Item >A-Z</Dropdown.Item>
