@@ -239,18 +239,7 @@ export default class ZipCodeDataPanel extends Component {
         }
     }
 
-    setSelectedHeader(zipCode) {
-        if (this.state.zipCode == "") {
-            return "Statewide"
-        }
-        else {
-            return this.state.zipCode
-        }
-    }
-
     render() {
-
-        var addressStyle;
 
         return (
             <div style={{ width: "600px" }}>
@@ -258,7 +247,7 @@ export default class ZipCodeDataPanel extends Component {
                     <Card.Header id="overview-container-header">
                         <Row>
                             <Col>
-                                <h2>{this.setSelectedHeader(this.state.zipCode)}</h2>
+                                {this.state.zipCode == "" ? (<h2>Statewide</h2>) : (<h2>{this.state.zipCode}</h2>)}
                                 <h4 style={{ color: "white", }}><b>{this.state.data['total_responses']} MiSymptoms Users | {this.state.data['date_range']}</b></h4>
                             </Col>
                         </Row>
