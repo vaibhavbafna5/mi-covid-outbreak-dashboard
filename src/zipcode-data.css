@@ -65,12 +65,12 @@
     list-style-type: circle;
 }
 
-/* #bootstrap-overrides .dropdown-item:active {
-    background-color: pink !important;
-} */
+#bootstrap-overrides .dropdown-item:active {
+    background-color: var(--light-blue-ten-percent) !important;
+}
 
 #bootstrap-overrides .dropdown-item:hover {
-    background-color: var(--light-blue-ten-percent);
+    background-color: var(--light-blue-five-percent);
 }
 
 #bootstrap-overrides .dropdown-item {
