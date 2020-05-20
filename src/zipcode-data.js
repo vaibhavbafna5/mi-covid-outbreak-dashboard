@@ -45,6 +45,7 @@ export default class ZipCodeDataPanel extends Component {
             zipCode: "",
             data: {},
             caseData: {},
+            caseType: "home",
             addressRow: {
                 expanded: false,
                 backgroundColor: "#FFFFFF",
@@ -65,6 +66,7 @@ export default class ZipCodeDataPanel extends Component {
         axios.get(REPORT_DATA_ENDPOINT, {
             params: {
                 'area': 'statewide',
+                'filter_type': 'all',
             }
         })
             // get state level report data 
@@ -83,14 +85,15 @@ export default class ZipCodeDataPanel extends Component {
             axios.get(REPORT_DATA_ENDPOINT, {
                 params: {
                     'area': newZipCode,
+                    'filter_type': 'all',
                 }
             }).then((response) => {
-                console.log("zipcode data here", response.data)
                 this.setState({
                     zipCodeDataExists: true,
                     zipCode: newZipCode,
                     data: response.data,
                     caseData: response.data['home_data'],
+                    caseType: "home",
                 })
             }).catch((e) => {
                 console.log("error", e);
@@ -100,6 +103,7 @@ export default class ZipCodeDataPanel extends Component {
             axios.get(REPORT_DATA_ENDPOINT, {
                 params: {
                     'area': 'statewide',
+                    'filter_type': 'all',
                 }
             }).then((response) => {
                 this.setState({
@@ -116,12 +120,15 @@ export default class ZipCodeDataPanel extends Component {
 
     onSelectAddress = (selectedAddress) => {
         var caseData = this.state.data['home_data']
+        var caseType = "home"
         if (selectedAddress == "#work") {
             caseData = this.state.data['work_data']
+            caseType = "work"
         }
 
         this.setState({
             caseData: caseData,
+            caseType: caseType,
         })
     }
 
@@ -152,15 +159,6 @@ export default class ZipCodeDataPanel extends Component {
         } else {
             this.state.activeReports[position] = false
         }
-
-        // console.log("report clicked - ", position)
-        // if (this.state.reportActive == position) {
-        //     this.setState({
-        //         reportActive: null,
-        //     })
-        // } else {
-        //     this.setState({ reportActive: position })
-        // }
     }
 
     onReportHover(position) {
@@ -176,11 +174,6 @@ export default class ZipCodeDataPanel extends Component {
     }
 
     setReportArrow(position) {
-
-        // if (this.state.reportActive == position) {
-        //     return SelectedArrow;
-        // }
-        // return UnselectedArrow;
 
         /* 
     if this.state.activeReports[pos] == false && this.state.reportHoverPosition == null
@@ -241,6 +234,26 @@ export default class ZipCodeDataPanel extends Component {
     onFilterSelect(eventKey) {
         this.setState({
             filter: eventKey,
+        })
+
+        console.log("eventKey on filter --> ", eventKey);
+
+        axios.get(REPORT_DATA_ENDPOINT, {
+            params: {
+                'area': this.state.zipCode,
+                'filter_type': eventKey,
+            }
+        }).then((response) => {
+            var caseData;
+            if (this.state.caseType == "home") {
+                caseData = response.data['home_data']
+            } else {
+                caseData = response.data['work_data']
+            }
+            this.setState({
+                data: response.data,
+                caseData: caseData,
+            })
         })
     }
 
@@ -314,7 +327,7 @@ export default class ZipCodeDataPanel extends Component {
                                                     <img style={{ paddingBottom: "2px" }} src={this.setFilterIcon()}></img>{this.state.filter}
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
-                                                    <Dropdown.Item eventKey="All" >{this.state.filter == "All" || this.state.filter == "Filter" ? (<b>All</b>) : "All"}</Dropdown.Item>
+                                                    <Dropdown.Item eventKey="All" >{this.state.filter === "All" || this.state.filter == "Filter" ? (<b>All</b>) : "All"}</Dropdown.Item>
                                                     <Dropdown.Item eventKey="COVID-Like" >{this.state.filter == "COVID-Like" ? (<b>COVID-Like</b>) : ("COVID-Like")}</Dropdown.Item>
                                                     <Dropdown.Item eventKey="COVID-Positive" >{this.state.filter == "COVID-Positive" ? (<b>COVID-Positive</b>) : ("COVID-Positive")}</Dropdown.Item>
                                                 </Dropdown.Menu>
