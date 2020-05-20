@@ -174,9 +174,9 @@ export default class App extends Component {
                                 <Chart showWeeklyData={this.state.showWeeklyData} weeklyData={this.state.weeklyData} cumulativeData={this.state.cumulativeData} />
                             </Row>
                         </Col>
-                        <Col style={{maxWidth: "478px", backgroundColor:"red", marginLeft: "50px"}} class="no-gutters">
+                        <Col style={{maxWidth: "478px", marginLeft: "50px"}} class="no-gutters">
                             <Row class="no-gutters" style={{top:"0"}}>
-                                <ZipCodeDataPanel zipCode={this.state.zipCode} style={{minWidth: "478px", top:"0", backgroundColor:"yellow"}} class="no-gutters"/>
+                                <ZipCodeDataPanel zipCode={this.state.zipCode} style={{minWidth: "478px", top:"0"}} class="no-gutters"/>
                             </Row>
                         </Col>
                             {/* <div style={{ marginTop: "24px", }}>

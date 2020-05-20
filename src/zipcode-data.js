@@ -308,7 +308,7 @@ export default class ZipCodeDataPanel extends Component {
                     (<div style={{width: "478px"}}>
                         <Card>
                             <Card.Header id="address-container-header">
-                                <h3 style={{ color: "white", }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Addresses</b></h3>
+                                <h3 style={{ color: "white", }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Reported Addresses in {this.state.zipCode}</b></h3>
                                 <Row style={{ height: "24px" }}>
                                     <Col >
                                         <Nav id="nav-container" variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress}>
