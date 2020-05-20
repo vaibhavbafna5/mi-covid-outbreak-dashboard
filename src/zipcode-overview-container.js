@@ -27,6 +27,7 @@ export default class ZipCodeOverviewContainer extends Component {
         axios.get(REPORT_DATA_ENDPOINT, {
             params: {
                 'area': 'statewide',
+                'filter_type': 'all',
             }
         })
             // get state level report data 
@@ -45,6 +46,7 @@ export default class ZipCodeOverviewContainer extends Component {
             axios.get(REPORT_DATA_ENDPOINT, {
                 params: {
                     'area': newZipCode,
+                    'filter_type': 'all',
                 }
             }).then((response) => {
                 this.setState({
@@ -58,6 +60,7 @@ export default class ZipCodeOverviewContainer extends Component {
             axios.get(REPORT_DATA_ENDPOINT, {
                 params: {
                     'area': 'statewide',
+                    'filter_type': 'all',
                 }
             }).then((response) => {
                 this.setState({
@@ -72,7 +75,7 @@ export default class ZipCodeOverviewContainer extends Component {
 
     render() {
         return (
-            <div style={{ minWidth: "524px", marginTop: "30px", zIndex:"-1"}}>
+            <div style={{ minWidth: "524px", marginTop: "30px", zIndex: "-1" }}>
                 <Card id="overview-container">
                     <Card.Header id="overview-container-header">
                         <Row>
@@ -85,9 +88,9 @@ export default class ZipCodeOverviewContainer extends Component {
                         </Row>
                     </Card.Header>
                     <Card.Body id="overview-container-body" className="no-gutters">
-                        <Card.Text style={{marginLeft:"14px"}}>
-                            <h3 style={{marginTop:"12px"}}>{this.state.data['symptomatic_cases']} COVID-Like reports<span style={{ marginLeft:"8px", marginRight:"8px"}}><div className="overview-body-divider"></div></span>{this.state.data['confirmed_cases']} COVID-Positive reports</h3>
-                            <h5 class="medium" style={{color: "#51646D", marginTop:"-2px"}}>Data last updated on {this.state.data['last_updated']}</h5>
+                        <Card.Text style={{ marginLeft: "14px" }}>
+                            <h3 style={{ marginTop: "12px" }}>{this.state.data['symptomatic_cases']} COVID-Like reports<span style={{ marginLeft: "8px", marginRight: "8px" }}><div className="overview-body-divider"></div></span>{this.state.data['confirmed_cases']} COVID-Positive reports</h3>
+                            <h5 class="medium" style={{ color: "#51646D", marginTop: "-2px" }}>Data last updated on {this.state.data['last_updated']}</h5>
                         </Card.Text>
                     </Card.Body>
                 </Card>
