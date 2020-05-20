@@ -1,18 +1,15 @@
 #address-container-header {
     background-color: var(--light-blue);
     color: var(--white);
+    height: 72px;
 }
 
 #address-container-header-text {
     color: var(--white);
 }
 
-#nav-container {
-    background-color: var(--light-blue);
-}
-
 #nav-item {
-    background-color: var(--light-blue);
+    background-color: none;
     border: none;
     height: 36px;
 }
@@ -33,11 +30,18 @@
     border-bottom: 0px;
 }
 
+.nav-link {
+    padding: 0 !important;
+    margin-right: 0 !important;
+    text-align:left !important;
+    height: 21px !important;
+}
+
 #bootstrap-overrides .nav-link.active {
     /* text-decoration: underline; */
-    background-color: var(--light-blue);
-    border: none;
-    border-bottom: 2px solid white;
+    background-color: none;
+    /* border: none; */
+    border-bottom: 2px solid var(--white);
     color: var(--white);
 }
 

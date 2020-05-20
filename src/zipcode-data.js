@@ -209,6 +209,7 @@ export default class ZipCodeDataPanel extends Component {
     }
 
     setBackgroundColor(position) {
+        console.log("red")
         if (this.state.active == position) {
             return "#E5F4F9";
         }
@@ -312,11 +313,12 @@ export default class ZipCodeDataPanel extends Component {
                         <Card>
                             <Card.Header id="address-container-header">
                                 <h3 style={{ color: "white", fontSize: "20px", marginTop: "0" }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Reported Addresses in {this.state.zipCode}</b></h3>
-                                <Row style={{ height: "24px", marginTop: "0px" }}>
+                                <Row style={{ marginTop: "0px" }}>
                                     <Col>
-                                        <Nav id="nav-container" variant="tabs" activeKey={this.state.caseType} onSelect={this.onSelectAddress} style={{ fontSize: "13px", fontWeight: "600" }}>
-                                            <Nav.Item id="nav-item">
+                                        <Nav activeKey={this.state.caseType} onSelect={this.onSelectAddress} style={{ fontSize: "13px", fontWeight: "600"}}>
+                                            <Nav.Item id="nav-item" style={{marginRight:"24px"}}>
                                                 <Nav.Link eventKey={"home"}>Home ({this.state.data['home_data'].length})</Nav.Link>
+                                                
                                             </Nav.Item>
                                             <Nav.Item id="nav-item">
                                                 <Nav.Link eventKey={"work"}>Work ({this.state.data['work_data'].length})</Nav.Link>
