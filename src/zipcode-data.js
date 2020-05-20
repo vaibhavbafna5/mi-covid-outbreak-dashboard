@@ -118,18 +118,21 @@ export default class ZipCodeDataPanel extends Component {
         }
     }
 
-    onSelectAddress = (selectedAddress) => {
-        var caseData = this.state.data['home_data']
-        var caseType = "home"
-        if (selectedAddress == "#work") {
-            caseData = this.state.data['work_data']
-            caseType = "work"
+    onSelectAddress = (eventKey) => {
+        console.log("selected addy --> ", eventKey)
+        if (eventKey == "work") {
+            var workData = this.state.data['work_data']
+            this.setState({
+                caseData: workData,
+                caseType: "work"
+            })
+        } else {
+            var homeData = this.state.data['home_data']
+            this.setState({
+                caseData: homeData,
+                caseType: "home"
+            })
         }
-
-        this.setState({
-            caseData: caseData,
-            caseType: caseType,
-        })
     }
 
     onAddressToggle(position) {
@@ -308,15 +311,15 @@ export default class ZipCodeDataPanel extends Component {
                     (<div style={{ width: "550px" }}>
                         <Card>
                             <Card.Header id="address-container-header">
-                                <h3 style={{ color: "white", fontSize:"20px", marginTop: "0"}} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Reported Addresses in {this.state.zipCode}</b></h3>
-                                <Row style={{ height: "24px", marginTop:"0px" }}>
+                                <h3 style={{ color: "white", fontSize: "20px", marginTop: "0" }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Reported Addresses in {this.state.zipCode}</b></h3>
+                                <Row style={{ height: "24px", marginTop: "0px" }}>
                                     <Col>
-                                        <Nav id="nav-container" variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress} style={{fontSize:"13px", fontWeight: "600" }}>
+                                        <Nav id="nav-container" variant="tabs" activeKey={this.state.caseType} onSelect={this.onSelectAddress} style={{ fontSize: "13px", fontWeight: "600" }}>
                                             <Nav.Item id="nav-item">
-                                                <Nav.Link href="#home">Home ({this.state.data['home_data'].length})</Nav.Link>
+                                                <Nav.Link eventKey={"home"}>Home ({this.state.data['home_data'].length})</Nav.Link>
                                             </Nav.Item>
                                             <Nav.Item id="nav-item">
-                                                <Nav.Link href="#work">Work ({this.state.data['work_data'].length})</Nav.Link>
+                                                <Nav.Link eventKey={"work"}>Work ({this.state.data['work_data'].length})</Nav.Link>
                                             </Nav.Item>
                                         </Nav>
                                     </Col>
