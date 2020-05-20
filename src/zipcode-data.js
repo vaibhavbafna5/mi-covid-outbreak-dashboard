@@ -287,7 +287,7 @@ export default class ZipCodeDataPanel extends Component {
     render() {
 
         return (
-            <div style={{ width: "600px" }}>
+            <div style={{ width: "550px" }}>
                 {/* <Card>
                     <Card.Header id="overview-container-header">
                         <Row>
@@ -305,7 +305,7 @@ export default class ZipCodeDataPanel extends Component {
                     <Card.Footer id="overview-container-footer" className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
                 </Card> */}
                 {this.state.zipCodeDataExists ?
-                    (<div style={{width: "478px"}}>
+                    (<div style={{ width: "550px" }}>
                         <Card>
                             <Card.Header id="address-container-header">
                                 <h3 style={{ color: "white", }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Reported Addresses in {this.state.zipCode}</b></h3>
@@ -340,20 +340,20 @@ export default class ZipCodeDataPanel extends Component {
                                 {this.state.caseData.map((item, index) => (
                                     <Card id="address-card" variant="flush">
                                         {/* style={{ backgroundColor: this.state.addressRow.backgroundColor }}  */}
-                                        <Accordion.Toggle onMouseLeave={() => { this.onAddressUnhover(index) }} onMouseEnter={() => { this.onAddressHover(index) }} style={{ backgroundColor: this.setBackgroundColor(index) }} onClick={() => { this.onAddressToggle(index) }} id="address-accordion-toggle" as={Card.Header} eventKey={index}>
+                                        <Accordion.Toggle onMouseLeave={() => { this.onAddressUnhover(index) }} onMouseEnter={() => { this.onAddressHover(index) }} style={{ backgroundColor: this.setBackgroundColor(index), }} onClick={() => { this.onAddressToggle(index) }} id="address-accordion-toggle" as={Card.Header} eventKey={index}>
                                             <Row >
                                                 <Col>
-                                                    <div style={{ width: "325px", }}>
+                                                    <div style={{ width: "300px", }}>
                                                         {item['address'].slice(0, item['address'].lastIndexOf(","))}
                                                     </div>
                                                 </Col>
                                                 <Col >
-                                                    <div style={{ width: "125px", }}>
+                                                    <div style={{ width: "100px", }}>
                                                         {item['num_reports']} reports
                                                     </div>
                                                 </Col>
                                                 <Col>
-                                                    <div>
+                                                    <div style={{ width: "25px" }}>
                                                         <img className="address-expand-icon" src={this.setAddressArrow(index)}></img>
                                                     </div>
                                                 </Col>
@@ -368,7 +368,7 @@ export default class ZipCodeDataPanel extends Component {
                                                             <Accordion.Toggle id="report-accordion-toggle" onMouseLeave={() => { this.onReportUnhover(ind) }} onMouseEnter={() => { this.onReportHover(ind) }} as={Card.Header} eventKey={ind} onClick={() => { this.onReportToggle(ind) }}>
                                                                 <Row>
                                                                     <Col>
-                                                                        <div style={{ width: "325px" }}>
+                                                                        <div style={{ width: "275px" }}>
                                                                             {case_datum['name']} - {case_datum['age']}, {case_datum['gender']}
                                                                         </div>
                                                                     </Col>
