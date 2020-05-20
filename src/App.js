@@ -141,7 +141,7 @@ export default class App extends Component {
                 </Navbar>
                 <Container style={{ marginTop: "30px" }}>
                     <Row>
-                        <Col>
+                        <Col style={{ maxWidth: "524px" }}>
                             <Row style={{ maxHeight: "40px" }}>
                                 <Col className="no-gutters" style={{ maxHeight: "40px" }}>
                                     <Autocomplete onZipCodeChange={this.onZipCodeChange} zipCode={this.state.zipCode} />
@@ -167,21 +167,23 @@ export default class App extends Component {
                                     </Form>
                                 </Col>
                             </Row>
-                            {/* <ZipCodeOverviewContainer zipCode={this.state.zipCode} /> */}
-                            <Chart showWeeklyData={this.state.showWeeklyData} weeklyData={this.state.weeklyData} cumulativeData={this.state.cumulativeData} />
-                            {/* <div style={{ marginTop: "24px", }}>
+                            <Row>
+                                <ZipCodeOverviewContainer zipCode={this.state.zipCode} />
+                            </Row>
+                            <Row>
+                                <Chart showWeeklyData={this.state.showWeeklyData} weeklyData={this.state.weeklyData} cumulativeData={this.state.cumulativeData} />
+                            </Row>
+                        </Col>
+                        <Col style={{ maxWidth: "478px", marginLeft: "50px" }} class="no-gutters">
+                            <Row class="no-gutters" style={{ top: "0" }}>
+                                <ZipCodeDataPanel zipCode={this.state.zipCode} style={{ minWidth: "550px", top: "0" }} class="no-gutters" />
+                            </Row>
+                        </Col>
+                        {/* <div style={{ marginTop: "24px", }}>
                                 <MichiganMap />
                             </div> */}
-                        </Col>
-                        <Col>
-                            <ZipCodeDataPanel zipCode={this.state.zipCode} />
-                        </Col>
                     </Row>
                 </Container>
-                {/* <Autocomplete onZipCodeChange={this.onZipCodeChange} />
-                <Chart weeklyData={this.state.weeklyData} cumulativeData={this.state.cumulativeData} />
-                <MichiganMap />
-                <ZipCodeDataPanel zipCode={this.state.zipCode} /> */}
             </>
         )
     }

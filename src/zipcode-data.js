@@ -45,6 +45,7 @@ export default class ZipCodeDataPanel extends Component {
             zipCode: "",
             data: {},
             caseData: {},
+            caseType: "home",
             addressRow: {
                 expanded: false,
                 backgroundColor: "#FFFFFF",
@@ -65,6 +66,7 @@ export default class ZipCodeDataPanel extends Component {
         axios.get(REPORT_DATA_ENDPOINT, {
             params: {
                 'area': 'statewide',
+                'filter_type': 'all',
             }
         })
             // get state level report data 
@@ -83,14 +85,15 @@ export default class ZipCodeDataPanel extends Component {
             axios.get(REPORT_DATA_ENDPOINT, {
                 params: {
                     'area': newZipCode,
+                    'filter_type': 'all',
                 }
             }).then((response) => {
-                console.log("zipcode data here", response.data)
                 this.setState({
                     zipCodeDataExists: true,
                     zipCode: newZipCode,
                     data: response.data,
                     caseData: response.data['home_data'],
+                    caseType: "home",
                 })
             }).catch((e) => {
                 console.log("error", e);
@@ -100,6 +103,7 @@ export default class ZipCodeDataPanel extends Component {
             axios.get(REPORT_DATA_ENDPOINT, {
                 params: {
                     'area': 'statewide',
+                    'filter_type': 'all',
                 }
             }).then((response) => {
                 this.setState({
@@ -114,15 +118,21 @@ export default class ZipCodeDataPanel extends Component {
         }
     }
 
-    onSelectAddress = (selectedAddress) => {
-        var caseData = this.state.data['home_data']
-        if (selectedAddress == "#work") {
-            caseData = this.state.data['work_data']
+    onSelectAddress = (eventKey) => {
+        console.log("selected addy --> ", eventKey)
+        if (eventKey == "work") {
+            var workData = this.state.data['work_data']
+            this.setState({
+                caseData: workData,
+                caseType: "work"
+            })
+        } else {
+            var homeData = this.state.data['home_data']
+            this.setState({
+                caseData: homeData,
+                caseType: "home"
+            })
         }
-
-        this.setState({
-            caseData: caseData,
-        })
     }
 
     onAddressToggle(position) {
@@ -152,15 +162,6 @@ export default class ZipCodeDataPanel extends Component {
         } else {
             this.state.activeReports[position] = false
         }
-
-        // console.log("report clicked - ", position)
-        // if (this.state.reportActive == position) {
-        //     this.setState({
-        //         reportActive: null,
-        //     })
-        // } else {
-        //     this.setState({ reportActive: position })
-        // }
     }
 
     onReportHover(position) {
@@ -176,11 +177,6 @@ export default class ZipCodeDataPanel extends Component {
     }
 
     setReportArrow(position) {
-
-        // if (this.state.reportActive == position) {
-        //     return SelectedArrow;
-        // }
-        // return UnselectedArrow;
 
         /* 
     if this.state.activeReports[pos] == false && this.state.reportHoverPosition == null
@@ -242,6 +238,26 @@ export default class ZipCodeDataPanel extends Component {
         this.setState({
             filter: eventKey,
         })
+
+        console.log("eventKey on filter --> ", eventKey);
+
+        axios.get(REPORT_DATA_ENDPOINT, {
+            params: {
+                'area': this.state.zipCode,
+                'filter_type': eventKey,
+            }
+        }).then((response) => {
+            var caseData;
+            if (this.state.caseType == "home") {
+                caseData = response.data['home_data']
+            } else {
+                caseData = response.data['work_data']
+            }
+            this.setState({
+                data: response.data,
+                caseData: caseData,
+            })
+        })
     }
 
     onFilterHover() {
@@ -266,15 +282,16 @@ export default class ZipCodeDataPanel extends Component {
     setFilterIcon() {
         if (this.state.filterHover == true) {
             return FilterIconHovered
+        } else {
+            return FilterIconUnhovered
         }
-        return FilterIconUnhovered
     }
 
     render() {
 
         return (
-            <div style={{ width: "600px" }}>
-                <Card>
+            <div>
+                {/* <Card>
                     <Card.Header id="overview-container-header">
                         <Row>
                             <Col>
@@ -289,20 +306,20 @@ export default class ZipCodeDataPanel extends Component {
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer id="overview-container-footer" className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
-                </Card>
+                </Card> */}
                 {this.state.zipCodeDataExists ?
-                    (<div>
-                        <Card style={{ marginTop: "36px" }}>
+                    (<div style={{ width: "550px" }}>
+                        <Card>
                             <Card.Header id="address-container-header">
-                                <h3 style={{ color: "white", }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Addresses</b></h3>
-                                <Row style={{ height: "24px" }}>
-                                    <Col >
-                                        <Nav id="nav-container" variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress}>
+                                <h3 style={{ color: "white", fontSize: "20px", marginTop: "0" }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Reported Addresses in {this.state.zipCode}</b></h3>
+                                <Row style={{ height: "24px", marginTop: "0px" }}>
+                                    <Col>
+                                        <Nav id="nav-container" variant="tabs" activeKey={this.state.caseType} onSelect={this.onSelectAddress} style={{ fontSize: "13px", fontWeight: "600" }}>
                                             <Nav.Item id="nav-item">
-                                                <Nav.Link href="#home"><b>Home ({this.state.data['home_data'].length})</b></Nav.Link>
+                                                <Nav.Link eventKey={"home"}>Home ({this.state.data['home_data'].length})</Nav.Link>
                                             </Nav.Item>
                                             <Nav.Item id="nav-item">
-                                                <Nav.Link href="#work"><b>Work ({this.state.data['work_data'].length})</b></Nav.Link>
+                                                <Nav.Link eventKey={"work"}>Work ({this.state.data['work_data'].length})</Nav.Link>
                                             </Nav.Item>
                                         </Nav>
                                     </Col>
@@ -313,7 +330,7 @@ export default class ZipCodeDataPanel extends Component {
                                                     <img style={{ paddingBottom: "2px" }} src={this.setFilterIcon()}></img>{this.state.filter}
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
-                                                    <Dropdown.Item eventKey="All" >{this.state.filter == "All" || this.state.filter == "Filter" ? (<b>All</b>) : "All"}</Dropdown.Item>
+                                                    <Dropdown.Item eventKey="All" >{this.state.filter === "All" || this.state.filter == "Filter" ? (<b>All</b>) : "All"}</Dropdown.Item>
                                                     <Dropdown.Item eventKey="COVID-Like" >{this.state.filter == "COVID-Like" ? (<b>COVID-Like</b>) : ("COVID-Like")}</Dropdown.Item>
                                                     <Dropdown.Item eventKey="COVID-Positive" >{this.state.filter == "COVID-Positive" ? (<b>COVID-Positive</b>) : ("COVID-Positive")}</Dropdown.Item>
                                                 </Dropdown.Menu>
@@ -326,20 +343,20 @@ export default class ZipCodeDataPanel extends Component {
                                 {this.state.caseData.map((item, index) => (
                                     <Card id="address-card" variant="flush">
                                         {/* style={{ backgroundColor: this.state.addressRow.backgroundColor }}  */}
-                                        <Accordion.Toggle onMouseLeave={() => { this.onAddressUnhover(index) }} onMouseEnter={() => { this.onAddressHover(index) }} style={{ backgroundColor: this.setBackgroundColor(index) }} onClick={() => { this.onAddressToggle(index) }} id="address-accordion-toggle" as={Card.Header} eventKey={index}>
+                                        <Accordion.Toggle onMouseLeave={() => { this.onAddressUnhover(index) }} onMouseEnter={() => { this.onAddressHover(index) }} style={{ backgroundColor: this.setBackgroundColor(index), }} onClick={() => { this.onAddressToggle(index) }} id="address-accordion-toggle" as={Card.Header} eventKey={index}>
                                             <Row >
                                                 <Col>
-                                                    <div style={{ width: "325px", }}>
+                                                    <div style={{ width: "300px", }}>
                                                         {item['address'].slice(0, item['address'].lastIndexOf(","))}
                                                     </div>
                                                 </Col>
                                                 <Col >
-                                                    <div style={{ width: "125px", }}>
+                                                    <div style={{ width: "100px", }}>
                                                         {item['num_reports']} reports
                                                     </div>
                                                 </Col>
                                                 <Col>
-                                                    <div>
+                                                    <div style={{ width: "25px" }}>
                                                         <img className="address-expand-icon" src={this.setAddressArrow(index)}></img>
                                                     </div>
                                                 </Col>
@@ -354,7 +371,7 @@ export default class ZipCodeDataPanel extends Component {
                                                             <Accordion.Toggle id="report-accordion-toggle" onMouseLeave={() => { this.onReportUnhover(ind) }} onMouseEnter={() => { this.onReportHover(ind) }} as={Card.Header} eventKey={ind} onClick={() => { this.onReportToggle(ind) }}>
                                                                 <Row>
                                                                     <Col>
-                                                                        <div style={{ width: "325px" }}>
+                                                                        <div style={{ width: "275px" }}>
                                                                             {case_datum['name']} - {case_datum['age']}, {case_datum['gender']}
                                                                         </div>
                                                                     </Col>
