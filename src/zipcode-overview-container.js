@@ -72,22 +72,24 @@ export default class ZipCodeOverviewContainer extends Component {
 
     render() {
         return (
-            <div style={{ width: "400px" }}>
-                <Card>
+            <div style={{ minWidth: "524px", marginTop: "30px", zIndex:"-1"}}>
+                <Card id="overview-container">
                     <Card.Header id="overview-container-header">
                         <Row>
-                            <Col>
-                                {this.state.zipCode == "" ? (<h2>Statewide</h2>) : (<h2>{this.state.zipCode}</h2>)}
-                                <h4 style={{ color: "white", }}><b>{this.state.data['total_responses']} MiSymptoms Users | {this.state.data['date_range']}</b></h4>
+                            <Col className="no-gutters">
+                                <div>
+                                    <div className="center-text" style={{display:"inline-block", marginLeft:"10px"}}>{this.state.zipCode == "" ? (<h1>Statewide</h1>) : (<h1>{this.state.zipCode}</h1>)}</div>
+                                    <div style={{ paddingLeft:"12px", display:"inline-block",}}><h4>{this.state.data['total_responses']} Users<span style={{marginLeft:"8px", marginRight:"8px"}}><div className="overview-header-divider"></div></span>{this.state.data['date_range']}</h4></div>
+                                </div>
                             </Col>
                         </Row>
                     </Card.Header>
-                    <Card.Body id="overview-container-body">
-                        <Card.Text>
-                            <h3>{this.state.data['symptomatic_cases']} COVID-like reports  <b style={{ opacity: "0.25" }}>|</b>  {this.state.data['confirmed_cases']} COVID-positive reports</h3>
+                    <Card.Body id="overview-container-body" className="no-gutters">
+                        <Card.Text style={{marginLeft:"14px"}}>
+                            <h3 style={{marginTop:"12px"}}>{this.state.data['symptomatic_cases']} COVID-Like reports<span style={{ marginLeft:"8px", marginRight:"8px"}}><div className="overview-body-divider"></div></span>{this.state.data['confirmed_cases']} COVID-Positive reports</h3>
+                            <h5 class="medium" style={{color: "#51646D", marginTop:"-2px"}}>Data last updated on {this.state.data['last_updated']}</h5>
                         </Card.Text>
                     </Card.Body>
-                    <Card.Footer id="overview-container-footer" className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
                 </Card>
             </div>
         )

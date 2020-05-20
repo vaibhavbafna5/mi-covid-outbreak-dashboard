@@ -288,7 +288,7 @@ export default class ZipCodeDataPanel extends Component {
 
         return (
             <div style={{ width: "600px" }}>
-                <Card>
+                {/* <Card>
                     <Card.Header id="overview-container-header">
                         <Row>
                             <Col>
@@ -303,10 +303,10 @@ export default class ZipCodeDataPanel extends Component {
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer id="overview-container-footer" className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
-                </Card>
+                </Card> */}
                 {this.state.zipCodeDataExists ?
-                    (<div>
-                        <Card style={{ marginTop: "36px" }}>
+                    (<div style={{width: "478px"}}>
+                        <Card>
                             <Card.Header id="address-container-header">
                                 <h3 style={{ color: "white", }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Addresses</b></h3>
                                 <Row style={{ height: "24px" }}>
