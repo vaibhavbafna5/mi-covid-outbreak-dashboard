@@ -78,7 +78,7 @@ export default class ZipCodeOverviewContainer extends Component {
                         <Row>
                             <Col className="no-gutters">
                                 <div>
-                                    <div className="center-text" style={{display:"inline-block", marginLeft:"10px"}}>{this.state.zipCode == "" ? (<h1>Statewide</h1>) : (<h1>{this.state.zipCode}</h1>)}</div>
+                                    <div style={{display:"inline-block", marginLeft:"10px"}}>{this.state.zipCode == "" ? (<h1>Statewide</h1>) : (<h1>{this.state.zipCode}</h1>)}</div>
                                     <div style={{ paddingLeft:"12px", display:"inline-block",}}><h4>{this.state.data['total_responses']} Users<span style={{marginLeft:"8px", marginRight:"8px"}}><div className="overview-header-divider"></div></span>{this.state.data['date_range']}</h4></div>
                                 </div>
                             </Col>

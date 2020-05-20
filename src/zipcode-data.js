@@ -287,7 +287,7 @@ export default class ZipCodeDataPanel extends Component {
     render() {
 
         return (
-            <div style={{ width: "600px" }}>
+            <div>
                 {/* <Card>
                     <Card.Header id="overview-container-header">
                         <Row>
@@ -308,15 +308,15 @@ export default class ZipCodeDataPanel extends Component {
                     (<div style={{width: "478px"}}>
                         <Card>
                             <Card.Header id="address-container-header">
-                                <h3 style={{ color: "white", }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Reported Addresses in {this.state.zipCode}</b></h3>
-                                <Row style={{ height: "24px" }}>
-                                    <Col >
-                                        <Nav id="nav-container" variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress}>
+                                <h3 style={{ color: "white", fontSize:"20px", marginTop: "0"}} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Reported Addresses in {this.state.zipCode}</b></h3>
+                                <Row style={{ height: "24px", marginTop:"0px" }}>
+                                    <Col>
+                                        <Nav id="nav-container" variant="tabs" defaultActiveKey="#home" onSelect={this.onSelectAddress} style={{fontSize:"13px", fontWeight: "600" }}>
                                             <Nav.Item id="nav-item">
-                                                <Nav.Link href="#home"><b>Home ({this.state.data['home_data'].length})</b></Nav.Link>
+                                                <Nav.Link href="#home">Home ({this.state.data['home_data'].length})</Nav.Link>
                                             </Nav.Item>
                                             <Nav.Item id="nav-item">
-                                                <Nav.Link href="#work"><b>Work ({this.state.data['work_data'].length})</b></Nav.Link>
+                                                <Nav.Link href="#work">Work ({this.state.data['work_data'].length})</Nav.Link>
                                             </Nav.Item>
                                         </Nav>
                                     </Col>
