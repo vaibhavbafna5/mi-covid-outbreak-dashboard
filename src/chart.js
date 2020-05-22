@@ -59,22 +59,22 @@ export default class Chart extends Component {
         this.setState({
             weeklyData: [
                 {
-                    "name": "Covid Positive Cases",
-                    "data": newProps.weeklyData["covid_positive_cases"],
+                    "name": "Covid-Like Reports",
+                    "data": newProps.weeklyData["symptomatic_responses"]
                 },
                 {
-                    "name": "Symptomatic Responses",
-                    "data": newProps.weeklyData["symptomatic_responses"],
+                    "name": "Covid-Positive Reports",
+                    "data": newProps.weeklyData["covid_positive_cases"],
                 }
             ],
             cumulativeData: [
                 {
-                    "name": "Covid Positive Cases",
-                    "data": newProps.cumulativeData["covid_positive_cases"],
+                    "name": "Covid-Like Reports",
+                    "data": newProps.cumulativeData["symptomatic_responses"],
                 },
                 {
-                    "name": "Symptomatic Responses",
-                    "data": newProps.cumulativeData["symptomatic_responses"],
+                    "name": "Covid-Positive Reports",
+                    "data": newProps.cumulativeData["covid_positive_cases"],
                 }
             ],
             showWeeklyData: newProps.showWeeklyData,
@@ -86,9 +86,9 @@ export default class Chart extends Component {
             <div style={{ marginTop: "45px" }}>
                 {this.state.showWeeklyData ?
                     (
-                        <LineChart colors={["#B80000", "#8573BC"]} width="524px" height="200px" legend={"bottom"} data={this.state.weeklyData} />
+                        <LineChart colors={["#8573BC", "#B80000"]} width="524px" height="200px" legend={"bottom"} data={this.state.weeklyData} />
                     ) : (
-                        <LineChart colors={["#B80000", "#8573BC"]} width="524px" height="200px" legend={"bottom"} data={this.state.cumulativeData} />
+                        <LineChart colors={["#8573BC","#B80000"]} width="524px" height="200px" legend={"bottom"} data={this.state.cumulativeData} />
                     )
                 }
             </div>

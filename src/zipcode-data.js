@@ -56,7 +56,7 @@ export default class ZipCodeDataPanel extends Component {
             addressHoverPosition: null,
             reportHoverPosition: null,
             activeReports: {},
-            filter: "Filter",
+            filter: "All",
             filterHover: false,
         }
     }
@@ -309,11 +309,11 @@ export default class ZipCodeDataPanel extends Component {
                     <Card.Footer id="overview-container-footer" className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
                 </Card> */}
                 {this.state.zipCodeDataExists ?
-                    (<div style={{ width: "550px" }}>
-                        <Card>
+                    (<div style={{ width: "550px"}}>
+                        <Card style={{border: "none"}}>
                             <Card.Header id="address-container-header">
                                 <h3 style={{ color: "white", fontSize: "20px", marginTop: "0" }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Reported Addresses in {this.state.zipCode}</b></h3>
-                                <Row style={{ marginTop: "0px" }}>
+                                <Row style={{ marginTop: "0px"}}>
                                     <Col>
                                         <Nav activeKey={this.state.caseType} onSelect={this.onSelectAddress} style={{ fontSize: "13px", fontWeight: "600"}}>
                                             <Nav.Item id="nav-item" style={{marginRight:"24px"}}>
@@ -326,15 +326,17 @@ export default class ZipCodeDataPanel extends Component {
                                         </Nav>
                                     </Col>
                                     <Col>
-                                        <div style={{ float: "right", marginRight: "18px" }}>
-                                            <Dropdown alignRight id="filter-dropdown" onSelect={this.onFilterSelect.bind(this)}>
-                                                <Dropdown.Toggle onMouseLeave={() => this.onFilterUnhover()} onMouseEnter={() => this.onFilterHover()} style={{ color: this.setFilterColor(), border: "#008EC6", backgroundColor: "#008EC6", }}>
+                                        <div style={{ float: "right", marginRight: "-16px"}}>
+                                            <Dropdown alignRight id="filter-dropdown" onSelect={this.onFilterSelect.bind(this)} style={{ marginTop: "-10px"}}>
+                                                <Dropdown.Toggle onMouseLeave={() => this.onFilterUnhover()} onMouseEnter={() => this.onFilterHover()} style={{ color: this.setFilterColor(), border: "#008EC6", fontSize:"13px", fontWeight: "600"}}>
                                                     <img style={{ paddingBottom: "2px" }} src={this.setFilterIcon()}></img>{this.state.filter}
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
-                                                    <Dropdown.Item eventKey="All" >{this.state.filter === "All" || this.state.filter == "Filter" ? (<b>All</b>) : "All"}</Dropdown.Item>
-                                                    <Dropdown.Item eventKey="COVID-Like" >{this.state.filter == "COVID-Like" ? (<b>COVID-Like</b>) : ("COVID-Like")}</Dropdown.Item>
-                                                    <Dropdown.Item eventKey="COVID-Positive" >{this.state.filter == "COVID-Positive" ? (<b>COVID-Positive</b>) : ("COVID-Positive")}</Dropdown.Item>
+                                                    <Dropdown.Item className="no-gutters" eventKey="All" >{this.state.filter === "All" ? (<h5 className="medium, current-dropdown-item">All</h5>) : (<h5 className="regular">All</h5>)}</Dropdown.Item>
+                                                    <div className="dropdown-divider"></div>
+                                                    <Dropdown.Item className="no-gutters" eventKey="COVID-Like" >{this.state.filter == "COVID-Like" ? (<h5 className="medium, current-dropdown-item">COVID-Like</h5>) : (<h5 className="regular">COVID-Like</h5>)}</Dropdown.Item>
+                                                    <div className="dropdown-divider"></div>
+                                                    <Dropdown.Item className="no-gutters" eventKey="COVID-Positive" >{this.state.filter == "COVID-Positive" ? (<h5 className="medium, current-dropdown-item">COVID-Positive</h5>) : (<h5 className="regular">COVID-Positive</h5>)}</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                         </div>

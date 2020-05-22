@@ -2,6 +2,9 @@
     background-color: var(--light-blue);
     color: var(--white);
     height: 72px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: none;
 }
 
 #address-container-header-text {
@@ -37,12 +40,18 @@
     height: 21px !important;
 }
 
+#bootstrap-overrides .nav-link:not(.active):hover {
+    color: #CBE4EC;
+}
+
 #bootstrap-overrides .nav-link.active {
-    /* text-decoration: underline; */
     background-color: none;
-    /* border: none; */
     border-bottom: 2px solid var(--white);
     color: var(--white);
+}
+
+#bootstrap-overrides .nav-item:hover {
+    color: #CBE4EC
 }
 
 #bootstrap-overrides .btn-primary.dropdown-toggle:focus {
@@ -53,16 +62,54 @@
     list-style-type: circle;
 }
 
+#bootstrap-overrides .dropdown-item {
+    color: var(--sixty-percent-gray);
+}
+
 #bootstrap-overrides .dropdown-item:active {
     background-color: var(--light-blue-ten-percent) !important;
+    color: var(--black);
 }
 
 #bootstrap-overrides .dropdown-item:hover {
     background-color: var(--light-blue-five-percent);
+    color: var(--eighty-percent-gray);
 }
 
-#bootstrap-overrides .dropdown-item {
+/* .current-dropdown-item {
+    background-color: var(--light-blue-ten-percent) !important;
+} */
+
+#bootstrap-overrides .dropdown-menu {
+    margin-top: 12px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    border: none;
+}
+
+#bootstrap-overrides .dropdown-divider {
+    border: none;
+    height: 1px;
+    background-color: var(--thirty-percent-gray);
+    margin-top: 0px;
+    margin-bottom: 0px;
+    /* width: 136px;
+    margin-left: 12px */
+}
+
+#bootstrap-overrides .dropdown-item h5 {
+    padding-left: 12px;
+    line-height: 36px;
+}
+
+.current-dropdown-item {
     color: var(--black);
+    font-weight: 500 !important;
+    background-color: var(--light-blue-ten-percent);
+}
+
+.dropdown-toggle {
+    background-color: transparent !important;
+    height: 16px;
 }
 
 #address-accordion-toggle {
@@ -78,12 +125,14 @@
 }
 
 #address-accordion {
-    border: none;
+    border: 1;
+    border-radius: 0;
 }
 
 #address-card {
-    border: none;
-    border-top: 1px solid rgba(0,0,0,.125);
+    /* border: none; */
+    /* border-top: 1px solid rgba(0,0,0,.125); */
+    border-radius: 0;
 }
 
 #address-card-body {
@@ -94,6 +143,7 @@
     background-color: var(--white);
     border: none;
     border-top: 1px solid rgba(0,0,0,.125);
+    border-radius: 0;
 }
 
 #report-card-body {
