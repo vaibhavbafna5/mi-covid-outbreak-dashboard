@@ -110,7 +110,7 @@ export default class App extends Component {
                     cumulativeData: res.data['chart_data']['cumulative_data'],
                     weeklyData: res.data['chart_data']['weekly_data']
                 })
-                console.log("merp this fuckin error", this.state)
+                console.log("merp this f***in error", this.state)
             })
         // make an api request to get zipcode level data
         // reset cumulative/weekly data
