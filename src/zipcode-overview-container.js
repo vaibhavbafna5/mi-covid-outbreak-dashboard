@@ -82,15 +82,15 @@ export default class ZipCodeOverviewContainer extends Component {
                             <Col className="no-gutters">
                                 <div>
                                     <div style={{display:"inline-block", marginLeft:"10px"}}>{this.state.zipCode == "" ? (<h1>Statewide</h1>) : (<h1>{this.state.zipCode}</h1>)}</div>
-                                    <div style={{ paddingLeft:"12px", display:"inline-block",}}><h4>{this.state.data['total_responses']} Users<span style={{marginLeft:"8px", marginRight:"8px"}}><div className="overview-header-divider"></div></span>{this.state.data['date_range']}</h4></div>
+                                    {/* <div style={{ paddingLeft:"12px", display:"inline-block",}}><h4>{this.state.data['total_responses']} Users<span style={{marginLeft:"8px", marginRight:"8px"}}><div className="overview-header-divider"></div></span>{this.state.data['date_range']}</h4></div> */}
                                 </div>
                             </Col>
                         </Row>
                     </Card.Header>
                     <Card.Body id="overview-container-body" className="no-gutters">
                         <Card.Text style={{ marginLeft: "14px" }}>
-                            <h3 style={{ marginTop: "12px" }}>{this.state.data['symptomatic_cases']} COVID-Like reports<span style={{ marginLeft: "8px", marginRight: "8px" }}><div className="overview-body-divider"></div></span>{this.state.data['confirmed_cases']} COVID-Positive reports</h3>
-                            <h5 class="medium" style={{ color: "#51646D", marginTop: "-2px" }}>Data last updated on {this.state.data['last_updated']}</h5>
+                            <h3 style={{ marginTop: "13px"}}>{this.state.data['symptomatic_cases']} COVID-Like reports<span style={{ marginLeft: "8px", marginRight: "8px" }}><div className="overview-summary-divider"></div></span>{this.state.data['confirmed_cases']} COVID-Positive reports</h3>
+                            <h5 class="medium" style={{ color: "#51646D", marginTop: "-1px"}}>{this.state.data['date_range']}<span style={{marginLeft:"8px", marginRight:"8px"}}><div className="overview-dates-divider"></div></span>Data last updated on {this.state.data['last_updated']}</h5>
                         </Card.Text>
                     </Card.Body>
                 </Card>

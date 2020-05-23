@@ -48,7 +48,7 @@ body {
 
 /* address name */
 #bootstrap-overrides h3 {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
   color: var(--black);
 }
@@ -84,12 +84,12 @@ body {
   font-weight: 500;
 }
 
-#bootstrap-overrides li:not(:first-child) {
+#bootstrap-overrides .popover li:not(:first-child) {
   margin-top: 8px;
 
 }
 
-#bootstrap-overrides li {
+#bootstrap-overrides .popover li {
   line-height: 25px;
   font-size: 14px;
 }
@@ -117,6 +117,10 @@ body {
 /* update h5 for top banner subheader */
 .white {
   color: var(--white);
+}
+
+.black {
+  color: var(--black) !important;
 }
 
 /* update h4 for phone number & update h5 for text that follows bulleted list label 

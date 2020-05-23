@@ -216,6 +216,13 @@ export default class ZipCodeDataPanel extends Component {
         return "#FFFFFF";
     }
 
+    setNumOfReportsBackgroundColor(position) {
+        if (this.state.active == position) {
+            return "#FFFFFF";
+        }
+        return "#E5F4F9";
+    }
+
     setAddressArrow(position) {
 
         // item is not selected
@@ -347,23 +354,21 @@ export default class ZipCodeDataPanel extends Component {
                                 {this.state.caseData.map((item, index) => (
                                     <Card id="address-card" variant="flush">
                                         {/* style={{ backgroundColor: this.state.addressRow.backgroundColor }}  */}
-                                        <Accordion.Toggle onMouseLeave={() => { this.onAddressUnhover(index) }} onMouseEnter={() => { this.onAddressHover(index) }} style={{ backgroundColor: this.setBackgroundColor(index), }} onClick={() => { this.onAddressToggle(index) }} id="address-accordion-toggle" as={Card.Header} eventKey={index}>
-                                            <Row >
-                                                <Col>
-                                                    <div style={{ width: "300px", }}>
+                                        <Accordion.Toggle onMouseLeave={() => { this.onAddressUnhover(index) }} onMouseEnter={() => { this.onAddressHover(index) }} style={{ backgroundColor: this.setBackgroundColor(index), }} onClick={() => { this.onAddressToggle(index) }} id="address-accordion-toggle" as={Card.Header} eventKey={index} className="no-gutters">
+                                            <Row className="address-row">
+                                                {/* <Col> */}
+                                                    <h3 style={{ marginLeft:"32px", lineHeight: "53px", width: "450px", display: "inline-block"}}>
                                                         {item['address'].slice(0, item['address'].lastIndexOf(","))}
+                                                    </h3>
+                                                {/* </Col> */}
+                                                {/* <Col className="no-gutters"> */}
+                                                    <h4 style={{color:"#008EC6", backgroundColor: this.setNumOfReportsBackgroundColor(index), width: "23px", height:"23px", lineHeight: "23px", lineWidth: "23px", borderRadius: "12px", textAlign: "center", marginTop:"15px", marginLeft:"3px", display: "inline-block"}}>{item['num_reports']}</h4>
+                                                {/* </Col> */}
+                                                {/* <Col className="no-gutters" style={{backgroundColor:"purple"}}> */}
+                                                    <div style={{ lineHeight: "53px", width: "28px", position:"absolute", right: "0", marginRight:"9px" }}>
+                                                        <img className="address-expand-icon" stle src={this.setAddressArrow(index)}></img>
                                                     </div>
-                                                </Col>
-                                                <Col >
-                                                    <div style={{ width: "100px", }}>
-                                                        {item['num_reports']} reports
-                                                    </div>
-                                                </Col>
-                                                <Col>
-                                                    <div style={{ width: "25px" }}>
-                                                        <img className="address-expand-icon" src={this.setAddressArrow(index)}></img>
-                                                    </div>
-                                                </Col>
+                                                {/* </Col> */}
                                             </Row>
                                         </Accordion.Toggle>
                                         <Accordion.Collapse id="address-accordion-collapser" eventKey={index}>
@@ -372,26 +377,20 @@ export default class ZipCodeDataPanel extends Component {
                                                     <Accordion>
                                                         <Card id="report-card">
                                                             {this.state.activeReports[ind] = false}
-                                                            <Accordion.Toggle id="report-accordion-toggle" onMouseLeave={() => { this.onReportUnhover(ind) }} onMouseEnter={() => { this.onReportHover(ind) }} as={Card.Header} eventKey={ind} onClick={() => { this.onReportToggle(ind) }}>
-                                                                <Row>
-                                                                    <Col>
-                                                                        <div style={{ width: "275px" }}>
+                                                            <Accordion.Toggle className="no-gutters" id="report-accordion-toggle" onMouseLeave={() => { this.onReportUnhover(ind) }} onMouseEnter={() => { this.onReportHover(ind) }} as={Card.Header} eventKey={ind} onClick={() => { this.onReportToggle(ind) }}>
+                                                                <Row className="report-row">
+                                                                        <h4 className="black" style={{ width: "275px", display: "inline-block", marginTop:"12px", marginLeft:"31px", fontWeight:"500" }}>
                                                                             {case_datum['name']} - {case_datum['age']}, {case_datum['gender']}
-                                                                        </div>
-                                                                    </Col>
-                                                                    <Col >
-                                                                        <div style={{ width: "125px" }}>
+                                                                        </h4>
+                                                                        <h4 className="medium" style={{ width: "125px", display: "inline-block", marginTop:"12px", marginLeft:"78px", color:"#51646D", textAlign:"right"}}>
                                                                             {case_datum['phone_number']}
-                                                                        </div>
-                                                                    </Col>
-                                                                    <Col>
-                                                                        <div>
+                                                                        </h4>
+                                                                        <div style={{width:"28px", position: "absolute", right: "0", marginRight:"9px", lineHeight:"72px"}}>
                                                                             <img className="address-expand-icon" src={this.setReportArrow(ind)}></img>
                                                                         </div>
-                                                                    </Col>
                                                                 </Row>
                                                                 <Row>
-                                                                    <Col>
+                                                                    <Col style={{marginLeft:"16px"}}>
                                                                         {case_datum['flags']['tested'] === 'Negative' ? (
                                                                             <CovidNegativeBadge />
                                                                         ) : case_datum['flags']['tested'] === 'Awaiting Results' ? (
@@ -411,34 +410,34 @@ export default class ZipCodeDataPanel extends Component {
                                                                 </Row>
                                                             </Accordion.Toggle>
                                                             <Accordion.Collapse eventKey={ind}>
-                                                                <Card.Body id="report-card-body">
-                                                                    <hr></hr>
+                                                                <Card.Body id="report-card-body" className="no-gutters">
+                                                                    <div className="report-divider"></div>
                                                                     <ul>
-                                                                        <li><b>Reported</b> - {case_datum['reported']}</li>
-                                                                        <li><b>Temperature</b> - {case_datum['temperature']}</li>
-                                                                        <li><b>Symptoms</b> - {case_datum['symptoms']}</li>
-                                                                        <li><b>Covid+ Contact</b> - {case_datum['covid_contacted']}</li>
+                                                                        <li><span className="report-list-item-label">Reported:</span> {case_datum['reported']}</li>
+                                                                        <li><span className="report-list-item-label">Temperature:</span> {case_datum['temperature']}</li>
+                                                                        <li><span className="report-list-item-label">Symptoms:</span> {case_datum['symptoms']}</li>
+                                                                        <li><span className="report-list-item-label">Covid+ Contact:</span> {case_datum['covid_contacted']}</li>
                                                                         {
                                                                             case_datum['work_address'] == "" ? (
                                                                                 // <p>No work address reported</p>
                                                                                 <></>
                                                                             ) : (
-                                                                                    <li><b>Work address</b> - {case_datum['work_address']}</li>
+                                                                                    <li><span className="report-list-item-label">Work address:</span> {case_datum['work_address']}</li>
                                                                                 )
                                                                         }
                                                                         {
                                                                             case_datum['household_sick'] ? (
-                                                                                <li><b>Household Sick</b> - members in house are feeling unwell</li>
+                                                                                <li><span className="report-list-item-label">Household Sick:</span> members in house are feeling unwell</li>
                                                                             ) :
-                                                                                (<li><b>Household Sick</b> - members in house feel fine</li>)
+                                                                                (<li><span className="report-list-item-label">Household Sick:</span> members in house feel fine</li>)
                                                                         }
                                                                         {
                                                                             case_datum['flags']['symptomatic'] ? (
-                                                                                <li><b>Symptomatic</b> - yes, COVID-like illness reported</li>
+                                                                                <li><span className="report-list-item-label">Symptomatic:</span> yes, COVID-like illness reported</li>
                                                                             ) :
-                                                                                (<li><b>Symptomatic</b> - no symptoms of a COVID-like illness reported</li>)
+                                                                                (<li><span className="report-list-item-label">Symptomatic:</span> no symptoms of a COVID-like illness reported</li>)
                                                                         }
-                                                                        <li><b>Tested</b> - {case_datum['flags']['tested']}</li>
+                                                                        <li><span className="report-list-item-label">Tested:</span> {case_datum['flags']['tested']}</li>
                                                                     </ul>
                                                                 </Card.Body>
                                                             </Accordion.Collapse>

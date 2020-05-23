@@ -18,19 +18,28 @@
     border-color: var(--thirty-percent-gray);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    height: 69px;
+    height: 73px;
 }
 
-.overview-header-divider {
+.overview-dates-divider {
     width: 2px;
     height: 16px; 
-    background-color: var(--white);
+    background-color: var(--thirty-percent-gray);
     display: inline-block;
     vertical-align: middle;
     border-radius: 1px;
 }
 
-.overview-body-divider {
+/* .overview-body-divider {
+    width: 2px;
+    height: 23px;
+    background-color: var(--thirty-percent-gray);
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 1px;
+} */
+
+.overview-summary-divider {
     width: 2px;
     height: 23px;
     background-color: var(--thirty-percent-gray);
