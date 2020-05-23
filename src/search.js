@@ -75,7 +75,6 @@ class Autocomplete extends Component {
     onMouseDown = e => {
         const userInput = e.target.outerText;
         // Update the user input and reset the rest of the state
-        console.log(userInput);
         if (userInput == "Statewide View") {
             this.setState({
                 activeSuggestion: 0,
@@ -99,7 +98,6 @@ class Autocomplete extends Component {
 
     // Remove suggestions when user clicks off search field
     onBlur = e => {
-        console.log("hi")
         this.setState({
             showSuggestions: false,
         });
@@ -112,44 +110,11 @@ class Autocomplete extends Component {
         });
     }
 
-    // Event fired when the user presses a key down
-    onKeyDown = e => {
-        const { activeSuggestion, filteredSuggestions } = this.state;
-
-        // User pressed the enter key, update the input and close the
-        // suggestions
-        if (e.keyCode === 13) {
-            this.setState({
-                activeSuggestion: 0,
-                showSuggestions: false,
-                userInput: filteredSuggestions[activeSuggestion]
-            });
-            this.props.onZipCodeChange(this.state.userInput)
-        }
-        // User pressed the up arrow, decrement the index
-        else if (e.keyCode === 38) {
-            if (activeSuggestion === 0) {
-                return;
-            }
-
-            this.setState({ activeSuggestion: activeSuggestion - 1 });
-        }
-        // User pressed the down arrow, increment the index
-        else if (e.keyCode === 40) {
-            if (activeSuggestion - 1 === filteredSuggestions.length) {
-                return;
-            }
-
-            this.setState({ activeSuggestion: activeSuggestion + 1 });
-        }
-    };
-
     render() {
         const {
             onChange,
             onClick,
             onMouseDown,
-            onKeyDown,
             onBlur,
             onFocus,
             state: {
@@ -197,17 +162,17 @@ class Autocomplete extends Component {
                         })}
                     </ListGroup>
                 );
-            } 
+            }
 
             else if (userInput == this.props.zipCode) {
                 suggestionsListComponent = (
-                    <ListGroup.Item className="zipcode" style={{ width: "202px", color: "black", fontSize: "14px"}}
-                    action onMouseDown={onMouseDown}>
+                    <ListGroup.Item className="zipcode" style={{ width: "202px", color: "black", fontSize: "14px" }}
+                        action onMouseDown={onMouseDown}>
                         <div style={{ marginLeft: "19px" }}>Statewide View</div>
                     </ListGroup.Item>
                 );
             }
-            
+
             else {
                 suggestionsListComponent = (
                     <ListGroup.Item className="no-zipcode" style={{ width: "202px", fontSize: "14px", fontStyle: "italic", textAlign: "center" }}>
@@ -223,7 +188,7 @@ class Autocomplete extends Component {
             <Fragment>
                 {/* <Form style={{ width: "202px", borderWidth: "1px"}} inline="true"> */}
                 <Form style={{ width: "202px", borderWidth: "1px", borderTopLeftRadius: "5px" }}>
-                {/* <img onClick={onClick} src={SearchIcon} alt="Search Icon" /> */}
+                    {/* <img onClick={onClick} src={SearchIcon} alt="Search Icon" /> */}
                     <InputGroup>
                         <InputGroup.Prepend>
                             <InputGroup.Text style={{ backgroundColor: "white", border: "0", width: "41px" }}> <img src={SearchIcon} alt="Search Icon" /></InputGroup.Text>

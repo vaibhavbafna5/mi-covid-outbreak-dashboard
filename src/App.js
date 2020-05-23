@@ -16,6 +16,8 @@ import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
 import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Spinner from 'react-bootstrap/Spinner';
+
 import { CovidNegativeBadge, CovidPositiveBadge, AwaitingResultsBadge, CovidLikeBadge } from './badges'
 
 import questionMarkIcon from './icons/questionMarkIcon.svg';
@@ -60,6 +62,7 @@ export default class App extends Component {
             cumulativeData: [],
             weeklyData: [],
             showWeeklyData: true,
+            loading: true,
         }
 
         axios.get(CHART_DATA_ENDPOINT, {
@@ -69,7 +72,8 @@ export default class App extends Component {
         }).then((res) => {
             this.setState({
                 cumulativeData: res.data['chart_data']['cumulative_data'],
-                weeklyData: res.data['chart_data']['weekly_data']
+                weeklyData: res.data['chart_data']['weekly_data'],
+                loading: false,
             })
         }).catch((e) => {
             console.log("error", e);
@@ -84,7 +88,8 @@ export default class App extends Component {
         }).then((res) => {
             this.setState({
                 cumulativeData: res.data['chart_data']['cumulative_data'],
-                weeklyData: res.data['chart_data']['weekly_data']
+                weeklyData: res.data['chart_data']['weekly_data'],
+                loading: false,
             })
         }).catch((e) => {
             console.log("error", e);
@@ -96,7 +101,12 @@ export default class App extends Component {
             newZipCode = 'statewide'
         }
 
-        console.log(newZipCode);
+        this.setState({
+            zipCode: newZipCode,
+            loading: true,
+        })
+
+        console.log("onZipCode change", this.state.zipCode);
 
         axios.get(CHART_DATA_ENDPOINT, {
             params: {
@@ -106,11 +116,10 @@ export default class App extends Component {
             // get state level cumulative/weekly data 
             .then(res => {
                 this.setState({
-                    zipCode: newZipCode,
                     cumulativeData: res.data['chart_data']['cumulative_data'],
-                    weeklyData: res.data['chart_data']['weekly_data']
+                    weeklyData: res.data['chart_data']['weekly_data'],
+                    loading: false,
                 })
-                console.log("merp this f***in error", this.state)
             })
         // make an api request to get zipcode level data
         // reset cumulative/weekly data
@@ -170,8 +179,13 @@ export default class App extends Component {
                             <Row>
                                 <ZipCodeOverviewContainer zipCode={this.state.zipCode} />
                             </Row>
-                            <Row>
-                                <Chart showWeeklyData={this.state.showWeeklyData} weeklyData={this.state.weeklyData} cumulativeData={this.state.cumulativeData} />
+                            <Row className="justify-content-center">
+                                {this.state.loading ?
+                                    (<div style={{ paddingTop: "72px" }}>
+                                        <Spinner style={{ color: "#008EC6" }} animation="border" />
+                                    </div>) :
+                                    (<Chart showWeeklyData={this.state.showWeeklyData} weeklyData={this.state.weeklyData} cumulativeData={this.state.cumulativeData} />)
+                                }
                             </Row>
                         </Col>
                         <Col style={{ maxWidth: "478px", marginLeft: "50px" }} class="no-gutters">

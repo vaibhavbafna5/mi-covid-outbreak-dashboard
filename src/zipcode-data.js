@@ -9,6 +9,7 @@ import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import Spinner from 'react-bootstrap/Spinner';
 
 import { CovidNegativeBadge, CovidPositiveBadge, AwaitingResultsBadge, CovidLikeBadge } from './badges'
 
@@ -36,7 +37,6 @@ export default class ZipCodeDataPanel extends Component {
 
     constructor(props) {
         super(props);
-        console.log("zipcode-data props", this.props)
 
 
 
@@ -58,68 +58,70 @@ export default class ZipCodeDataPanel extends Component {
             activeReports: {},
             filter: "All",
             filterHover: false,
+            loading: false,
         }
     }
 
     componentWillMount() {
         //
-        axios.get(REPORT_DATA_ENDPOINT, {
-            params: {
-                'area': 'statewide',
-                'filter_type': 'all',
-            }
-        })
-            // get state level report data 
-            .then(res => {
-                this.setState({
-                    data: res.data,
-                })
-                console.log("merp", this.state)
-            })
+
+        // axios.get(REPORT_DATA_ENDPOINT, {
+        //     params: {
+        //         'area': 'statewide',
+        //         'filter_type': 'all',
+        //     }
+        // })
+        //     // get state level report data 
+        //     .then(res => {
+        //         this.setState({
+        //             data: res.data,
+        //             loading: false,
+        //         })
+        //         console.log("merp", this.state)
+        //     })
     }
 
     componentWillReceiveProps(newProps) {
         // get zip code level data
         var newZipCode = newProps.zipCode
-        if (newZipCode != "" && newZipCode != 'statewide') {
-            axios.get(REPORT_DATA_ENDPOINT, {
-                params: {
-                    'area': newZipCode,
-                    'filter_type': 'all',
-                }
-            }).then((response) => {
-                this.setState({
-                    zipCodeDataExists: true,
-                    zipCode: newZipCode,
-                    data: response.data,
-                    caseData: response.data['home_data'],
-                    caseType: "home",
-                })
-            }).catch((e) => {
-                console.log("error", e);
-            });
-        } else {
-            console.log('hey, we got the state change')
-            axios.get(REPORT_DATA_ENDPOINT, {
-                params: {
-                    'area': 'statewide',
-                    'filter_type': 'all',
-                }
-            }).then((response) => {
+
+        if (newProps.zipCode !== this.props.zipCode) {
+            console.log("newZipCode here --> ", newZipCode)
+            if (newZipCode == "" || newZipCode == "statewide") {
                 this.setState({
                     zipCodeDataExists: false,
                     zipCode: "",
-                    data: response.data,
+                    data: {},
                     caseData: {},
+                    loading: false,
                 })
-            }).catch((e) => {
-                console.log("error", e);
-            });
+            } else {
+                this.setState({
+                    zipCodeDataExists: false,
+                    loading: true,
+                })
+                axios.get(REPORT_DATA_ENDPOINT, {
+                    params: {
+                        'area': newZipCode,
+                        'filter_type': 'all',
+                    }
+                }).then((response) => {
+                    this.setState({
+                        zipCodeDataExists: true,
+                        zipCode: newZipCode,
+                        data: response.data,
+                        caseData: response.data['home_data'],
+                        caseType: "home",
+                        loading: false,
+                    })
+                }).catch((e) => {
+                    console.log("error", e);
+                });
+            }
         }
     }
 
     onSelectAddress = (eventKey) => {
-        console.log("selected addy --> ", eventKey)
         if (eventKey == "work") {
             var workData = this.state.data['work_data']
             this.setState({
@@ -136,7 +138,6 @@ export default class ZipCodeDataPanel extends Component {
     }
 
     onAddressToggle(position) {
-        console.log("accordion clicked - ", position);
         if (this.state.active === position) {
             this.setState({ active: null })
         } else {
@@ -209,7 +210,6 @@ export default class ZipCodeDataPanel extends Component {
     }
 
     setBackgroundColor(position) {
-        console.log("red")
         if (this.state.active == position) {
             return "#E5F4F9";
         }
@@ -247,7 +247,6 @@ export default class ZipCodeDataPanel extends Component {
             filter: eventKey,
         })
 
-        console.log("eventKey on filter --> ", eventKey);
 
         axios.get(REPORT_DATA_ENDPOINT, {
             params: {
@@ -298,34 +297,24 @@ export default class ZipCodeDataPanel extends Component {
     render() {
 
         return (
-            <div>
-                {/* <Card>
-                    <Card.Header id="overview-container-header">
-                        <Row>
-                            <Col>
-                                {this.state.zipCode == "" ? (<h2>Statewide</h2>) : (<h2>{this.state.zipCode}</h2>)}
-                                <h4 style={{ color: "white", }}><b>{this.state.data['total_responses']} MiSymptoms Users | {this.state.data['date_range']}</b></h4>
-                            </Col>
-                        </Row>
-                    </Card.Header>
-                    <Card.Body id="overview-container-body">
-                        <Card.Text>
-                            <h3>{this.state.data['symptomatic_cases']} COVID-like reports  <b style={{ opacity: "0.25" }}>|</b>  {this.state.data['confirmed_cases']} COVID-positive reports</h3>
-                        </Card.Text>
-                    </Card.Body>
-                    <Card.Footer id="overview-container-footer" className="text-muted"><p style={{ fontSize: "12px" }}>Data last updated on {this.state.data['last_updated']}</p></Card.Footer>
-                </Card> */}
-                {this.state.zipCodeDataExists ?
-                    (<div style={{ width: "550px"}}>
-                        <Card style={{border: "none"}}>
+            <div style={{ width: "550px" }}>
+                {this.state.loading ? (
+                    <Row className="justify-content-center">
+                        <div style={{ paddingTop: "88px" }}>
+                            <Spinner style={{ color: "#008EC6" }} animation="border" />
+                        </div>
+                    </Row>
+                ) :
+                    this.state.zipCodeDataExists ? (<div style={{ width: "550px" }}>
+                        <Card style={{ border: "none" }}>
                             <Card.Header id="address-container-header">
-                                <h3 style={{ color: "white", fontSize: "20px", marginTop: "0" }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Reported Addresses in {this.state.zipCode}</b></h3>
-                                <Row style={{ marginTop: "0px"}}>
+                                <h3 style={{ color: "white", fontSize: "20px", marginTop: "0" }} id="address-container-header-text"><b>{this.state.data['home_data'].length + this.state.data['work_data'].length} Addresses in {this.state.zipCode}</b></h3>
+                                <Row style={{ marginTop: "0px" }}>
                                     <Col>
-                                        <Nav activeKey={this.state.caseType} onSelect={this.onSelectAddress} style={{ fontSize: "13px", fontWeight: "600"}}>
-                                            <Nav.Item id="nav-item" style={{marginRight:"24px"}}>
+                                        <Nav activeKey={this.state.caseType} onSelect={this.onSelectAddress} style={{ fontSize: "13px", fontWeight: "600" }}>
+                                            <Nav.Item id="nav-item" style={{ marginRight: "24px" }}>
                                                 <Nav.Link eventKey={"home"}>Home ({this.state.data['home_data'].length})</Nav.Link>
-                                                
+
                                             </Nav.Item>
                                             <Nav.Item id="nav-item">
                                                 <Nav.Link eventKey={"work"}>Work ({this.state.data['work_data'].length})</Nav.Link>
@@ -333,9 +322,9 @@ export default class ZipCodeDataPanel extends Component {
                                         </Nav>
                                     </Col>
                                     <Col>
-                                        <div style={{ float: "right", marginRight: "-16px"}}>
-                                            <Dropdown alignRight id="filter-dropdown" onSelect={this.onFilterSelect.bind(this)} style={{ marginTop: "-10px"}}>
-                                                <Dropdown.Toggle onMouseLeave={() => this.onFilterUnhover()} onMouseEnter={() => this.onFilterHover()} style={{ color: this.setFilterColor(), border: "#008EC6", fontSize:"13px", fontWeight: "600"}}>
+                                        <div style={{ float: "right", marginRight: "-16px" }}>
+                                            <Dropdown alignRight id="filter-dropdown" onSelect={this.onFilterSelect.bind(this)} style={{ marginTop: "-10px" }}>
+                                                <Dropdown.Toggle onMouseLeave={() => this.onFilterUnhover()} onMouseEnter={() => this.onFilterHover()} style={{ color: this.setFilterColor(), border: "#008EC6", fontSize: "13px", fontWeight: "600" }}>
                                                     <img style={{ paddingBottom: "2px" }} src={this.setFilterIcon()}></img>{this.state.filter}
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
@@ -357,17 +346,17 @@ export default class ZipCodeDataPanel extends Component {
                                         <Accordion.Toggle onMouseLeave={() => { this.onAddressUnhover(index) }} onMouseEnter={() => { this.onAddressHover(index) }} style={{ backgroundColor: this.setBackgroundColor(index), }} onClick={() => { this.onAddressToggle(index) }} id="address-accordion-toggle" as={Card.Header} eventKey={index} className="no-gutters">
                                             <Row className="address-row">
                                                 {/* <Col> */}
-                                                    <h3 style={{ marginLeft:"32px", lineHeight: "53px", width: "450px", display: "inline-block"}}>
-                                                        {item['address'].slice(0, item['address'].lastIndexOf(","))}
-                                                    </h3>
+                                                <h3 style={{ marginLeft: "32px", lineHeight: "53px", width: "450px", display: "inline-block" }}>
+                                                    {item['address'].slice(0, item['address'].lastIndexOf(",")).replace(/[0-9]/g, "X")}
+                                                </h3>
                                                 {/* </Col> */}
                                                 {/* <Col className="no-gutters"> */}
-                                                    <h4 style={{color:"#008EC6", backgroundColor: this.setNumOfReportsBackgroundColor(index), width: "23px", height:"23px", lineHeight: "23px", lineWidth: "23px", borderRadius: "12px", textAlign: "center", marginTop:"15px", marginLeft:"3px", display: "inline-block"}}>{item['num_reports']}</h4>
+                                                <h4 style={{ color: "#008EC6", backgroundColor: this.setNumOfReportsBackgroundColor(index), width: "23px", height: "23px", lineHeight: "23px", lineWidth: "23px", borderRadius: "12px", textAlign: "center", marginTop: "15px", marginLeft: "3px", display: "inline-block" }}>{item['num_reports']}</h4>
                                                 {/* </Col> */}
                                                 {/* <Col className="no-gutters" style={{backgroundColor:"purple"}}> */}
-                                                    <div style={{ lineHeight: "53px", width: "28px", position:"absolute", right: "0", marginRight:"9px" }}>
-                                                        <img className="address-expand-icon" stle src={this.setAddressArrow(index)}></img>
-                                                    </div>
+                                                <div style={{ lineHeight: "53px", width: "28px", position: "absolute", right: "0", marginRight: "9px" }}>
+                                                    <img className="address-expand-icon" stle src={this.setAddressArrow(index)}></img>
+                                                </div>
                                                 {/* </Col> */}
                                             </Row>
                                         </Accordion.Toggle>
@@ -379,18 +368,18 @@ export default class ZipCodeDataPanel extends Component {
                                                             {this.state.activeReports[ind] = false}
                                                             <Accordion.Toggle className="no-gutters" id="report-accordion-toggle" onMouseLeave={() => { this.onReportUnhover(ind) }} onMouseEnter={() => { this.onReportHover(ind) }} as={Card.Header} eventKey={ind} onClick={() => { this.onReportToggle(ind) }}>
                                                                 <Row className="report-row">
-                                                                        <h4 className="black" style={{ width: "275px", display: "inline-block", marginTop:"12px", marginLeft:"31px", fontWeight:"500" }}>
-                                                                            {case_datum['name']} - {case_datum['age']}, {case_datum['gender']}
-                                                                        </h4>
-                                                                        <h4 className="medium" style={{ width: "125px", display: "inline-block", marginTop:"12px", marginLeft:"78px", color:"#51646D", textAlign:"right"}}>
-                                                                            {case_datum['phone_number']}
-                                                                        </h4>
-                                                                        <div style={{width:"28px", position: "absolute", right: "0", marginRight:"9px", lineHeight:"72px"}}>
-                                                                            <img className="address-expand-icon" src={this.setReportArrow(ind)}></img>
-                                                                        </div>
+                                                                    <h4 className="black" style={{ width: "275px", display: "inline-block", marginTop: "12px", marginLeft: "31px", fontWeight: "500" }}>
+                                                                        {case_datum['name'].replace(/./g, 'X')} - {case_datum['age']}, {case_datum['gender']}
+                                                                    </h4>
+                                                                    <h4 className="medium" style={{ width: "125px", display: "inline-block", marginTop: "12px", marginLeft: "78px", color: "#51646D", textAlign: "right" }}>
+                                                                        {case_datum['phone_number'].replace(/[0-9]/g, "X")}
+                                                                    </h4>
+                                                                    <div style={{ width: "28px", position: "absolute", right: "0", marginRight: "9px", lineHeight: "72px" }}>
+                                                                        <img className="address-expand-icon" src={this.setReportArrow(ind)}></img>
+                                                                    </div>
                                                                 </Row>
                                                                 <Row>
-                                                                    <Col style={{marginLeft:"16px"}}>
+                                                                    <Col style={{ marginLeft: "16px" }}>
                                                                         {case_datum['flags']['tested'] === 'Negative' ? (
                                                                             <CovidNegativeBadge />
                                                                         ) : case_datum['flags']['tested'] === 'Awaiting Results' ? (
@@ -452,9 +441,9 @@ export default class ZipCodeDataPanel extends Component {
                         </Card>
 
                     </div>) :
-                    (
-                        <></>
-                    )}
+                        (
+                            <></>
+                        )}
             </div>
         )
     }
