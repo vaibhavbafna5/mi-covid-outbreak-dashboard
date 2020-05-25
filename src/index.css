@@ -1,3 +1,71 @@
+
+/* 
+=== Nav Overrides ===
+*/
+
+button:focus {
+  outline:0;
+}
+
+.navbar-light .navbar-toggler {
+  border: none;
+  margin-right: 50px;
+}
+
+.show {
+  background-color: var(--white);
+  position: absolute;
+  margin-top: 80px;
+  width: 150px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  right: 0px;
+}
+
+.show .navbar-nav {
+  margin-left: 16px;
+  margin-right: 16px;
+  width: 150px;
+  /* background-color:red; */
+  margin-top: 16px;
+  margin-bottom:16px;
+}
+
+.show .navbar-nav a {
+  /* background-color: blue; */
+  color: var(--black) !important;
+  border-bottom-color: var(--black) !important;
+  /* margin-left: -40px; */
+}
+
+.show .navbar-nav .nav_navItem__3DNCK {
+  /* background-color: purple; */
+  margin-top: 10px;
+  margin-left: 0px;
+}
+
+
+/* override logout button styling */
+.show .navbar-nav .nav_navItem__3DNCK .nav_logoutButton__27MGI {
+  border: none;
+  /* width: 100%; */
+  height: none;
+  margin-top: 0px;
+  border: none;
+  line-height: 17px;
+  text-align: left;
+  color: inherit;
+}
+
+/* override logout button hover styling */
+.show .navbar-nav .nav_navItem__3DNCK .nav_logoutButton__27MGI:hover {
+  background-color: none;
+  background: none;
+  color: var(--white);
+}
+
+
+
 body {
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased !important;
@@ -34,9 +102,8 @@ body {
 
 /* statewide & zipcode header */
 #bootstrap-overrides h1 {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--white);
+  font-size: 24px;
+  font-weight: 800;
 }
 
 /* dashboard title */
@@ -64,7 +131,6 @@ body {
 #bootstrap-overrides h5 {
   font-size: 14px;
   font-weight: 600;
-  /* color: var(--black); */
 }
 
 #bootstrap-overrides h6 {
@@ -127,16 +193,6 @@ body {
 & update for h7 unselected radio button label & update for time stamp in overview container */
 .seventy-percent-gray {
   color: var(--seventy-percent-gray)
-}
-
-#top-level-nav {
-  margin: 0px;
-  min-height: 86px;
-  background: linear-gradient(271.49deg, #008EC6 0.1%, #0077A7 99.9%);
-  color: var(--white);
-  display: block;
-  text-align: center;
-  padding: 0px;
 }
 
 h2.header {

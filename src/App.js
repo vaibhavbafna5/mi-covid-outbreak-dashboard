@@ -5,6 +5,7 @@ import Autocomplete from './search';
 import ZipCodeDataPanel from './zipcode-data';
 import Chart from './chart';
 import ZipCodeOverviewContainer from "./zipcode-overview-container";
+import TopNav from "./nav.js";
 
 import axios from "axios";
 
@@ -141,13 +142,8 @@ export default class App extends Component {
     render() {
         return (
             <>
-                <Navbar id="top-level-nav">
-                    <Popup />
-                    <div style={{ textAlign: "center", marginTop: "-61px" }}>
-                        <h2 className="header">COVID-19 Outbreak Tracker</h2>
-                        <h5 className="subheader">Surfacing the most recent self-reports of MiSymptom users</h5>
-                    </div>
-                </Navbar>
+                <TopNav />
+                <Popup />
                 <Container style={{ marginTop: "30px" }}>
                     <Row>
                         <Col style={{ maxWidth: "524px" }}>
