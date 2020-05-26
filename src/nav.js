@@ -22,6 +22,7 @@ export default class TopNav extends Component {
                     <Nav className= { cx(styles.noGutters, styles.navItems) }>
                         <Nav.Link href="#dashboard" active>Dashboard</Nav.Link>
                         <Nav.Link href="#about" className={styles.navItem}>About</Nav.Link>
+                        <Nav.Link href="#about" className={styles.navItem}>Settings</Nav.Link>
                         {/* <Nav.Link href="#about" className={styles.navItem} onToggle="true">Logout</Nav.Link> */}
                         <Nav.Link href="#logout" className={styles.navItem} onToggle="false"><div className={styles.logoutButton}>Logout</div></Nav.Link>
                     </Nav>

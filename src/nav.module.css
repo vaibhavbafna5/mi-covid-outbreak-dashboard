@@ -71,7 +71,8 @@
     text-align: center;
 }
 
-.navbar-light .navbar-toggler {
+
+#boostrap-overrides .navbar-light .navbar-toggler {
     color: green !important;
     border-color: green;
 }
